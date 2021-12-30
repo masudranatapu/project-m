@@ -36,9 +36,8 @@ class DashboardController extends Controller
         $slug = "profile";
         if (isset($profile_image)) {
             //make unique name for profile image
-            $currentDate = Carbon::now()->toDateString();
-            $profile_image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$profile_image->getClientOriginalExtension();
-            $upload_path = 'extrafile/profile/';
+            $profile_image_name = $slug.'-'.uniqid().'.'.$profile_image->getClientOriginalExtension();
+            $upload_path = 'media/profile/';
             $profile_image_url = $upload_path.$profile_image_name;
 
             // unlink profile image 
@@ -59,6 +58,7 @@ class DashboardController extends Controller
             'image' => $profile_image_url,
             'phone' => $request->phone,
             'address' => $request->address,
+            'updated_at' => Carbon::now(),
         ]);
         Toastr::success('Admin Profile Updated successfully :-)','Success');
         return redirect()->back();

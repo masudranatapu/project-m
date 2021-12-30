@@ -9,6 +9,15 @@ use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\Admin\SizeController;
 use App\Http\Controllers\Admin\ColorController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\DivisionController;
+use App\Http\Controllers\Admin\DistrictController;
+use App\Http\Controllers\Admin\BlogController;
+use App\Http\Controllers\Admin\SliderController;
+use App\Http\Controllers\Admin\PolicyController;
+use App\Http\Controllers\Admin\AboutController;
+use App\Http\Controllers\Admin\HappyClintController;
+use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\Admin\CategoryController;
 
 use App\Http\Controllers\Customer\InformationController;
 
@@ -55,6 +64,34 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::get('color-inactive/{id}', [ColorController::class, 'colorInactive'])->name('color.inactive');
     Route::get('color-active/{id}', [ColorController::class, 'colorActive'])->name('color.active');
 
+    // Location section 
+    Route::resource('division', DivisionController::class);
+    Route::resource('district', DistrictController::class);
+
+    // blog section
+    Route::resource('blogs', BlogController::class);
+    Route::get('blog-inactive/{id}', [BlogController::class, 'blogInactive'])->name('blog.inactive');
+    Route::get('blog-active/{id}', [BlogController::class, 'blogActive'])->name('blog.active');
+    // slider section 
+    Route::resource('slider', SliderController::class);
+    Route::get('slider-inactive/{id}', [SliderController::class, 'sliderInactive'])->name('slider.inactive');
+    Route::get('slider-active/{id}', [SliderController::class, 'sliderActive'])->name('slider.active');
+    // policy section 
+    Route::resource('policy', PolicyController::class);
+    Route::get('policy-inactive/{id}', [PolicyController::class, 'policyInactive'])->name('policy.inactive');
+    Route::get('policy-active/{id}', [PolicyController::class, 'policyActive'])->name('policy.active');
+    // about us
+    Route::resource('abouts', AboutController::class);
+    // happy clints
+    Route::resource('clints', HappyClintController::class);
+    // product 
+    Route::resource('products', ProductController::class);
+    Route::get('product-category/ajax/{category_id}', [ProductController::class, 'productCategory']);
+    Route::get('product-subcategory/ajax/{subcategory_id}', [ProductController::class, 'productSubcategory']);
+    // category
+    Route::resource('category', CategoryController::class);
+    Route::get('/category/parent-chlid/ajax/{cate_id}', [CategoryController::class, 'parentChild']);
+    
 });
 
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth', 'customer']], function () {

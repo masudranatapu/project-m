@@ -18,7 +18,7 @@
             </li>
             <!-- category area  -->
             <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{{ route('admin.category.index') }}" class="nav-link {{ Request::is('admin/category') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-chart-pie"></i>
                     <p>
                         Category
@@ -59,100 +59,38 @@
                 </ul>
             </li>
 
-            <li class="nav-item">
+            <li class="nav-item {{ Request::is('admin/division') || Request::is('admin/district') ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-tree"></i>
-                <p>
-                    UI Elements
-                    <i class="fas fa-angle-left right"></i>
-                </p>
+                    <i class="nav-icon fas fa-street-view"></i>
+                    <p>
+                        Location
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
                 </a>
                 <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="pages/UI/general.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>General</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/icons.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Icons</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/buttons.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Buttons</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/sliders.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Sliders</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/modals.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Modals & Alerts</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/navbar.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Navbar & Tabs</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/timeline.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Timeline</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/ribbons.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Ribbons</p>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.division.index') }}" class="nav-link {{ Request::is('admin/division') ? 'active' : '' }}">
+                        <i class="far fa-circle nav-icon"></i>
+                        <p>Division</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.district.index') }}" class="nav-link {{ Request::is('admin/district') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>District</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
             <li class="nav-item">
-                <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-edit"></i>
-                <p>
-                    Forms
-                    <i class="fas fa-angle-left right"></i>
-                </p>
+                <a href="{{ route('admin.products.index') }}" class="nav-link {{ Route::is('admin.products.index') || Route::is('admin.products.create') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-shopping-cart"></i>
+                    <p>
+                        Product
+                    </p>
                 </a>
-                <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="pages/forms/general.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>General Elements</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/forms/advanced.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Advanced Elements</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/forms/editors.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Editors</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/forms/validation.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Validation</p>
-                    </a>
-                </li>
-                </ul>
             </li>
+            
             <li class="nav-item">
                 <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-table"></i>
@@ -184,31 +122,6 @@
             </li>
             
             <li class="nav-item">
-                <a href="pages/calendar.html" class="nav-link">
-                <i class="nav-icon fas fa-calendar-alt"></i>
-                <p>
-                    Calendar
-                    <span class="badge badge-info right">2</span>
-                </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="pages/gallery.html" class="nav-link">
-                <i class="nav-icon far fa-image"></i>
-                <p>
-                    Gallery
-                </p>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a href="pages/kanban.html" class="nav-link">
-                <i class="nav-icon fas fa-columns"></i>
-                <p>
-                    Kanban Board
-                </p>
-                </a>
-            </li>
-            <li class="nav-item">
                 <a href="#" class="nav-link">
                 <i class="nav-icon far fa-envelope"></i>
                 <p>
@@ -237,6 +150,7 @@
                 </li>
                 </ul>
             </li>
+
             <li class="nav-item">
                 <a href="#" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
@@ -308,133 +222,46 @@
                 </li>
                 </ul>
             </li>
-            <li class="nav-item">
+            
+            <li class="nav-item {{ Request::is('admin/blogs') || Request::is('admin/slider') || Request::is('admin/policy') || Request::is('admin/clints') || Request::is('admin/abouts') ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link">
-                <i class="nav-icon far fa-plus-square"></i>
-                <p>
-                    Extras
-                    <i class="fas fa-angle-left right"></i>
-                </p>
+                    <i class="nav-icon far fa-plus-square"></i>
+                    <p>
+                        Extras
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
                 </a>
                 <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>
-                        Login & Register v1
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                    </a>
-                    <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="pages/examples/login.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Login v1</p>
+                        <a href="{{ route('admin.blogs.index') }}" class="nav-link {{ Request::is('admin/blogs') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Blog</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/examples/register.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Register v1</p>
+                        <a href="{{ route('admin.slider.index') }}" class="nav-link {{ Request::is('admin/slider') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Slider</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/examples/forgot-password.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Forgot Password v1</p>
+                        <a href="{{ route('admin.policy.index') }}" class="nav-link {{ Request::is('admin/policy') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Policy</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/examples/recover-password.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Recover Password v1</p>
-                        </a>
-                    </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>
-                        Login & Register v2
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                    </a>
-                    <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="pages/examples/login-v2.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Login v2</p>
+                        <a href="{{ route('admin.abouts.index') }}" class="nav-link {{ Request::is('admin/abouts') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>About Us</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/examples/register-v2.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Register v2</p>
+                        <a href="{{ route('admin.clints.index') }}" class="nav-link {{ Request::is('admin/clints') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Happy Clints</p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="pages/examples/forgot-password-v2.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Forgot Password v2</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="pages/examples/recover-password-v2.html" class="nav-link">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Recover Password v2</p>
-                        </a>
-                    </li>
-                    </ul>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/examples/lockscreen.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Lockscreen</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/examples/legacy-user-menu.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Legacy User Menu</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/examples/language-menu.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Language Menu</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/examples/404.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Error 404</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/examples/500.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Error 500</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/examples/pace.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Pace</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/examples/blank.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Blank Page</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="starter.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Starter Page</p>
-                    </a>
-                </li>
                 </ul>
             </li>
             <li class="nav-item {{ Request::is('admin/website') ? 'menu-open' : '' }}">

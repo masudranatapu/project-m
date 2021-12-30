@@ -88,9 +88,8 @@ class WebsiteController extends Controller
         $slug_1 = 'logo';
         if (isset($logo)) {
             // make unique name for image
-            $currentDate = Carbon::now()->toDateString();
-            $logo_image = $slug_1.'-'.$currentDate.'-'.uniqid().'.'.$logo->getClientOriginalExtension();
-            $upload_path = 'extrafile/logo/';
+            $logo_image = $slug_1.'-'.uniqid().'.'.$logo->getClientOriginalExtension();
+            $upload_path = 'media/logo/';
             $logo_image_url = $upload_path.$logo_image;
             $website = Website::findOrFail($id);
             if ($website->logo) {
@@ -107,9 +106,8 @@ class WebsiteController extends Controller
         $slug = 'favicon';
         if (isset($favicon)) {
             //make unique name for favicon
-            $currentDate = Carbon::now()->toDateString();
-            $fav_icon = $slug.'-'.$currentDate.'-'.uniqid().'.'.$favicon->getClientOriginalExtension();
-            $upload_path = 'extrafile/logo/';
+            $fav_icon = $slug.'-'.uniqid().'.'.$favicon->getClientOriginalExtension();
+            $upload_path = 'media/logo/';
             $fav_icon_url = $upload_path.$fav_icon;
             $website = Website::findOrFail($id);
             if ($website->favicon) {
@@ -134,6 +132,7 @@ class WebsiteController extends Controller
             'link' => $link,
             'logo' => $logo_image_url,
             'favicon' => $fav_icon_url,
+            'updated_at' => Carbon::now(),
         ]);
         
         Toastr::success('Website updated successfully :-)','Success');

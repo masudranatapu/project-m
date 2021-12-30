@@ -49,9 +49,8 @@ class BrandController extends Controller
 
         $brand_image = $request->file('image');
         $slug = 'brand';
-        $currentDate = Carbon::now()->toDateString();
-        $brand_image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$brand_image->getClientOriginalExtension();
-        $upload_path = 'extrafile/brand/';
+        $brand_image_name = $slug.'-'.uniqid().'.'.$brand_image->getClientOriginalExtension();
+        $upload_path = 'media/brand/';
         $brand_image->move($upload_path, $brand_image_name);
 
         $image_url = $upload_path.$brand_image_name;
@@ -114,9 +113,8 @@ class BrandController extends Controller
         $brand_image = $request->file('image');
         $slug = 'brand';
         if(isset($brand_image)) {
-            $currentDate = Carbon::now()->toDateString();
-            $brand_image_name = $slug.'-'.$currentDate.'-'.uniqid().'.'.$brand_image->getClientOriginalExtension();
-            $upload_path = 'extrafile/brand/';
+            $brand_image_name = $slug.'-'.uniqid().'.'.$brand_image->getClientOriginalExtension();
+            $upload_path = 'media/brand/';
             $brand_image->move($upload_path, $brand_image_name);
 
             $brandimage = Brand::findOrFail($id);

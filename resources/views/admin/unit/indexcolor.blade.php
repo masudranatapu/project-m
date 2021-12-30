@@ -54,7 +54,7 @@
                             <div class="modal-dialog modal-lg">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Create Colors</h4>
+                                        <h4 class="modal-title">Create Color</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
@@ -72,8 +72,8 @@
                                                 <label class="col-sm-4 col-form-label">Status</label>
                                                 <div class="col-sm-8">
                                                     <select name="status" class="form-control">
-                                                        <option value="" disabled selected>Select One</option>
-                                                        <option value="1">Active</option>
+                                                        <option value="" disabled>Select One</option>
+                                                        <option value="1" selected>Active</option>
                                                         <option value="0">Inactive</option>
                                                     </select>
                                                 </div>

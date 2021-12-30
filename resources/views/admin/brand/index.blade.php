@@ -65,13 +65,13 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">brands Name</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="name" placeholder="brands Name" required>
+                                                    <input type="text" class="form-control" name="name" placeholder="Brands Name" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Brand Website Link</label>
                                                 <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="link" placeholder="Brand Website Link">
+                                                    <input type="text" class="form-control" name="link" placeholder="Brand website link">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -96,16 +96,16 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-3 col-form-label">Status</label>
                                                 <div class="col-sm-9">
-                                                    <select name="status" class="form-control" required>
-                                                        <option value="" disabled selected>Select One</option>
-                                                        <option value="1">Active</option>
+                                                    <select name="status" class="form-control">
+                                                        <option value="" disabled >Select One</option>
+                                                        <option value="1" selected>Active</option>
                                                         <option value="0">Inactive</option>
                                                     </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="offset-sm-3 col-sm-9">
-                                                    <button type="submit" class="btn btn-success">Create brands</button>
+                                                    <button type="submit" class="btn btn-success">Create Brand</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -198,7 +198,7 @@
                                                                     <label class="col-sm-3 col-form-label">Status</label>
                                                                     <div class="col-sm-9">
                                                                         <select name="status" class="form-control">
-                                                                            <option value="" disabled selected>Select One</option>
+                                                                            <option value="" disabled>Select One</option>
                                                                             <option @if($brand->status == 1) selected @endif value="1">Active</option>
                                                                             <option @if($brand->status == 0) selected @endif value="0">Inactive</option>
                                                                         </select>

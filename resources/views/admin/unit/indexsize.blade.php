@@ -44,7 +44,7 @@
                                     <div class="text-right cutom_search" >
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create">
                                             <i class="fa fa-plus-circle"></i>
-                                            <span>Add Dizes</span>
+                                            <span>Add Sizes</span>
                                         </button>
                                     </div>
                                 </div>
@@ -65,15 +65,15 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-4 col-form-label">Size Name</label>
                                                 <div class="col-sm-8">
-                                                    <input type="text" class="form-control" name="name" placeholder="Size Name">
+                                                    <input type="text" class="form-control" name="name" placeholder="Size name">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <label class="col-sm-4 col-form-label">Status</label>
                                                 <div class="col-sm-8">
                                                     <select name="status" class="form-control">
-                                                        <option value="" disabled selected>Select One</option>
-                                                        <option value="1">Active</option>
+                                                        <option value="" disabled>Select One</option>
+                                                        <option value="1" selected>Active</option>
                                                         <option value="0">Inactive</option>
                                                     </select>
                                                 </div>
@@ -144,7 +144,7 @@
                                                                     <label class="col-sm-4 col-form-label">Status</label>
                                                                     <div class="col-sm-8">
                                                                         <select name="status" class="form-control">
-                                                                            <option value="" disabled selected>Select One</option>
+                                                                            <option value="" disabled>Select One</option>
                                                                             <option @if($size->status == 1) selected @endif value="1">Active</option>
                                                                             <option @if($size->status == 0) selected @endif value="0">Inactive</option>
                                                                         </select>

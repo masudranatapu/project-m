@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Color;
 use Brian2694\Toastr\Facades\Toastr;
+use Carbon\Carbon;
 
 class ColorController extends Controller
 {
@@ -47,6 +48,7 @@ class ColorController extends Controller
         Color::insert([
             'name' => $request->name,
             'status' => $request->status,
+            'created_at' => Carbon::now(),
         ]);
         Toastr::success('Color Successfully Save :-)','Success');
         return redirect()->back();
@@ -96,6 +98,7 @@ class ColorController extends Controller
         Color::findOrFail($id)->update([
             'name' => $request->name,
             'status' => $request->status,
+            'updated_at' => Carbon::now(),
         ]);
         Toastr::success('Color Successfully update :-)','Success');
         return redirect()->back();
