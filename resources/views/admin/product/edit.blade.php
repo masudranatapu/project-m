@@ -5,7 +5,7 @@
 @stop
 
 @push('css')
-    <link rel="stylesheet" href="{{asset('backend/plugins/select2/css/select2.min.css')}}">
+    <link rel="stylesheet" href="{{asset('backend/plugins/select2/css/select2.css')}}">
     <link rel="stylesheet" href="{{asset('backend/plugins/summernote/summernote-bs4.min.css')}}">
 @endpush
 
@@ -182,7 +182,10 @@
                                                             <label class="col-md-3">Sub Category</label>
                                                             <div class="col-md-9">
                                                                 <select name="subcategory_id" id="subcategory" class="form-control">
-                                                                    <option value="">First Select Your Category </option>
+                                                                    <option value="">Select One</option>
+                                                                    @foreach($subcategory as $subcate)
+                                                                        <option @if($subcate->id == $products->subcategory_id) selected @endif value="{{ $subcate->name }}">{{ $subcate->name}}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>
@@ -190,7 +193,10 @@
                                                             <label class="col-md-3">Sub Sub Category </label>
                                                             <div class="col-md-9">
                                                                 <select name="subsubcategory_id" id="subsubcategory" class="form-control">
-                                                                    <option value="" selected disabled>First Select Your Sub Category</option>
+                                                                    <option value="" selected >Select One</option>
+                                                                    @foreach($subsubcategory as $subsubcate)
+                                                                        <option @if($subsubcate->id == $products->subsubcategory_id) selected @endif value="{{ $subsubcate->id }}">{{ $subsubcate->name }}</option>
+                                                                    @endforeach
                                                                 </select>
                                                             </div>
                                                         </div>

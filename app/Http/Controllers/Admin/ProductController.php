@@ -179,13 +179,15 @@ class ProductController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::latest()->get();
+        $category = Category::where('parent_id', NULL)->where('child_id', NULL)->latest()->get();
+        $subcategory = Category::where('parent_id', '!=', NULL)->where('child_id', NULL)->latest()->get();
+        $subsubcategory = Category::where('parent_id', '!=', NULL)->where('child_id', '!=', NULL)->latest()->get();
         $brands = Brand::where('status', 1)->latest()->get();
         $colorses = Color::where('status', 1)->latest()->get();
         $sizes = Size:: where('status', 1)->latest()->get();
         $title = "Edit Product";
         $products = Product::where('id', $id)->first();
-        return view('admin.product.edit', compact('title', 'category','brands', 'colorses','sizes', 'products'));
+        return view('admin.product.edit', compact('title', 'category', 'subcategory', 'subsubcategory', 'brands', 'colorses','sizes', 'products'));
         
     }
 
