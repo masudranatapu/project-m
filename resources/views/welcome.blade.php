@@ -1,134 +1,105 @@
 @extends('layouts.frontend.app')
 
 @section('title')
-{{$title}}
+    {{$title}}
 @endsection
 
 @section('meta')
 
 @endsection
-
+    @php
+        $website = App\Models\Website::latest()->first();
+    @endphp
 @push('css')
 
 @endpush
 
-@section('content')
-<!--categories section start-->
-<div class="category_section pb-4 pt-sm-5 pt-4 bg-white">
-    <div class="container">
-        <div class="categorie_banner_title">
-            <h3 class="pb-0">categories</h3>
-        </div>
-        <div class="category-carousel owl-carousel">
-            <div class="item">
-                <div class="category-item">
-                    <a href="#">              
-                        <img class="img-fluid" src="assets/img/electronics/17.jpg" alt="Image">    
-                        <h6 class="text-capitalize">electronics</h6>
-                    </a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="category-item">
-                    <a href="#">
-                        <img class="img-fluid" src="assets/img/clothing/product-10-3-330x371.jpg" alt="Image">                   
-                        <h6>travel & clothing</h6>
-                    </a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="category-item">
-                    <a href="#">
-                        <img class="img-fluid" src="assets/img/fashions/8.jpg" alt="Image">                   
-                        <h6>headgears</h6>
-                    </a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="category-item">
-                    <a href="#">
-                        <img class="img-fluid" src="assets/img/fashions/5.jpg" alt="Image">                 
-                        <h6>jewelry & watches</h6>
-                    </a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="category-item">
-                    <a href="#">
-                        <img class="img-fluid" src="assets/img/electronics/15.jpg" alt="Image">                  
-                        <h6>computers & accessories</h6>
-                    </a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="category-item">
-                    <a href="#">
-                        <img class="img-fluid" src="assets/img/electronics/13.jpg" alt="Image">                 
-                        <h6>Foreign fruit tree</h6>
-                    </a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="category-item">
-                    <a href="#">
-                        <img class="img-fluid" src="assets/img/fashions/7.jpg" alt="Image">                 
-                        <h6>Decoration Indoor Plants</h6>
-                    </a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="category-item">
-                    <a href="#">
-                        <img class="img-fluid" src="assets/img/beauty/beauty1.jpg" alt="Image">                 
-                        <h6>beauty & fragrance</h6>
-                    </a>
-                </div>
-            </div>
-            <div class="item">
-                <div class="category-item">
-                    <a href="#">              
-                        <img class="img-fluid" src="assets/img/kitchen/kitchen7.jpg" alt="Image">    
-                        <h6>home & kitchen</h6>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--categories section end-->
 
-<!--Best selling start-->
-<div class="best_selling_section py-4 py-lg-5 bg-lite">
+@section('content')
+<div class="slider_area slider_three owl-carousel mb-0">
+    @foreach($sliders as $key => $slider)
+        <div class="single_slider">
+            <a href="#">
+                <img src="{{asset($slider->image)}}" alt="slider image">
+            </a>
+        </div>
+    @endforeach
+</div>
+
+<div class="category_section  py-4 ">
     <div class="container">
         <div class="row">
             <div class="col-12">   
                 <div class="categorie_banner_title">
-                    <h3 class="">Best Selling</h3>
+                    <h3>Categories</h3>
                 </div>
             </div>    
         </div>
         <div class="row cat">
-            <div class="categorie_banner_active best-selling-carousel owl-carousel">
+            @foreach($caegories as $key => $caegory)
+                <div class="col-lg-3 col-sm-4 col-6">
+                    <div class="product text-center grey-section mb-4">
+                        <figure class="product-media mb-0">
+                            <a href="">
+                                <img src="{{ asset($caegory->image) }}" alt="product" class="w-100">
+                            </a>
+                        </figure>
+                        <div class="category-bottom py-2">
+                            <h3 class="title mb-0" title="Gardening">
+                                <a href="">{{ $caegory->name }}</a>
+                            </h3>
+                        </div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="row">
+            <div class="col-12">   
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="{{ route('all.category') }}" class="btn-product vbtn-sm text-capitalize" title="View More">
+                        view more
+                        <i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i>
+                    </a>
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>
+
+<div class="best_selling_section  py-4 grey-section ">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">   
+                <div class="categorie_banner_title">
+                    <h3>Best Selling</h3>
+                </div>
+            </div>    
+        </div>
+        <div class="row cat">
+            <div class="categorie_banner_active owl-carousel">
                 <div class="col-lg-3">
                     <div class="product text-center mb-4 bg-white">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/kitchen/kitchen9.jpg); background-size: cover; background-position: center;">
-                                    
-                                </div>
+                                <img src="assets/img/best-selling/images-18_resize_55.jpg" alt="product" class="w-100">
                             </a>
                             <div class="product-label-group">
+                                
+                            </div>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                             </div>
                         </figure>
                         <div class="Service-bottom py-3">
                             <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                                <a href="#">হলুদ গজারিয়া</a>
+                                <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
                             </h3>
                             <div class="product-price">
-                                <ins class="new-price">৳ 300</ins>
+                                <ins class="new-price">৳ 100</ins>
                             </div>
                             <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Quick View">buy now</a>
                             </div>
                         </div>
                     </div>
@@ -137,10 +108,14 @@
                     <div class="product text-center mb-4 bg-white">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/kitchen/kitchen10.jpg); background-size: cover; background-position: center;"></div>
+                                <img src="assets/img/best-selling/61iwktD8PRL._SL1000_-600x600.jpg" alt="product" class="w-100">
                             </a>
                             <div class="product-label-group">
-                                <span class="product-label label-sale">- 6%</span>
+                                <span class="product-label label-sale">6% off</span>
+                            </div>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                             </div>
                         </figure>
                         <div class="Service-bottom py-3">
@@ -151,7 +126,7 @@
                                 <ins class="new-price">৳ 310</ins><del class="old-price">৳ 330</del>
                             </div>
                             <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Quick View">buy now</a>
                             </div>
                         </div>
                     </div>
@@ -160,21 +135,25 @@
                     <div class="product text-center mb-4 bg-white">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/electronics/15.jpg); background-size: cover; background-position: center;"></div>
+                                <img src="assets/img/best-selling/images-48_crop_19_resize_88.jpg" alt="product" class="w-100">
                             </a>
                             <div class="product-label-group">
-                                <span class="product-label label-sale">- 6%</span>
+                                <span class="product-label label-sale">6% off</span>
+                            </div>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                             </div>
                         </figure>
                         <div class="Service-bottom py-3">
-                            <h3 class="title" title="Air Pruning Geo Fabric Grow Bag – 25 Gallon – for Home, Terrace, Balcony. Size (Dia: 21 “, H: 15.5”)">
-                                <a href="#">Air Pruning Geo Fabric Grow Bag – 25 Gallon – for Home, Terrace, Balcony. Size (Dia: 21 “, H: 15.5”)</a>
+                            <h3 class="title" title="Quarter Steel Drum – With color( Round) – Hight: 17 inch , Dia 14 inch">
+                                <a href="#">Quarter Steel Drum – With color( Round) – Hight: 17 inch , Dia 14 inch</a>
                             </h3>
                             <div class="product-price">
-                                <ins class="new-price">৳ 310</ins><del class="old-price">৳ 330</del>
+                                <ins class="new-price">৳ 300</ins><del class="old-price">৳ 320</del>
                             </div>
                             <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Quick View">buy now</a>
                             </div>
                         </div>
                     </div>
@@ -183,33 +162,14 @@
                     <div class="product text-center mb-4 bg-white">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/electronics/17.jpg); background-size: cover; background-position: center;"></div>
+                                <img src="assets/img/best-selling/images-53_resize_69.jpg" alt="product" class="w-100">
                             </a>
                             <div class="product-label-group">
-                                <span class="product-label label-sale">- 6%</span>
+
                             </div>
-                        </figure>
-                        <div class="Service-bottom py-3">
-                            <h3 class="title" title="Air Pruning Geo Fabric Grow Bag – 25 Gallon – for Home, Terrace, Balcony. Size (Dia: 21 “, H: 15.5”)">
-                                <a href="#">Air Pruning Geo Fabric Grow Bag – 25 Gallon – for Home, Terrace, Balcony. Size (Dia: 21 “, H: 15.5”)</a>
-                            </h3>
-                            <div class="product-price">
-                                <ins class="new-price">৳ 310</ins><del class="old-price">৳ 330</del>
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product text-center mb-4 bg-white">
-                        <figure class="product-media mb-0">
-                            <a href="#">
-                                <div class="img" style="background-image: url(assets/img/electronics/13.jpg); background-size: cover; background-position: center;"></div>
-                            </a>
-                            <div class="product-label-group">
-                                <span class="product-label label-sale">- 20%</span>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                             </div>
                         </figure>
                         <div class="Service-bottom py-3">
@@ -217,10 +177,10 @@
                                 <a href="#">DAP Fertilizer ( Per Kg)</a>
                             </h3>
                             <div class="product-price">
-                                <ins class="new-price">৳ 300</ins><del class="old-price">৳ 400</del>
+                                <ins class="new-price">৳ 50</ins>
                             </div>
                             <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                                <a href="#" class="btn-product pbtn-sm text-capitalize" title="Buy View">buy now</a>
                             </div>
                         </div>
                     </div>
@@ -229,10 +189,64 @@
                     <div class="product text-center mb-4 bg-white">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/fashions/7.jpg); background-size: cover; background-position: center;"></div>
+                                <img src="assets/img/best-selling/61iwktD8PRL._SL1000_-600x600.jpg" alt="product" class="w-100">
                             </a>
                             <div class="product-label-group">
-                                <span class="product-label label-sale">- 14%</span>
+                                <span class="product-label label-sale">6% off</span>
+                            </div>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                            </div>
+                        </figure>
+                        <div class="Service-bottom py-3">
+                            <h3 class="title" title="Air Pruning Geo Fabric Grow Bag – 25 Gallon – for Home, Terrace, Balcony. Size (Dia: 21 “, H: 15.5”)">
+                                <a href="#">Air Pruning Geo Fabric Grow Bag – 25 Gallon – for Home, Terrace, Balcony. Size (Dia: 21 “, H: 15.5”)</a>
+                            </h3>
+                            <div class="product-price">
+                                <ins class="new-price">৳ 310</ins><del class="old-price">৳ 330</del>
+                            </div>
+                            <div class="product-action">
+                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Quick View">buy now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-12">   
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="#" class="btn-product vbtn-sm text-capitalize" title="View More">view more<i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i></a>
+                </div>
+            </div>    
+        </div>
+    </div>
+</div>
+
+<div class="new_arrival_section  py-4 bg-white">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">   
+                <div class="categorie_banner_title">
+                    <h3>New Arrival</h3>
+                </div>
+            </div>    
+        </div>
+        <div class="row cat">
+            <div class="categorie_banner_active owl-carousel">
+                <div class="col-lg-3">
+                    <div class="product text-center mb-4 grey-section">
+                        <figure class="product-media mb-0">
+                            <a href="#">
+                                <img src="assets/img/new-arrival/ice-tea-dJZ5m6vCATc-unsplash.jpg" alt="product" class="w-100">
+                            </a>
+                            <div class="product-label-group">
+                                <span class="product-label label-sale">20% off</span>
+                            </div>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                             </div>
                         </figure>
                         <div class="Service-bottom py-3">
@@ -240,1713 +254,325 @@
                                 <a href="#">Ivy Lota Plat |(H: 4-6 inch)</a>
                             </h3>
                             <div class="product-price">
-                                <ins class="new-price">৳ 330</ins><del class="old-price">৳ 390</del>
+                                <ins class="new-price">৳ 8</ins><del class="old-price">৳ 20</del>
                             </div>
                             <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Quick View">buy now</a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="product text-center mb-4 bg-white">
+                    <div class="product text-center mb-4 grey-section">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/fashions/2.jpg); background-size: cover; background-position: center;"></div>
+                                <img src="assets/img/new-arrival/maxresdefault.jpg" alt="product" class="w-100">
                             </a>
                             <div class="product-label-group">
-                                <span class="product-label label-sale">- 20%</span>
+                                <span class="product-label label-sale">7% off</span>
+                            </div>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
                             </div>
                         </figure>
                         <div class="Service-bottom py-3">
-                            <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                                <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
+                            <h3 class="title" title="Red Kathal Thai(H:1.5- 2)">
+                                <a href="#">Red Kathal Thai(H:1.5- 2)</a>
                             </h3>
                             <div class="product-price">
-                                <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
+                                <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
                             </div>
                             <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Quick View">buy now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="product text-center mb-4 grey-section">
+                        <figure class="product-media mb-0">
+                            <a href="#">
+                                <img src="assets/img/new-arrival/chiang-mai.jpg" alt="product" class="w-100">
+                            </a>
+                            <div class="product-label-group">
+                                <span class="product-label label-sale">14% off</span>
+                            </div>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                            </div>
+                        </figure>
+                        <div class="Service-bottom py-3">
+                            <h3 class="title" title="Chiang Mai mango(H: 4- 5)">
+                                <a href="#">Chiang Mai mango(H: 4- 5)</a>
+                            </h3>
+                            <div class="product-price">
+                                <ins class="new-price">৳ 600</ins><del class="old-price">৳ 700</del>
+                            </div>
+                            <div class="product-action">
+                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Quick View">buy now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="product text-center mb-4 grey-section">
+                        <figure class="product-media mb-0">
+                            <a href="#">
+                                <img src="assets/img/new-arrival/banana-mango.jpg" alt="product" class="w-100">
+                            </a>
+                            <div class="product-label-group">
+                                <span class="product-label label-sale">9% off</span>
+                            </div>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                            </div>
+                        </figure>
+                        <div class="Service-bottom py-3">
+                            <h3 class="title" title="Banana Mango(H:3.5- 4)">
+                                <a href="#">Banana Mango(H:3.5- 4)</a>
+                            </h3>
+                            <div class="product-price">
+                                <ins class="new-price">৳ 500</ins><del class="old-price">৳ 550</del>
+                            </div>
+                            <div class="product-action">
+                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Quick View">buy now</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="product text-center mb-4 grey-section">
+                        <figure class="product-media mb-0">
+                            <a href="#">
+                                <img src="assets/img/new-arrival/banana-mango.jpg" alt="product" class="w-100">
+                            </a>
+                            <div class="product-label-group">
+                                <span class="product-label label-sale">9% off</span>
+                            </div>
+                            <div class="product-action-vertical">
+                                <a href="#" class="btn-product-icon btn-cart" data-toggle="modal" data-target="#addCartModal" title="Add to cart"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
+                                <a href="#" class="btn-product-icon btn-wishlist" title="Add to wishlist"><i class="fa fa-heart-o" aria-hidden="true"></i></a>
+                            </div>
+                        </figure>
+                        <div class="Service-bottom py-3">
+                            <h3 class="title" title="Banana Mango(H:3.5- 4)">
+                                <a href="#">Banana Mango(H:3.5- 4)</a>
+                            </h3>
+                            <div class="product-price">
+                                <ins class="new-price">৳ 500</ins><del class="old-price">৳ 550</del>
+                            </div>
+                            <div class="product-action">
+                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Quick View">buy now</a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <div class="row">
+            <div class="col-12">   
+                <div class="d-flex align-items-center justify-content-center">
+                    <a href="#" class="btn-product vbtn-sm text-capitalize" title="View More">view more<i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i></a>
+                </div>
+            </div>    
+        </div>
     </div>
 </div>
-<!--Best selling end-->
 
-<!--New Arrival start-->
-<div class="new_arrival_section py-lg-5 py-4 bg-white">
+<div class="service_section py-4 grey-section">
     <div class="container">
         <div class="row">
             <div class="col-12">   
                 <div class="categorie_banner_title">
-                    <h3 class="">New Arrival</h3>
+                    <h3>Our Services</h3>
                 </div>
             </div>    
         </div>
         <div class="row cat">
-            <div class="new-arrival-carousel categorie_banner_active owl-carousel">
+            <div class="categorie_banner_active owl-carousel">
                 <div class="col-lg-3">
-                    <div class="product text-center mb-4 bg-white">
+                    <div class="product text-center bg-white mb-4">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/electronics/17.jpg); background-size: cover; background-position: center;"></div>
+                                <img src="assets/img/services/service-1.jpg" alt="product" class="w-100">
                             </a>
-                            <div class="product-label-group">
-                            </div>
                         </figure>
                         <div class="Service-bottom py-3">
-                            <h3 class="title" title="Lilium Pink flower">
-                                <a href="#">Lilium Pink flower</a>
+                            <h3 class="title mb-0 font-si" title="Roof Garden Installation">
+                                <a href="#">Roof Garden Installation</a>
                             </h3>
-                            <div class="product-price">
-                                <ins class="new-price">৳ 300</ins>
-                            </div>
-                        <!--      <div class="cart-plus-minus">
-                                <div class="buttons dec qtybutton">-</div>
-                                <input type="number" class="input" value="1" min="1" />
-                                <div class="buttons inc qtybutton">+</div>
-                            </div> -->
-
-                            <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="product text-center mb-4 bg-white">
+                    <div class="product text-center bg-white mb-4">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/fashions/3.jpg); background-size: cover; background-position: center;"></div>
+                                <img src="assets/img/services/service-2.jpg" alt="product" class="w-100">
                             </a>
-                            <div class="product-label-group">
-                                <span class="product-label label-sale">- 6%</span>
-                            </div>
                         </figure>
                         <div class="Service-bottom py-3">
-                            <h3 class="title" title="Banana Mango(H:3.5- 4)">
-                                <a href="#">Banana Mango(H:3.5- 4)</a>
+                            <h3 class="title mb-0 font-si" title="Landscape Garden & Beautification">
+                                <a href="#">Landscape Garden & Beautification</a>
                             </h3>
-                            <div class="product-price">
-                                <ins class="new-price">৳ 310</ins><del class="old-price">৳ 330</del>
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="product text-center mb-4 bg-white">
+                    <div class="product text-center bg-white mb-4">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/fashions/8.jpg); background-size: cover; background-position: center;"></div>
+                                <img src="assets/img/services/service-3.jpg" alt="product" class="w-100">
                             </a>
-                            <div class="product-label-group">
-                                <span class="product-label label-sale">- 6%</span>
-                            </div>
                         </figure>
                         <div class="Service-bottom py-3">
-                            <h3 class="title" title="Banana Mango(H:3.5- 4)">
-                                <a href="#">Banana Mango(H:3.5- 4)</a>
+                            <h3 class="title mb-0 font-si" title="Indoor/ Office Gardening">
+                                <a href="#">Indoor/ Office Gardening</a>
                             </h3>
-                            <div class="product-price">
-                                <ins class="new-price">৳ 310</ins><del class="old-price">৳ 330</del>
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="product text-center mb-4 bg-white">
+                    <div class="product text-center bg-white mb-4">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/clothing/featured1.jpg); background-size: cover; background-position: center;"></div>
+                                <img src="assets/img/services/service-4.jpg" alt="product" class="w-100">
                             </a>
-                            <div class="product-label-group">
-                                <span class="product-label label-sale">- 6%</span>
-                            </div>
                         </figure>
                         <div class="Service-bottom py-3">
-                            <h3 class="title" title="Banana Mango(H:3.5- 4)">
-                                <a href="#">Banana Mango(H:3.5- 4)</a>
+                            <h3 class="title mb-0 font-si" title="Roof Garden Installation">
+                                <a href="#">Garden Maintenance Service</a>
                             </h3>
-                            <div class="product-price">
-                                <ins class="new-price">৳ 310</ins><del class="old-price">৳ 330</del>
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-3">
-                    <div class="product text-center mb-4 bg-white">
+                    <div class="product text-center bg-white mb-4">
                         <figure class="product-media mb-0">
                             <a href="#">
-                                <div class="img" style="background-image: url(assets/img/clothing/product-7-1-580x652.jpg); background-size: cover; background-position: center;"></div>
+                                <img src="assets/img/services/service-3.jpg" alt="product" class="w-100">
                             </a>
-                            <div class="product-label-group">
-                                <span class="product-label label-sale">- 20%</span>
-                            </div>
                         </figure>
                         <div class="Service-bottom py-3">
-                            <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                                <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
+                            <h3 class="title mb-0 font-si" title="Indoor/ Office Gardening">
+                                <a href="#">Indoor/ Office Gardening</a>
                             </h3>
-                            <div class="product-price">
-                                <ins class="new-price">৳ 300</ins><del class="old-price">৳ 400</del>
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product text-center mb-4 bg-white">
-                        <figure class="product-media mb-0">
-                            <a href="#">
-                                <div class="img" style="background-image: url(assets/img/beauty/beauty10.jpg); background-size: cover; background-position: center;"></div>
-                            </a>
-                            <div class="product-label-group">
-                                <span class="product-label label-sale">- 12%</span>
-                            </div>
-                        </figure>
-                        <div class="Service-bottom py-3">
-                            <h3 class="title" title="jackfruit">
-                                <a href="#">jackfruit</a>
-                            </h3>
-                            <div class="product-price">
-                                <ins class="new-price">৳ 280</ins><del class="old-price">৳ 330</del>
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3">
-                    <div class="product text-center mb-4 bg-white">
-                        <figure class="product-media mb-0">
-                            <a href="#">
-                                <div class="img" style="background-image: url(assets/img/beauty/beauty9.jpg); background-size: cover; background-position: center;"></div>
-                            </a>
-                            <div class="product-label-group">
-                                <span class="product-label label-sale">- 20%</span>
-                            </div>
-                        </figure>
-                        <div class="Service-bottom py-3">
-                            <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                                <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                            </h3>
-                            <div class="product-price">
-                                <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                            </div>
-                            <div class="product-action">
-                                <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-</div>
-<!--New Arrival end-->
-
-
-<!--all-product section start-->
-<div class="product bg-lite py-lg-5 py-sm-4 py-3">
-    <div class="container">
         <div class="row">
             <div class="col-12">   
-                <div class="categorie_banner_title d-flex justify-content-between align-items-center">
-                    <!-- <h5>recently added our store</h5> -->
-                    <h3 class="">Electronics</h3>
+                <div class="d-flex align-items-center justify-content-center">
                     <a href="#" class="btn-product vbtn-sm text-capitalize" title="View More">view more<i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i></a>
                 </div>
             </div>    
         </div>
-        <div class="row cat">
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/13.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 20%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/14.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 9%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Chiang Mai mango(H: 4- 5)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 500</ins><del class="old-price">৳ 550</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/15.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 20%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/17.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/19.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 14%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Ivy Lota Plat |(H: 4-6 inch)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 700</ins><del class="old-price">৳ 600</del>
-                        </div>
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/22.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Angiisar leaflets(অগ্নীশ্বর পাতাবাহার)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 700</ins><del class="old-price">৳ 600</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/23.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/22.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Lilium Pink flower</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/product-2-800x900.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">হলুদ গজারিয়া</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/19.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Gondhoraj Flower Plants</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/14.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">হলুদ গজারিয়া</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/electronics/17.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 </div>
-<!--all-product section end-->
 
-
-
-<!--all-product section start-->
-<div class="product bg-white py-lg-5 py-sm-4 py-3">
+<div class="how_to_buy bg-white py-4 pb-5">
     <div class="container">
         <div class="row">
             <div class="col-12">   
-                <div class="categorie_banner_title d-flex justify-content-between align-items-center">
-                    <!-- <h5>recently added our store</h5> -->
-                    <h3 class="">febrics & clothing</h3>
-                    <a href="#" class="btn-product vbtn-sm text-capitalize" title="View More">view more<i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i></a>
+                <div class="categorie_banner_title mt-2">
+                    <h3 class="text-center">how to buy</h3>
                 </div>
             </div>    
         </div>
-        <div class="row cat">
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/featured1.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 20%</span>
+        <div class="brand_inner">  
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="single-inner d-flex justify-content-center align-items-center py-3">
+                        <div class="item-icon light-r mr-3">
+                            <i aria-hidden="true" class="flaticon flaticon-grocery d-flex"></i>
                         </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                        <div class="item-holder">
+                            <h5 class="item--title mb-0"> Select Product</h5>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/featured3.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 9%</span>
+                <div class="col-md-3">
+                    <div class="single-inner d-flex justify-content-center align-items-center py-3">
+                        <div class="item-icon light-g mr-3">
+                            <i aria-hidden="true" class="flaticon flaticon-checked d-flex"></i>
                         </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Chiang Mai mango(H: 4- 5)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 500</ins><del class="old-price">৳ 550</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                        <div class="item-holder">
+                            <h5 class="item--title mb-0"> Add To Cart</h5>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/featured4.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 20%</span>
+                <div class="col-md-3">
+                    <div class="single-inner d-flex justify-content-center align-items-center py-3">
+                        <div class="item-icon light-r mr-3">
+                            <i aria-hidden="true" class="flaticon flaticon-add-to-cart d-flex"></i>
                         </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                        <div class="item-holder">
+                            <h5 class="item--title mb-0"> Check Out</h5>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/product-10-3-330x371.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
+                <div class="col-md-3">
+                    <div class="single-inner d-flex justify-content-center align-items-center py-3">
+                        <div class="item-icon light-g mr-3">
+                            <i aria-hidden="true" class="flaticon flaticon-delivery-truck d-flex"></i>
                         </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                        <div class="item-holder">
+                            <h5 class="item--title mb-0"> Waiting to Delivery</h5>
                         </div>
                     </div>
-                </div>
+                </div>                           
             </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/product-9-3-580x580.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 14%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Ivy Lota Plat |(H: 4-6 inch)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 700</ins><del class="old-price">৳ 600</del>
-                        </div>
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/product-7-1-580x652.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Angiisar leaflets(অগ্নীশ্বর পাতাবাহার)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 700</ins><del class="old-price">৳ 600</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/product-7-2-109x122.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/product-7-4-580x652.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Lilium Pink flower</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/product-8-4-580x580.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">হলুদ গজারিয়া</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/product-9-1-580x580.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Gondhoraj Flower Plants</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/product-9-3-580x580.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">হলুদ গজারিয়া</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/clothing/product-10-1-580x652.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>     
     </div>
 </div>
-<!--all-product section end-->
 
-
-
-<!--all-product section start-->
-<div class="product bg-lite py-lg-5 py-sm-4 py-3">
+<div class="py-4 grey-section border-bottom">
     <div class="container">
-        <div class="row">
-            <div class="col-12">   
-                <div class="categorie_banner_title d-flex justify-content-between align-items-center">
-                    <!-- <h5>recently added our store</h5> -->
-                    <h3 class="">fashion & shoes</h3>
-                    <a href="#" class="btn-product vbtn-sm text-capitalize" title="View More">view more<i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i></a>
+        <div class="shipping_contact">   
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="single_shipping justify-content-start">
+                        <div class="shipping_icone">
+                            <span class="pe-7s-call"></span>
+                        </div>
+                        <div class="shipping_content">
+                            <h3>{{ $website->phone }}</h3>
+                            <p>Free support line!</p>
+                        </div>
+                    </div>
                 </div>
-            </div>    
-        </div>
-        <div class="row cat">
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/8.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 20%</span>
+                <div class="col-sm-4">
+                    <div class="single_shipping">
+                        <div class="shipping_icone">
+                            <span class="pe-7s-mail"></span>
                         </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
+                        <div class="shipping_content">
+                            <h3>{{ $website->email }}</h3>
+                            <p>Orders Support!</p>
                         </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="single_shipping  justify-content-end column_3">
+                        <div class="shipping_icone">
+                            <span class="pe-7s-timer"></span>
+                        </div>
+                        <div class="shipping_content">
+                            <h3>Mon - Fri / 8:00 - 18:00</h3>
+                            <p>Working Days/Hours!</p>
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/1.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 9%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Chiang Mai mango(H: 4- 5)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 500</ins><del class="old-price">৳ 550</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/2.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 20%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/3.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/5.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 14%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Ivy Lota Plat |(H: 4-6 inch)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 700</ins><del class="old-price">৳ 600</del>
-                        </div>
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/7.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Angiisar leaflets(অগ্নীশ্বর পাতাবাহার)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 700</ins><del class="old-price">৳ 600</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/11.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/15.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Lilium Pink flower</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/14.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">হলুদ গজারিয়া</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/12.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Gondhoraj Flower Plants</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/17.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">হলুদ গজারিয়া</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/fashions/20.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </div>    
     </div>
 </div>
-<!--all-product section end-->
 
-
-
-<!--all-product section start-->
-<div class="product bg-white py-lg-5 py-sm-4 py-3">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">   
-                <div class="categorie_banner_title d-flex justify-content-between align-items-center">
-                    <!-- <h5>recently added our store</h5> -->
-                    <h3 class="">Beauty & Fragrance</h3>
-                    <a href="#" class="btn-product vbtn-sm text-capitalize" title="View More">view more<i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i></a>
-                </div>
-            </div>    
-        </div>
-        <div class="row cat">
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty1.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 20%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty2.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 9%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Chiang Mai mango(H: 4- 5)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 500</ins><del class="old-price">৳ 550</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty3.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 20%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty4.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty5.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 14%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Ivy Lota Plat |(H: 4-6 inch)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 700</ins><del class="old-price">৳ 600</del>
-                        </div>
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty6.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Angiisar leaflets(অগ্নীশ্বর পাতাবাহার)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 700</ins><del class="old-price">৳ 600</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty7.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty8.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Lilium Pink flower</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty9.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">হলুদ গজারিয়া</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty10.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Gondhoraj Flower Plants</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty11.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">হলুদ গজারিয়া</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/beauty/beauty12.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--all-product section end-->
-
-
-<!--all-product section start-->
-<div class="product bg-lite py-lg-5 py-sm-4 py-3">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">   
-                <div class="categorie_banner_title d-flex justify-content-between align-items-center">
-                    <h3 class="">home & kitchen</h3>
-                    <a href="#" class="btn-product vbtn-sm text-capitalize" title="View More">view more<i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i></a>
-                </div>
-            </div>    
-        </div>
-        <div class="row cat">
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen1.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 20%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen2.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 9%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Chiang Mai mango(H: 4- 5)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 500</ins><del class="old-price">৳ 550</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen3.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 20%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Soil (25-30 kg) Filled with Cement Bag</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen4.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen5.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 14%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Ivy Lota Plat |(H: 4-6 inch)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 700</ins><del class="old-price">৳ 600</del>
-                        </div>
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen6.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Angiisar leaflets(অগ্নীশ্বর পাতাবাহার)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 700</ins><del class="old-price">৳ 600</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen7.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen8.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Lilium Pink flower</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen9.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">হলুদ গজারিয়া</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen10.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Gondhoraj Flower Plants</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen11.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">হলুদ গজারিয়া</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 300</ins><del class="old-price">৳ 330</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-lg-2 col-sm-3 col-4">
-                <div class="product text-center mb-4 bg-white">
-                    <figure class="product-media mb-0">
-                        <a href="#">
-                            <img src="assets/img/kitchen/kitchen15.jpg" alt="product" class="w-100">
-                        </a>
-                        <div class="product-label-group">
-                            <span class="product-label label-sale">- 7%</span>
-                        </div>
-                    </figure>
-                    <div class="Service-bottom py-3">
-                        <h3 class="title" title="Soil (25-30 kg) Filled with Cement Bag">
-                            <a href="#">Banana Mango(H:3.5- 4)</a>
-                        </h3>
-                        <div class="product-price">
-                            <ins class="new-price">৳ 650</ins><del class="old-price">৳ 700</del>
-                        </div>
-                        <div class="product-action">
-                            <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="buy now"><i class="flaticon-shopping-bag-2 mr-2"></i>buy now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
-<!--all-product section end-->
 @endsection
 
 @push('js')

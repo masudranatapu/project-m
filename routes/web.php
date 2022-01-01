@@ -37,6 +37,10 @@ Route::get('/', [HomeController::class, 'welcome'])->name('home');
 
 Auth::routes();
 
+Route::get('about-us', [HomeController::class, 'aboutUs'])->name('about');
+Route::get('contact-us', [HomeController::class, 'contactUs'])->name('contact');
+Route::post('contact-us', [HomeController::class, 'contact'])->name('contact.us');
+Route::get('all-category', [HomeController::class, 'allCategory'])->name('all.category');
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 

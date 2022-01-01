@@ -1,76 +1,87 @@
-<!--footer area start-->
-<div class="footer_area footer_three pt-4 bg-white">
-                <div class="container">
-                    <div class="footer_top">
-                        <div class="row">
-                            <div class="col-md-3 col-6">
-                                <div class="single_footer text-md-left text-center">
-                                    <div class="footer_contact">
-                                        <h3>Customer service</h3>
-                                        <ul>
-                                            <li><a href="#">How To Shop</a></li>
-                                            <li><a href="#">Cancellation, Return & Refund Policy</a></li>
-                                            <li><a href="#">EMI Policy</a></li>
-                                            <li><a href="#">Contact us</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="single_footer text-md-left text-center">
-                                    <h3>top Categories</h3>
-                                    <ul>
-                                        <li><a href="#">Plants Packs by Location</a></li>
-                                        <li><a href="#">Fruit Trees</a></li>
-                                        <li><a href="#">Pesticides</a></li>
-                                        <li><a href="#">Vegetable Seeds</a></li>
-                                        <li><a href="#">Gardening Accessories</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="single_footer text-md-left text-center">
-                                    <h3>delivery locations</h3>
-                                    <ul>
-                                        <li><a href="#">dhaka</a></li>
-                                        <li><a href="#">mymensingh</a></li>
-                                        <li><a href="#">khulna</a></li>
-                                        <li><a href="#">sylhet</a></li>
-                                        <li><a href="#">rajshahi</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-md-3 col-6">
-                                <div class="single_footer text-md-left text-center">
-                                    <h3>about us</h3>
-                                    <ul>
-                                        <li><a href="#">About Us</a></li>
-                                        <li><a href="#">Delivery Information</a></li>
-                                        <li><a href="#">Privacy Policy</a></li>
-                                        <li><a href="#">Terms & Conditions</a></li>
-                                        <li><a href="#">Warranty</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="copyright_area">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-md-6">
-                                <div class="copyright_content text-center text-md-left">
-                                    <p>Copyright &copy; 2021, <a href="#">Royalmart</a>. All Rights Reserved</p>
-                                </div>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="footer-dev text-center text-md-right">
-                                    <p class="mb-0 text-white">Designed and developed by <a href="https://www.projanmoit.com/" class=" text-white">ProjanmoIT</a></p>
-                                </div>
-                            </div>
-                            
-                        </div>
+@php
+    $website = App\Models\Website::latest()->first();
+    $categories = App\Models\Category::where('parent_id', NULL)->where('child_id', NULL)->latest()->limit(5)->get();
+    $policies = App\Models\Policy::latest()->limit(4)->get();
+@endphp
+<div class="container">
+    <div class="footer_top">
+        <div class="row">
+            <div class="col-sm-3 col-6">
+                <div class="single_footer text-md-left text-center">
+                    <div class="footer_contact">
+                        <h3>Contract Address</h3>
+                        <ul>
+                            <li><i class="ion-location"></i>{{ $website->address }}</li>
+                            <li><i class="ion-ios-telephone"></i><a href="tel:{{$website->phone }}">{{$website->phone }}</a></li>
+                            <li><i class="ion-ios-email"></i><a href="mailto:{{ $website->email }}">{{$website->email}}</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>
-            <!--footer area end-->
+            <div class="col-sm-3 col-6">
+                <div class="single_footer text-md-left text-center">
+                    <h3>Product Categories</h3>
+                    <ul>
+                        @foreach($categories as $category)
+                            <li><a href="#">{{ $category->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3 col-6">
+                <div class="single_footer text-md-left text-center">
+                    <h3>Privacy</h3>
+                    <ul>
+                        <li><a href="{{ route('about') }}">About Us</a></li>
+                        @foreach($policies as $policy)
+                            <li><a href="#">{{ $policy->name }}</a></li>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <div class="col-sm-3 col-6">
+                <div class="single_footer text-md-left text-center">
+                    <h3>My Account</h3>
+                    <ul>
+                        @auth
+                            @if(Auth::check() && auth()->user()->role_id == 1)
+                                <li><a href="{{ route('admin.dashboard') }}" target="_blank">Admin Dashboard</li>
+                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            @endif
+                            @if(Auth::check() && auth()->user()->role_id == 2)
+                                <li><a href="{{ route('customer.dashboard') }}">Customer Profile</li>
+                                <li><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+                                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                    @csrf
+                                </form>
+                            @endif
+                        @else
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                        @endauth
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="copyright_area">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-md-6">
+                <div class="copyright_content text-center text-md-left">
+                    <p>Copyright &copy; 2021, <a href="{{ route('home') }}">{{ $website->name }}</a>. All Rights Reserved</p>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="footer-dev text-center text-md-right">
+                    <p class="mb-0 text-white">Designed and developed by <a href="javascript:;" class=" text-white">Friendsit</a></p>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</div>
