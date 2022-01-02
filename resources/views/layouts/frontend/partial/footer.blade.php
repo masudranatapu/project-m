@@ -34,7 +34,7 @@
                     <ul>
                         <li><a href="{{ route('about') }}">About Us</a></li>
                         @foreach($policies as $policy)
-                            <li><a href="#">{{ $policy->name }}</a></li>
+                            <li><a href="{{ route('policy.details', $policy->slug) }}">{{ $policy->name }}</a></li>
                         @endforeach
                     </ul>
                 </div>

@@ -7,9 +7,7 @@
 @section('meta')
 
 @endsection
-    @php
-        $website = App\Models\Website::latest()->first();
-    @endphp
+
 @push('css')
 
 @endpush
@@ -36,8 +34,8 @@
         <div class="container">
             <div class="row">
                 <div class="col-12">
-                    <h3>{{ $about->name }}</h3>
-                    <p class="text-justify" >{{ $about->details }}</p>
+                    <h3>{{ $policy->name }}</h3>
+                    <p class="text-justify" >{{ $policy->details }}</p>
                 </div>
             </div>
         </div>

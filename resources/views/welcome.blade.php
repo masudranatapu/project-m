@@ -14,7 +14,6 @@
 
 @endpush
 
-
 @section('content')
 <div class="slider_area slider_three owl-carousel mb-0">
     @foreach($sliders as $key => $slider)

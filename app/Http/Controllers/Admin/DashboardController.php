@@ -60,7 +60,7 @@ class DashboardController extends Controller
             'address' => $request->address,
             'updated_at' => Carbon::now(),
         ]);
-        Toastr::success('Admin Profile Updated successfully :-)','Success');
+        Toastr::success('Your Profile Updated successfully :-)','Success');
         return redirect()->back();
     }
 
@@ -79,11 +79,11 @@ class DashboardController extends Controller
             $userData->save();
             Auth::logout();
             
-            Toastr::success('Website updated successfully :-)','Success');
-            return redirect('/login');
+            Toastr::success('Your password updated successfully :-)','Success');
+            return redirect()->route('login');
             
         }else {
-            Toastr::success('something is worng. Please try agian :-)','warning');
+            Toastr::warning('something is worng. Please try agian :-)','warning');
             return redirect()->back();
         }
     }

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Carbon\Carbon;
 
 class UserTableSeeder extends Seeder
 {
@@ -20,12 +21,14 @@ class UserTableSeeder extends Seeder
             'name' => 'Super Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('password'),
+            'created_at' => Carbon::now(),
         ]);
         User::insert([
             'role_id'=> '2',
             'name' => 'Customer',
             'email' => 'customer@gmail.com',
             'password' => bcrypt('password'),
+            'created_at' => Carbon::now(),
         ]);
     }
 }

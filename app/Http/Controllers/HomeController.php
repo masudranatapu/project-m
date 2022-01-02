@@ -8,6 +8,8 @@ use App\Models\Slider;
 use App\Models\Category;
 use App\Models\About;
 use App\Models\Contact;
+use App\Models\Blog;
+use App\Models\Policy;
 
 class HomeController extends Controller
 {
@@ -24,10 +26,22 @@ class HomeController extends Controller
         $about = About::latest()->first();
         return view('pages.aboutus', compact('title', 'about'));
     }
+    public function blogs()
+    {
+        $title = "Blogs";
+        $blogs = Blog::where('status', 1)->latest()->get();
+        return view('pages.blog', compact('title', 'blogs'));
+    }
+    public function blogDetails($slug)
+    {
+        $blog = Blog::where('slug', $slug)->latest()->first();
+        $title = $blog->name;
+        return view('pages.blogdetails', compact('title', 'blog'));
+    }
     public function contactUs()
     {
         $title = "Contact Us";
-        return view('pages.contactus', compact('title'));
+        return view('pages.contactus', compact('title',));
     }
     public function contact(Request $request)
     {
@@ -57,5 +71,11 @@ class HomeController extends Controller
         $subsubcaegories = Category::where('parent_id', '!=', NULL)->where('child_id', '!=', NULL)->latest()->get();
         
         return view('pages.categories', compact('title', 'caegories', 'subcaegories', 'subsubcaegories'));
+    }
+    public function policy($slug)
+    {
+        $policy = Policy::where('slug', $slug)->latest()->first();
+        $title = $policy->name;
+        return view('pages.policy', compact('title', 'policy'));
     }
 }

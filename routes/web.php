@@ -38,11 +38,14 @@ Route::get('/', [HomeController::class, 'welcome'])->name('home');
 Auth::routes();
 
 Route::get('about-us', [HomeController::class, 'aboutUs'])->name('about');
+Route::get('blogs', [HomeController::class, 'blogs'])->name('blog');
+Route::get('blogs/{slug}', [HomeController::class, 'blogDetails'])->name('blog.details');
 Route::get('contact-us', [HomeController::class, 'contactUs'])->name('contact');
 Route::post('contact-us', [HomeController::class, 'contact'])->name('contact.us');
 Route::get('all-category', [HomeController::class, 'allCategory'])->name('all.category');
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('policy/{slug}', [HomeController::class, 'policy'])->name('policy.details');
 
+// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
 
@@ -101,5 +104,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth', 'customer']], function () {
     
     Route::get('/information', [InformationController::class, 'information'])->name('dashboard');
-
+    Route::get('profile-setting', [InformationController::class, 'profile'])->name('profile');
+    Route::post('profile/{id}', [InformationController::class, 'profileUpdate'])->name('profile.update');
+    Route::post('pass-updated/{id}', [InformationController::class, 'updatePass'])->name('password.update');
+    
 });

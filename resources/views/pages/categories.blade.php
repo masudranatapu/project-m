@@ -12,7 +12,6 @@
 
 @endpush
 
-
 @section('content')
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area commun_bread py-3 grey-section">

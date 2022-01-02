@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\About;
+use Carbon\Carbon;
 
 class AboutTableSeeder extends Seeder
 {
@@ -18,6 +19,7 @@ class AboutTableSeeder extends Seeder
         About::insert([
             'name' => "About Us",
             'details' => "About Details",
+            'created_at' => Carbon::now(),
         ]);
     }
 }

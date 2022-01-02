@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use App\Models\Website;
+use Carbon\Carbon;
 
 class WebsiteTableSedder extends Seeder
 {
@@ -20,6 +21,7 @@ class WebsiteTableSedder extends Seeder
             'address' => 'demo Address',
             'email' => 'demo@gmail.com',
             'phone'=> '01711111111',
+            'created_at' => Carbon::now(),
         ]);
     }
 }

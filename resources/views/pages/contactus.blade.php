@@ -42,7 +42,7 @@
                             <h4>Leave your message for contact us</h4>
                             <form action="{{ route('contact.us') }}" method="POST">
                                 @csrf
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-6">
                                         <label for="">Your Name </label>
                                         <input type="text" name="name" class="form-control" placeholder="Your Name">
@@ -52,19 +52,19 @@
                                         <input type="email" name="email" class="form-control" placeholder="Email Address">
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-12">
                                         <label for="">Phone Number</label>
                                         <input type="text" name="phone" class="form-control" placeholder="Phonne Number">
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-12">
                                         <label for="">Address</label>
-                                        <input type="text" name="address" class="form-control" placeholder="Address">
+                                        <input type="text" name="address" class="form-control" placeholder="Your Address">
                                     </div>
                                 </div>
-                                <div class="row">
+                                <div class="row mb-3">
                                     <div class="col-md-12">
                                         <label for="">Leave your message</label>
                                         <textarea  name="message" id="" cols="30" rows="3" class="form-control" placeholder="Your Message"></textarea>
