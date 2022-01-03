@@ -631,13 +631,13 @@
      
     /*------addClass/removeClass categories-------*/
    $(".categories_menu_inner > ul > li > a, #cat_toggle.has-sub > a").on("click", function() {
-        $(this).removeAttr('href');
+        // $(this).removeAttr('href');
         $(this).toggleClass('open').next('.submenu').toggleClass('open');
         $(this).parents().siblings().find('.submenu').removeClass('open');
     });
     /*------addClass/removeClass categories-------*/
    $(".categories_menu_inner > ul > li > ul.submenu > li > a").on("click", function() {
-        $(this).removeAttr('href');
+        // $(this).removeAttr('href');
         $(this).toggleClass('open').next('.submenu').toggleClass('open');
         $(this).parents().siblings().find('.submenu').removeClass('open');
     });

@@ -20,6 +20,8 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 
 use App\Http\Controllers\Customer\InformationController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\ViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -44,6 +46,22 @@ Route::get('contact-us', [HomeController::class, 'contactUs'])->name('contact');
 Route::post('contact-us', [HomeController::class, 'contact'])->name('contact.us');
 Route::get('all-category', [HomeController::class, 'allCategory'])->name('all.category');
 Route::get('policy/{slug}', [HomeController::class, 'policy'])->name('policy.details');
+
+// product related routes
+Route::get('all-product-shop', [HomeController::class , 'shop'] )->name('shop');
+Route::get('bestdeals-product', [HomeController::class, 'bestdeals'])->name('bestdeals');
+Route::get('features-product', [HomeController::class, 'features'])->name('features');
+Route::get('hotdeals-product', [HomeController::class, 'hotdeals'])->name('hotdeals');
+
+
+// searching
+Route::get('searching-product', [SearchController::class, 'searching'])->name('searching');
+
+// product details and  view related
+Route::get('category-product/{slug}', [ViewController::class, 'category'])->name('category');
+Route::get('product-details/{slug}', [ViewController::class, 'productDetails'])->name('productdetails');
+
+
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 

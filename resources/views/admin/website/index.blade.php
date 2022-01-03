@@ -20,7 +20,7 @@
                             <div class="card-header bg-success">
                                 <h3 class="card-title">Website Setting</h3>
                             </div>
-                            <div class="card-body mx-5">
+                            <div class="card-body">
                                 <div class="form-group row">
                                     <label class="col-sm-4 col-form-label">Website Name</label>
                                     <div class="col-sm-8">
@@ -92,41 +92,40 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card card-info">
-                                <div class="card-header bg-success">
-                                    <h3 class="card-title">Additional Information</h3>
-                                </div>
-                                <table class="card-body mx-5 table table-striped">
-                                    <tbody id="diagnosis">
-                                        @php
-                                            $icon = explode("|",$website->icon);
-                                            $link = explode("|",$website->link);
-                                        @endphp
-                                        @foreach($icon as $key=>$icon)
-                                            <tr>
-                                                <td>
-                                                    <input type="text" name="icon[]" autocomplete="off" class="form-control" value="{{$icon}}" placeholder="Sofil Icon from front awsome">
-                                                </td>
-
-                                                <td>
-                                                    <input type="text" name="link[]" class="form-control" value="@if(isset($link[$key])){{$link[$key]}}@endif" placeholder="Link">
-                                                </td>
-                                                <td class="text-center">
-                                                <div class="btn btn-group">
-                                                    <button type="button" class="btn btn-primary DiaAddBtn">+</button>
-                                                    <button type="button" class="btn btn-danger DiaRemoveBtn">-</button>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                            <div class="card-header bg-success">
+                                <h3 class="card-title">Additional Information</h3>
                             </div>
+                            <table class="card-body table table-striped">
+                                <tbody id="diagnosis">
+                                    @php
+                                        $icon = explode("|",$website->icon);
+                                        $link = explode("|",$website->link);
+                                    @endphp
+                                    @foreach($icon as $key=>$icon)
+                                        <tr>
+                                            <td>
+                                                <input type="text" name="icon[]" autocomplete="off" class="form-control" value="{{$icon}}" placeholder="Sofil Icon from front awsome">
+                                            </td>
+
+                                            <td>
+                                                <input type="text" name="link[]" class="form-control" value="@if(isset($link[$key])){{$link[$key]}}@endif" placeholder="Link">
+                                            </td>
+                                            <td class="text-center">
+                                            <div class="btn btn-group">
+                                                <button type="button" class="btn btn-primary DiaAddBtn">+</button>
+                                                <button type="button" class="btn btn-danger DiaRemoveBtn">-</button>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+
                             <div class="card-footer">
                                 <div class="form-group row">
                                     <label for="inputPassword3" class="col-sm-4 col-form-label"></label>
                                     <div class="col-sm-8">
-                                        <button type="submit" class="btn btn-info btn-lg">Update Setting</button>
+                                        <button type="submit" class="btn btn-info btn-lg">Update Website</button>
                                     </div>
                                 </div>
                             </div>

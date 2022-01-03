@@ -41,17 +41,17 @@
                 </div>    
             </div>
             <div class="row cat">
-                @foreach($caegories as $key => $caegory)
+                @foreach($categories as $key => $category)
                     <div class="col-lg-3 col-sm-4 col-6">
                         <div class="product text-center grey-section mb-4">
                             <figure class="product-media mb-0">
-                                <a href="">
-                                    <img src="{{ asset($caegory->image) }}" alt="product" class="w-100">
+                                <a href="{{ route('category', $category->slug) }}">
+                                    <img src="{{ asset($category->image) }}" alt="product" class="w-100">
                                 </a>
                             </figure>
                             <div class="category-bottom py-2">
                                 <h3 class="title mb-0" title="Gardening">
-                                    <a href="">{{ $caegory->name }}</a>
+                                    <a href="">{{ $category->name }}</a>
                                 </h3>
                             </div>
                         </div>
@@ -79,8 +79,10 @@
                             <h3>Sub Categories</h3>
                         </div>
                         <div class="list-group">
-                            @foreach($subcaegories as $subcaegory)
-                                <a href="#" class="list-group-item list-group-item-action">{{ $subcaegory->name }} </a>
+                            @foreach($subcategories as $subcategory)
+                                <a href="{{ route('category', $subcategory->slug) }}" class="list-group-item list-group-item-action">
+                                    {{ $subcategory->name }}
+                                </a>
                             @endforeach
                         </div>
                     </div>
@@ -91,8 +93,10 @@
                             <h3>Sub Sub Categories</h3>
                         </div>
                         <div class="list-group">
-                            @foreach($subsubcaegories as $subsubcaegory)
-                                <a href="#" class="list-group-item list-group-item-action">{{ $subsubcaegory->name }} </a>
+                            @foreach($subsubcategories as $subsubcategory)
+                                <a href="{{ route('category', $subsubcategory->slug) }}" class="list-group-item list-group-item-action">
+                                    {{ $subsubcategory->name }}
+                                </a>
                             @endforeach
                         </div>
                     </div>

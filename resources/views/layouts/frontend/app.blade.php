@@ -9,7 +9,7 @@
             $website = App\Models\Website::latest()->first();
         @endphp
         <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
+        <link rel="shortcut icon" type="image/x-icon" href="{{$website->favicon}}">
         <!-- all css here -->
         @yield('meta')
         <!-- for header link -->

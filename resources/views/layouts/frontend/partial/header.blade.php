@@ -49,14 +49,16 @@
         <div class="row align-items-center">
             <div class="col-lg-3 col-md-4 d-md-block d-none">
                 <div class="logo">
-                    <a href="{{route('home')}}"><img src="{{asset('frontend/img/logo/logo-new.png')}}" alt=""></a>
+                    <a href="{{route('home')}}"><img src="{{asset($website->logo)}}" alt=""></a>
                 </div>
             </div>
             <div class="col-lg-7">
                 <div class="search_bar d-none d-md-block">
-                    <form action="#">
-                        <input placeholder="Search entire store here..." type="text">
-                        <button type="submit"><i class="ion-ios-search-strong"></i></button>
+                    <form action="{{ route('searching') }}" method="get">
+                        <input name="search_product" placeholder="Search entire store here..." type="text">
+                        <button type="submit">
+                            <i class="ion-ios-search-strong"></i>
+                        </button>
                     </form>
                 </div> 
             </div>
@@ -69,8 +71,8 @@
                     </div>
                     <div class="search_bar mb-0 mr-3 d-md-none d-block">
                         <a href="#" class="open-close"><i class="ion-ios-search-strong"></i></a>
-                        <form action="#" id="mobile-search">
-                            <input placeholder="Search your product here..." type="text">
+                        <form action="{{ route('searching') }}" method="get"id="mobile-search">
+                            <input name="search_product" placeholder="Search your product here..." type="text">
                             <button type="submit">
                                 <i class="ion-ios-search-strong"></i>
                             </button>
@@ -141,7 +143,7 @@
                         <ul>
                             @foreach($categories as $category)
                                 <li class="has-submenu">
-                                    <a href="#">{{ $category->name }} </a>
+                                    <a href="{{ route('category', $category->slug) }}">{{ $category->name }} </a>
                                     @php
                                         $subcategories = App\Models\Category::where('parent_id', $category->id)->where('child_id', NULL)->latest()->get();
                                     @endphp
@@ -149,14 +151,18 @@
                                         <ul class="submenu">
                                             @foreach($subcategories as $subcategory)
                                                 <li class="has-submenu">
-                                                    <a href="#">{{ $subcategory->name }}</a>
+                                                    <a href="{{ route('category', $subcategory->slug) }}">{{ $subcategory->name }}</a>
                                                     @php
                                                         $subsubcategories = App\Models\Category::where('parent_id', '!=', NULL)->where('child_id', $subcategory->id)->latest()->get();
                                                     @endphp
                                                     @if($subsubcategories->count() > 0)
                                                         <ul class="submenu">
                                                             @foreach($subsubcategories as $subsubcategory)
-                                                                <li><a href="#">{{ $subsubcategory->name }}</a></li>
+                                                                <li>
+                                                                    <a href="{{ route('category', $subsubcategory->slug) }}">
+                                                                        {{ $subsubcategory->name }}
+                                                                    </a>
+                                                                </li>
                                                             @endforeach
                                                         </ul>
                                                     @endif
@@ -175,8 +181,9 @@
                     <nav>  
                         <ul>
                             <li><a href="{{ route('home') }}">Home</a></li>
-                            <li><a href="{{ route('blog') }}">Blog</a></li>
                             <li><a href="{{ route('about') }}">About</a></li>
+                            <li><a href="{{ route('shop') }}">Shop</a></li>
+                            <li><a href="{{ route('blog') }}">Blog</a></li>
                             <li><a href="{{ route('contact') }}">Contact Us</a></li>
                         </ul>
                     </nav>     
@@ -185,8 +192,9 @@
                     <div class="main_menu d-none d-lg-block"> 
                         <ul>
                             <li><a href="{{route('home')}}">Home</a></li>
-                            <li><a href="{{ route('blog') }}">Blog</a></li>
                             <li><a href="{{ route('about') }}">About</a></li>
+                            <li><a href="{{ route('shop') }}">Shop</a></li>
+                            <li><a href="{{ route('blog') }}">Blog</a></li>
                             <li><a href="{{ route('contact') }}">Contact Us</a></li>
                         </ul>
                     </div>
@@ -199,7 +207,7 @@
                     </div>
                     <div class="contact_number">
                         <p>Call Us:</p>
-                        <span> 01676-333288</span>
+                        <span>{{ $website->phone }}</span>
                     </div>
                 </div>
             </div>

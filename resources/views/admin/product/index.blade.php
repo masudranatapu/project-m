@@ -104,10 +104,10 @@
                                             <td>{{$product->product_type}}</td>
                                             <td>{{$product['user']['name']}}</td>
                                             <td>
-                                                <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-info waves-effect" target="blank">
+                                                <a href="{{ route('admin.products.edit', $product->id) }}" class="btn btn-info waves-effect btn-xs" target="blank">
                                                     <i class="fas fa-edit"></i>
                                                 </a>
-                                                <button class="btn btn-danger waves-effect" type="button" onclick="deleteData({{ $product->id }})">
+                                                <button class="btn btn-danger waves-effect btn-xs" type="button" onclick="deleteData({{ $product->id }})">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
                                                 <form id="delete-form-{{ $product->id }}" action="{{ route('admin.products.destroy', $product->id) }}" method="POST" style="display: none;">

@@ -10,6 +10,7 @@ use App\Models\About;
 use App\Models\Contact;
 use App\Models\Blog;
 use App\Models\Policy;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
@@ -17,8 +18,11 @@ class HomeController extends Controller
     {
         $title = "Home";
         $sliders = Slider::where('status', 1)->latest()->get();
-        $caegories = Category::where('parent_id', NULL)->where('child_id', NULL)->latest()->limit(8)->get();
-        return view('welcome', compact('title', 'sliders', 'caegories'));
+        $categories = Category::where('parent_id', NULL)->where('child_id', NULL)->latest()->limit(8)->get();
+        $hotdeals = Product::where('product_type', 'Hot Deals')->where('status', 1)->latest()->get();
+        $features = Product::where('product_type', 'Features')->where('status', 1)->latest()->get();
+        $bestdeals = Product::where('product_type', 'Best Deals')->where('status', 1)->latest()->get();
+        return view('welcome', compact('title', 'sliders', 'categories', 'hotdeals', 'features', 'bestdeals'));
     }
     public function aboutUs()
     {
@@ -66,16 +70,40 @@ class HomeController extends Controller
     public function allCategory()
     {
         $title = "All Category";
-        $caegories = Category::where('parent_id', NULL)->where('child_id', NULL)->latest()->get();
-        $subcaegories = Category::where('parent_id', '!=', NULL)->where('child_id', NULL)->latest()->get();
-        $subsubcaegories = Category::where('parent_id', '!=', NULL)->where('child_id', '!=', NULL)->latest()->get();
+        $categories = Category::where('parent_id', NULL)->where('child_id', NULL)->latest()->get();
+        $subcategories = Category::where('parent_id', '!=', NULL)->where('child_id', NULL)->latest()->get();
+        $subsubcategories = Category::where('parent_id', '!=', NULL)->where('child_id', '!=', NULL)->latest()->get();
         
-        return view('pages.categories', compact('title', 'caegories', 'subcaegories', 'subsubcaegories'));
+        return view('pages.categories', compact('title', 'categories', 'subcategories', 'subsubcategories'));
     }
     public function policy($slug)
     {
         $policy = Policy::where('slug', $slug)->latest()->first();
         $title = $policy->name;
         return view('pages.policy', compact('title', 'policy'));
+    }
+    public function shop()
+    {
+        $title = "Shop Your Product";
+        $products = Product::where('status', 1)->latest()->get();
+        return view('pages.shopproduct', compact('title', 'products'));
+    }
+    public function bestdeals()
+    {
+        $title = "Best Deals Product";
+        $bestdeals = Product::where('product_type', 'Best Deals')->where('status', 1)->latest()->get();
+        return view('pages.bestdealsproduct', compact('title', 'bestdeals'));
+    }
+    public function features()
+    {
+        $title = "Features Product";
+        $features = Product::where('product_type', 'Features')->where('status', 1)->latest()->get();
+        return view('pages.featuresproduct', compact('title', 'features'));
+    }
+    public function hotdeals()
+    {
+        $title = "Features Product";
+        $hotdeals = Product::where('product_type', 'Hot Deals')->where('status', 1)->latest()->get();
+        return view('pages.hotdealsproduct', compact('title', 'hotdeals'));
     }
 }
