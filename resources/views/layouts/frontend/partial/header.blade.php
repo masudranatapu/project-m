@@ -207,7 +207,7 @@
                     </div>
                     <div class="contact_number">
                         <p>Call Us:</p>
-                        <span>{{ $website->phone }}</span>
+                        <span><a href="tel:{{ $website->phone }}">{{ $website->phone }}</a></span>
                     </div>
                 </div>
             </div>

@@ -42,14 +42,14 @@ class Product extends Model
     }
     public function subcategory()
     {
-        return $this->belongsTo(SubCategory::class, 'subcategory_id', 'id');
+        return $this->belongsTo(Category::class, 'subcategory_id', 'id');
     }
     public function subsubcategory()
     {
-        return $this->belongsTo(SubCategory::class, 'subsubcategory_id', 'id');
+        return $this->belongsTo(Category::class, 'subsubcategory_id', 'id');
     }
     public function brand()
     {
-        return $this->belongsTo(SubCategory::class, 'brand_id', 'id');
+        return $this->belongsTo(Brand::class, 'brand_id', 'id');
     }
 }
