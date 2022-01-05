@@ -31,19 +31,17 @@
             border: 1px solid #ced4da;
         }
         .add_to_cart_size {
-            height: 45px;
+            height: 40px;
             width: 100%;
             font: 1.5em sans-serif;
             border-radius: 50px;
-            letter-spacing: 2px;
         }
         .wishlist_size {
-            height: 45px;
-            padding: 10px 0 0 0;
+            height: 40px;
+            padding: 7px 0 0 0;
             width: 80%;
             font: 1.5em sans-serif;
             border-radius: 50px;
-            letter-spacing: 2px;
         }
         .input_center {
             padding-left: 36px;
@@ -102,7 +100,7 @@
                         <a href="javascript:;"><i class="ion-star text-danger"></i></a>
                         <a href="javascript:;"><i class="ion-star text-danger"></i></a>
                         <a href="javascript:;"><i class="ion-star text-danger"></i></a>
-                        <span class="ml-2"> 29 rating </span>
+                        <span class="ml-2"> {{ $reviews->count() }} Rating </span>
                     </p>
                     <hr>
                     <h6>Brand : {{ $product['brand']['name'] }}</h6>
@@ -141,55 +139,81 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-4">
-                                <div class="product-form">
-                                    <div class="product-form-group">
-                                        <label for="">Color</label>
-                                        <div class="mr-2 quantity">
-                                            <select name="" id="">
-                                                <option value="">Hi all</option>
-                                                <option value="">Hi all</option>
-                                                <option value="">Hi all</option>
-                                                <option value="">Hi all</option>
-                                            </select>
+                            @if($product->color_id)
+                                @php
+                                    $colors = explode(',', $product->color_id);
+                                @endphp
+                                <div class="col-md-4">
+                                    <div class="product-form">
+                                        <div class="product-form-group">
+                                            <label for="">Color</label>
+                                            <div class="mr-2 quantity">
+                                                <select name="" id="">
+                                                    <option value="" selected disabled>Select One</option>
+                                                    @foreach($colors as $color)
+                                                        @php
+                                                            $productColors = App\Models\Color::where('id', $color)->latest()->first();
+                                                        @endphp
+                                                        <option value="{{ $productColors->id }}">{{ $productColors->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="col-md-4">
-                                <div class="product-form">
-                                    <div class="product-form-group">
-                                        <label for="">Sizes</label>
-                                        <div class="mr-2 quantity">
-                                            <select name="" id="">
-                                                <option value="">Sizes</option>
-                                                <option value="">Sizes</option>
-                                                <option value="">Sizes</option>
-                                                <option value="">Sizes</option>
-                                                <option value="">Sizes</option>
-                                            </select>
+                            @endif
+                            @if($product->size_id)
+                                @php
+                                    $sizes = explode(',', $product->size_id);
+                                @endphp
+                                <div class="col-md-4">
+                                    <div class="product-form">
+                                        <div class="product-form-group">
+                                            <label for="">Sizes</label>
+                                            <div class="mr-2 quantity">
+                                                <select name="" id="">
+                                                    <option value="" selected disabled>Select One</option>
+                                                    @foreach($sizes as $size)
+                                                        @php
+                                                            $productSize = App\Models\Size::where('id', $size)->latest()->first();
+                                                        @endphp
+                                                        <option value="{{ $productSize->id }}">{{ $productSize->name }}</option>
+                                                    @endforeach
+                                                </select>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            @endif
                         </div>
                         <div class="row mt-4">
-                            <div class="col-md-5">
+                            <div class="col-md-4">
                                 <button type="submit" class="btn btn-lg btn-success add_to_cart_size">
                                     <i class="fa fa-cart-plus mr-2"></i>
                                     Add To Cart
                                 </button>
                             </div>
                             <!-- this button will be onclik  -->
-                            <div class="col-md-5">
-                                <a href="javascript:;" class="btn btn-lg btn-info wishlist_size"  onclick="wishlist">
+                            <div class="col-md-4">
+                                <a href="javascript:;" class="btn btn-lg btn-danger wishlist_size"  onclick="buyonw">
+                                    <i class="fa fa-shopping-bag mr-2"></i>Buy now
+                                </a>
+                            </div>
+                            <!-- this button will be onclik  -->
+                            <div class="col-md-4">
+                                <a href="javascript:;" title="Add to Wishlist" class="btn btn-lg btn-info wishlist_size"  onclick="wishlist_product_submit({{$product->id}})">
                                     <i class="fa fa-heart-o" aria-hidden="true"></i> Wishlist
                                 </a>
                             </div>
                         </div>
                     </form>
-                    <form action="" id="wishlist">
+                    <form action="{{ route('customer.wishlist.store') }}" id="wishlist_product_submit_form_{{ $product->id }}" method="POST">
                         <!-- this form only for wishlist  -->
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                    </form>
+                    <form action="" id="buynow">
+                        <!-- this form only for buynow  -->
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                     </form>
                     <hr>
@@ -308,99 +332,142 @@
                                             <div class="text-justify">
                                                 <div class="">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> 100 </div>
+                                                        <div class="progress-bar bg-success" role="progressbar" style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"> 100 %</div>
                                                     </div>
                                                 </div>
-                                                <div class="float-right"> 100 review</div>
+                                                <div class="float-right text-success"> {{ $fiveStarReviews->count() }} review</div>
                                             </div>
                                             <br>
                                             <div class="text-justify">
                                                 <div class="">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar bg-info" role="progressbar" style="width: 80%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100"> 80 %</div>
                                                     </div>
                                                 </div>
-                                                <div class="float-right"> 100 review</div>
+                                                <div class="float-right text-info"> {{ $fourStarReviews->count() }} review</div>
                                             </div>
                                             <br>
                                             <div class="text-justify">
                                                 <div class="">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar bg-warning" role="progressbar" style="width: 60%" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100"> 60 %</div>
                                                     </div>
                                                 </div>
-                                                <div class="float-right"> 100 review</div>
+                                                <div class="float-right text-warning"> {{ $threeStarReviews->count() }} review</div>
                                             </div>
                                             <br>
                                             <div class="text-justify">
                                                 <div class="">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 40%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar bg-secoundary" role="progressbar" style="width: 40%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> 40 %</div>
                                                     </div>
                                                 </div>
-                                                <div class="float-right"> 100 review</div>
+                                                <div class="float-right text-secoundary"> {{ $twoStarReviews->count() }} review</div>
                                             </div>
                                             <br>
                                             <div class="text-justify">
                                                 <div class="">
                                                     <div class="progress">
-                                                        <div class="progress-bar bg-secoundary" role="progressbar" style="width: 30%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"></div>
+                                                        <div class="progress-bar bg-danger" role="progressbar" style="width: 30%" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100"> 20 %</div>
                                                     </div>
                                                 </div>
-                                                <div class="float-right"> 100 review</div>
+                                                <div class="float-right text-danger"> {{ $oneStarReviews->count() }} review</div>
                                             </div>
                                         </div>
                                     </div>
-                                    <h5>Product Review</h5>
                                     <div class="row">
                                         <!-- this will be repet  -->
-                                        <div class="col-md-12 mb-2">
-                                            <div class="row">
-                                                <div class="col-md-2 col-sm-2">
-                                                    <img src="{{ asset('demomedia/demoprofile.png') }}" alt="Responsive image" class="review_image_size">
-                                                </div>
-                                                <div class="col-md-10 col-sm-10">
-                                                    <div class="blog-comments inner-bottom-xs outer-bottom-xs">
-                                                        <h4>Saraha Smith</h4>
-                                                        <p>
-                                                            <a href="javascript:;"><i class="ion-star text-danger"></i></a>
-                                                            <a href="javascript:;"><i class="ion-star text-danger"></i></a>
-                                                            <a href="javascript:;"><i class="ion-star text-danger"></i></a>
-                                                            <a href="javascript:;"><i class="ion-star text-danger"></i></a>
-                                                            <a href="javascript:;"><i class="ion-star text-danger"></i></a>
-                                                        </p>
-                                                        <p class="text-justify">Lorem ipsum dolor sit xime lorem non fugiat amet. Eligendi, in. veniam</p>
-                                                        <p>
-                                                            03 Day ago
-                                                        </p>
+                                        @if($reviews->count() > 0)
+                                            <h5 class="ml-3">Product Review</h5>
+                                            @foreach($reviews as $review)
+                                                <div class="col-md-12 mb-2">
+                                                    <div class="row">
+                                                        <div class="col-md-2 col-sm-2">
+                                                            <img src="@if($review->user_id) {{ asset($review['reviewuser']['image']) }} @else {{ asset('demomedia/demoprofile.png') }} @endif" alt="Responsive image" class="review_image_size">
+                                                        </div>
+                                                        <div class="col-md-10 col-sm-10">
+                                                            <div class="blog-comments inner-bottom-xs outer-bottom-xs">
+                                                                <h4>
+                                                                    @if($review->name == NULL)
+                                                                        <span class="badge">No Name for Reviewer </span>
+                                                                    @else
+                                                                        {{$review->name}}
+                                                                    @endif
+                                                                </h4>
+                                                                <p>
+                                                                    @if($review->rating == 5)
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                    @elseif($review->rating == 4)
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star"></i></a>
+                                                                    @elseif($review->rating == 3)
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star"></i></a>
+                                                                    @elseif($review->rating == 2)
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star"></i></a>
+                                                                    @else($review->rating == 1)
+                                                                        <a href="javascript:;"><i class="ion-star text-danger"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star"></i></a>
+                                                                        <a href="javascript:;"><i class="ion-star"></i></a>
+                                                                    @endif
+                                                                </p>
+                                                                <p class="text-justify">
+                                                                    @if($review->opinion == NULL)
+                                                                        Good product 
+                                                                    @else
+                                                                        {{$review->opinion}}
+                                                                    @endif
+                                                                </p>
+                                                                <p>
+                                                                    {{ $review->updated_at->diffForHumans() }}
+                                                                </p>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </div>
+                                            @endforeach
+                                        @endif
                                         <!-- this is will be repet  -->
                                     </div>
                                     <h5>Leave your review</h5>
                                     @auth 
-                                        <form action="">
+                                        <form action="{{ route('customer.review') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{$product->id}}">
                                             <input type="hidden" name="user_id" value="{{Auth::user()->id}}">
                                             <div class="row">
                                                 <div class="col-md-12 form-group">
                                                     <label for="">Your Opinion</label>
-                                                    <textarea name="" id="" cols="30" rows="4" placeholder="Your Opinion"></textarea>
+                                                    <textarea name="opinion" id="" cols="30" rows="4" placeholder="Your Opinion"></textarea>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Your Name</label>
-                                                    <input type="text" placeholder="Your Name">
+                                                    <input type="text" name="name" placeholder="Your Name" value="{{ Auth::user()->name }}">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Your Email</label>
-                                                    <input type="text" placeholder="Your Email Address">
+                                                    <input type="text" name="email" placeholder="Your Email Address" value="{{ Auth::user()->email }}">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Rating</label>
-                                                    <select name="" id="">
+                                                    <select name="rating">
+                                                        <option value="" selected disabled>Select one</option>
                                                         <option value="5">5 Star </option>
                                                         <option value="4">4 Star </option>
                                                         <option value="3">3 Star </option>
@@ -408,34 +475,41 @@
                                                         <option value="1">1 Star </option>
                                                     </select>
                                                 </div>
+                                                <div class="col-md-12 mt-3">
+                                                    <button type="submit" class="btn btn-success">Submit Review</button>
+                                                </div>
                                             </div>
                                         </form>
                                     @else 
-                                        <form action="">
+                                        <form action="{{ route('customer.review') }}" method="POST">
                                             @csrf
                                             <input type="hidden" name="product_id" value="{{$product->id}}">
                                             <div class="row">
                                                 <div class="col-md-12 form-group">
                                                     <label for="">Your Opinion</label>
-                                                    <textarea name="" id="" cols="30" rows="4" placeholder="Your Opinion"></textarea>
+                                                    <textarea name="opinion" id="" cols="30" rows="4" placeholder="Your Opinion"></textarea>
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Your Name</label>
-                                                    <input type="text" placeholder="Your Name">
+                                                    <input type="text" name="name" placeholder="Your Name">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Your Email</label>
-                                                    <input type="text" placeholder="Your Email Address">
+                                                    <input type="text" name="email" placeholder="Your Email Address">
                                                 </div>
                                                 <div class="col-md-4">
                                                     <label for="">Rating</label>
-                                                    <select name="" id="">
+                                                    <select name="rating" id="">
+                                                        <option value="" selected disabled>Select one</option>
                                                         <option value="5">5 Star </option>
                                                         <option value="4">4 Star </option>
                                                         <option value="3">3 Star </option>
                                                         <option value="2">2 Star </option>
                                                         <option value="1">1 Star </option>
                                                     </select>
+                                                </div>
+                                                <div class="col-md-12 mt-3">
+                                                    <button type="submit" class="btn btn-success">Submit Review</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -463,6 +537,13 @@
 @endsection
 
 @push('js')
+    <!-- product wishlist area  -->    
+	<script>
+		function wishlist_product_submit(id) {
+		    document.getElementById('wishlist_product_submit_form_'+id).submit();
+		}
+	</script>
+    <!-- product qty up down button  -->
     <script>
         $(document).ready(function () {
             $('.increment-btn').click(function (e) {
@@ -474,7 +555,6 @@
                     value++;
                     $(this).parents('.quantity').find('.qty-input').val(value);
                 }
-
             });
 
             $('.decrement-btn').click(function (e) {
@@ -487,7 +567,6 @@
                     $(this).parents('.quantity').find('.qty-input').val(value);
                 }
             });
-
         });
     </script>
     <!-- addthis shear  -->

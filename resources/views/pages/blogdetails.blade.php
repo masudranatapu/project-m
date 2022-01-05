@@ -45,12 +45,14 @@
                             <div class="row">
                                 <div class="col-md-4">
                                     <p> Create Blog </p>
-                                    <small>{{ $blog->created_at->format('d M Y h:i A') }}</small>
+                                    <small>{{ $blog->created_at }}</small>
                                 </div>
-                                <div class="col-md-4">
-                                    <p>Blog  Updated </p>
-                                    <small>{{ $blog->updated_at->format('d M Y h:i A') }}</small>
-                                </div>
+                                @if($blog->updated_at)
+                                    <div class="col-md-4">
+                                        <p>Blog  Updated </p>
+                                        <small>{{ $blog->updated_at }}</small>
+                                    </div>
+                                @endif
                             </div>
                             <p class="card-text text-justify">
                                 {!! $blog->details !!}

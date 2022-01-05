@@ -50,8 +50,12 @@
                             <li class="list-group-item {{ Route::is('customer.dashboard') ? 'active' : '' }}">
                                 <a class="{{ Route::is('customer.dashboard') ? 'text-white' : '' }}" href="{{ route('customer.dashboard') }}">My Profile</a>
                             </li>
-                            <li class="list-group-item"><a href="">Orders</a></li>
-                            <li class="list-group-item"><a href="">Wishlist</a></li>
+                            <li class="list-group-item {{ Route::is('customer.order') ? 'active' : '' }}">
+                                <a class="{{ Route::is('customer.order') ? 'text-white' : '' }}" href="{{ route('customer.order') }}">Orders</a>
+                            </li>
+                            <li class="list-group-item {{ Route::is('customer.wishlist') ? 'active' : '' }}">
+                                <a class="{{ Route::is('customer.wishlist') ? 'text-white' : '' }}" href="{{ route('customer.wishlist') }}">Wishlist</a>
+                            </li>
                             <li class="list-group-item {{ Route::is('customer.profile') ? 'active' : '' }}">
                                 <a class="{{ Route::is('customer.profile') ? 'text-white' : '' }}" href="{{ route('customer.profile') }}">Setting</a>
                             </li>

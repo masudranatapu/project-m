@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 
 use App\Http\Controllers\Customer\InformationController;
+use App\Http\Controllers\Customer\WishlistController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ViewController;
 
@@ -46,14 +47,11 @@ Route::get('contact-us', [HomeController::class, 'contactUs'])->name('contact');
 Route::post('contact-us', [HomeController::class, 'contact'])->name('contact.us');
 Route::get('all-category', [HomeController::class, 'allCategory'])->name('all.category');
 Route::get('policy/{slug}', [HomeController::class, 'policy'])->name('policy.details');
-
 // product related routes
 Route::get('all-product-shop', [HomeController::class , 'shop'] )->name('shop');
 Route::get('bestdeals-product', [HomeController::class, 'bestdeals'])->name('bestdeals');
 Route::get('features-product', [HomeController::class, 'features'])->name('features');
 Route::get('hotdeals-product', [HomeController::class, 'hotdeals'])->name('hotdeals');
-
-
 // searching
 Route::get('searching-product', [SearchController::class, 'searching'])->name('searching');
 
@@ -61,24 +59,19 @@ Route::get('searching-product', [SearchController::class, 'searching'])->name('s
 Route::get('category-product/{slug}', [ViewController::class, 'category'])->name('category');
 Route::get('product-details/{slug}', [ViewController::class, 'productDetails'])->name('productdetails');
 
-
-
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'admin']], function () {
-
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
     Route::post('profile/{id}', [DashboardController::class, 'profileUpdate'])->name('profile.update');
     Route::post('pass-updated/{id}', [DashboardController::class, 'updatePass'])->name('password.update');
-
     // website seeting
     Route::resource('website', WebsiteController::class);
     // brand 
     Route::resource('brands', BrandController::class);
     Route::get('brands-inactive/{id}', [BrandController::class, 'brandsInactive'])->name('brands.inactive');
     Route::get('brands-active/{id}', [BrandController::class, 'brandsActive'])->name('brands.active');
-
     // unit section 
         // size
     Route::resource('size', SizeController::class);
@@ -88,11 +81,9 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::resource('color', ColorController::class);
     Route::get('color-inactive/{id}', [ColorController::class, 'colorInactive'])->name('color.inactive');
     Route::get('color-active/{id}', [ColorController::class, 'colorActive'])->name('color.active');
-
     // Location section 
     Route::resource('division', DivisionController::class);
     Route::resource('district', DistrictController::class);
-
     // blog section
     Route::resource('blogs', BlogController::class);
     Route::get('blog-inactive/{id}', [BlogController::class, 'blogInactive'])->name('blog.inactive');
@@ -116,14 +107,20 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     // category
     Route::resource('category', CategoryController::class);
     Route::get('/category/parent-chlid/ajax/{cate_id}', [CategoryController::class, 'parentChild']);
-    
 });
-
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth', 'customer']], function () {
-    
     Route::get('/information', [InformationController::class, 'information'])->name('dashboard');
     Route::get('profile-setting', [InformationController::class, 'profile'])->name('profile');
     Route::post('profile/{id}', [InformationController::class, 'profileUpdate'])->name('profile.update');
     Route::post('pass-updated/{id}', [InformationController::class, 'updatePass'])->name('password.update');
-    
+    // wishlist arae with auth
+    Route::get('my-wishlist', [WishlistController::class, 'index'])->name('wishlist');
+    Route::post('my-wishlist', [WishlistController::class, 'wishlistStore'])->name('wishlist.store');
+    Route::post('destroy/my-wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
+    // my order view 
+    Route::get('my-order', [WishlistController::class, 'orderIndex'])->name('order');
+});
+Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer'], function () {
+    // wishlist area with un authentication 
+    Route::post('review', [WishlistController::class, 'review'])->name('review');
 });

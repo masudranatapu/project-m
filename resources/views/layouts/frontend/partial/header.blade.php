@@ -79,7 +79,7 @@
                         </form>
                     </div>
                     <div class="wishlist_link">
-                        <a href="#">
+                        <a href="{{ route('customer.wishlist') }}">
                             <i class="fa fa-heart-o" aria-hidden="true"></i>
                         </a>
                     </div>

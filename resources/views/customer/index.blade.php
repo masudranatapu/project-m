@@ -46,8 +46,12 @@
                             <li class="list-group-item {{ Route::is('customer.dashboard') ? 'active' : '' }}">
                                 <a class="{{ Route::is('customer.dashboard') ? 'text-white' : '' }}" href="{{ route('customer.dashboard') }}">My Profile</a>
                             </li>
-                            <li class="list-group-item"><a href="">Orders</a></li>
-                            <li class="list-group-item"><a href="">Wishlist</a></li>
+                            <li class="list-group-item {{ Route::is('customer.order') ? 'active' : '' }}">
+                                <a class="{{ Route::is('customer.order') ? 'text-white' : '' }}" href="{{ route('customer.order') }}">Orders</a>
+                            </li>
+                            <li class="list-group-item {{ Route::is('customer.wishlist') ? 'active' : '' }}">
+                                <a class="{{ Route::is('customer.wishlist') ? 'text-white' : '' }}" href="{{ route('customer.wishlist') }}">Wishlist</a>
+                            </li>
                             <li class="list-group-item {{ Route::is('customer.profile') ? 'active' : '' }}">
                                 <a class="{{ Route::is('customer.profile') ? 'text-white' : '' }}" href="{{ route('customer.profile') }}">Setting</a>
                             </li>
@@ -63,90 +67,88 @@
                 </div>
                 <div class="col-md-9">
                     <div class="card">
-                        <div class="card-header">
-                            <div class="card-title">
-                                <h5>Your profile informaiton</h5>
-                            </div>
-                            <div class="card-body">
-                                <ul class="list-group">
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="float-left">
-                                                    <h5>Your Name </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="text-center">
-                                                    <h5> : </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="float-right">
-                                                    <h5>{{ Auth::user()->name }}</h5>
-                                                </div>
+                        <div class="card-header bg-info">
+                            <h5 class="text-white">Your profile informaiton</h5>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="float-left">
+                                                <h5>Your Name </h5>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="float-left">
-                                                    <h5>Your Email </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="text-center">
-                                                    <h5> : </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="float-right">
-                                                    <h5>{{ Auth::user()->email }}</h5>
-                                                </div>
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <h5> : </h5>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="float-left">
-                                                    <h5>Phone Number </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="text-center">
-                                                    <h5> : </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="float-right">
-                                                    <h5>{{ Auth::user()->phone }}</h5>
-                                                </div>
+                                        <div class="col-md-6">
+                                            <div class="float-right">
+                                                <h5>{{ Auth::user()->name }}</h5>
                                             </div>
                                         </div>
-                                    </li>
-                                    <li class="list-group-item">
-                                        <div class="row">
-                                            <div class="col-md-4">
-                                                <div class="float-left">
-                                                    <h5>Address </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-2">
-                                                <div class="text-center">
-                                                    <h5> : </h5>
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <div class="float-right">
-                                                    <h5>{{ Auth::user()->address }}</h5>
-                                                </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="float-left">
+                                                <h5>Your Email </h5>
                                             </div>
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <h5> : </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="float-right">
+                                                <h5>{{ Auth::user()->email }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="float-left">
+                                                <h5>Phone Number </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <h5> : </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="float-right">
+                                                <h5>{{ Auth::user()->phone }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="list-group-item">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="float-left">
+                                                <h5>Address </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="text-center">
+                                                <h5> : </h5>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="float-right">
+                                                <h5>{{ Auth::user()->address }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>
