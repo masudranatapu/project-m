@@ -20,6 +20,7 @@
         .product_slider_image {
             height: 680px;
             width: 100%;
+            border: 1px solid;
         }
         hr {
             margin: 15px 0;
@@ -43,6 +44,9 @@
             font: 1.5em sans-serif;
             border-radius: 50px;
             letter-spacing: 2px;
+        }
+        .input_center {
+            padding-left: 36px;
         }
     </style>
 @endpush
@@ -131,7 +135,7 @@
                                         <label for="">Quantity</label>
                                         <div class="input-group mr-2 quantity">
                                             <button class="quantity-minus button_plus_minus decrement-btn"> - </button>
-                                            <input class="form-control qty-input" type="number" value="1" min="1" max="1000000">
+                                            <input class="form-control qty-input input_center" type="text" value="1" min="1" max="100">
                                             <button class="quantity-plus button_plus_minus increment-btn"> + </button>
                                         </div>
                                     </div>
@@ -268,8 +272,11 @@
                                 <li class="nav-item mr-3">
                                     <a class="nav-link active " id="pills-details-tab" data-toggle="pill" href="#pills-details" role="tab" aria-controls="pills-details" aria-selected="true">Product Details</a>
                                 </li>
-                                <li class="nav-item">
+                                <li class="nav-item mr-3">
                                     <a class="nav-link " id="pills-review-tab" data-toggle="pill" href="#pills-review" role="tab" aria-controls="pills-review" aria-selected="false">Review</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" id="pills-return-warranty-tab" data-toggle="pill" href="#pills-return-warranty" role="tab" aria-controls="pills-return-warranty" aria-selected="false">Return & Warranty</a>
                                 </li>
                             </ul>
                             <div class="tab-content" id="pills-tabContent">
@@ -433,6 +440,18 @@
                                             </div>
                                         </form>
                                     @endauth
+                                </div>
+                                <div class="tab-pane fade" id="pills-return-warranty" role="tabpanel" aria-labelledby="pills-return-warranty-tab">
+                                    <h3 class="my-3">Return & Warranty</h3>
+                                    <p>(1) If the product has any defect by its manufacturer.</p>
+                                    <p>(2) Product with missing parts and accessories.</p>
+                                    <h3 class="my-3">Payment System</h3>
+                                    <p>(1) Cash on Delivery (COD). </p>
+                                    <p>(2) Cards - Visa, MasterCard & Amex.</p>
+                                    <p>(3) Mobile banking = Nogad, bKash, Rocket, etc. </p>
+                                    <p>(4) Net banking.</p>
+                                    <h3 class="my-3">Home Delivery</h3>
+                                    <p>All time available</p>
                                 </div>
                             </div>
                         </div>
