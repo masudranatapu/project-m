@@ -46,8 +46,8 @@
                                     @endif
                                 </div>
                                 <div class="product-action-vertical">
-                                    <a href="#" class="btn-product-icon btn-cart bg-success" data-toggle="modal" data-target="#addCartModal" title="Add to cart">
-                                        <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                    <a href="#" class="btn-product-icon btn-cart bg-success" data-toggle="modal" data-target="#addCartModal" title="Buy Now">
+                                        <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                                     </a>
                                     <a href="javascript:;" class="btn-product-icon btn-wishlist bg-success" onclick="wishlist_product_submit({{$product->id}})" title="Add to wishlist">
                                         <i class="fa fa-heart-o" aria-hidden="true"></i>
@@ -70,7 +70,9 @@
                                     @endif
                                 </div>
                                 <div class="product-action">
-                                    <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Quick View">buy now</a>
+                                    <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Add to cart">
+                                        Add to cart
+                                    </a>
                                 </div>
                             </div>
                         </div>
