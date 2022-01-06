@@ -42,20 +42,20 @@
                         <div class="card-body">
                             <h5 class="card-title">{{ Auth::user()->name }}</h5>
                         </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item {{ Route::is('customer.dashboard') ? 'active' : '' }}">
-                                <a class="{{ Route::is('customer.dashboard') ? 'text-white' : '' }}" href="{{ route('customer.dashboard') }}">My Profile</a>
-                            </li>
-                            <li class="list-group-item {{ Route::is('customer.order') ? 'active' : '' }}">
-                                <a class="{{ Route::is('customer.order') ? 'text-white' : '' }}" href="{{ route('customer.order') }}">Orders</a>
-                            </li>
-                            <li class="list-group-item {{ Route::is('customer.wishlist') ? 'active' : '' }}">
-                                <a class="{{ Route::is('customer.wishlist') ? 'text-white' : '' }}" href="{{ route('customer.wishlist') }}">Wishlist</a>
-                            </li>
-                            <li class="list-group-item {{ Route::is('customer.profile') ? 'active' : '' }}">
-                                <a class="{{ Route::is('customer.profile') ? 'text-white' : '' }}" href="{{ route('customer.profile') }}">Setting</a>
-                            </li>
-                        </ul>
+                        <div class="list-group">
+                            <a href="{{ route('customer.dashboard') }}" class="list-group-item list-group-item-action {{ Route::is('customer.dashboard') ? 'active' : '' }}">
+                                My Profile    
+                            </a>
+                            <a href="{{ route('customer.order') }}" class="list-group-item list-group-item-action {{ Route::is('customer.order') ? 'active' : '' }}">
+                                Orders
+                            </a>
+                            <a href="{{ route('customer.wishlist') }}" class="list-group-item list-group-item-action {{ Route::is('customer.wishlist') ? 'active' : '' }}">
+                                Wishlist
+                            </a>
+                            <a href="{{ route('customer.profile') }}" class="list-group-item list-group-item-action {{ Route::is('customer.profile') ? 'active' : '' }}">
+                                Setting
+                            </a>
+                        </div>
                         <div class="card-body">
                             <a href="{{ route('home') }}" class="card-link btn btn-success">Home</a>
                             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="card-link btn btn-danger float-right">Logout</a>
