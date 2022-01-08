@@ -150,7 +150,7 @@
                                                                     <i class="fa fa-shopping-bag mr-2"></i>
                                                                     Buy Now
                                                                 </a>
-                                                                <a href="#" class="btn btn-lg btn-success add_to_cart_size float-right">
+                                                                <a href="{{ route('add_to_cart', $wishlist->product_id) }}" class="btn btn-lg btn-success add_to_cart_size float-right">
                                                                     <i class="fa fa-cart-plus mr-2"></i>
                                                                     Add To Cart
                                                                 </a>

@@ -125,7 +125,9 @@
                             @endif
                         </h3>
                     </div>
-                    <form action="#">
+                    <form action="{{ route('addtocart.withSizeColorQuantity') }}" method="POST">
+                        @csrf 
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                         <div class="row">   
                             <div class="col-md-4">
                                 <div class="product-form product-qty">
@@ -133,7 +135,7 @@
                                         <label for="">Quantity</label>
                                         <div class="input-group mr-2 quantity">
                                             <button class="quantity-minus button_plus_minus decrement-btn"> - </button>
-                                            <input class="form-control qty-input input_center" type="text" value="1" min="1" max="100">
+                                            <input class="form-control qty-input input_center" name="quantity" type="text" value="1" min="1" max="100">
                                             <button class="quantity-plus button_plus_minus increment-btn"> + </button>
                                         </div>
                                     </div>
@@ -148,7 +150,7 @@
                                         <div class="product-form-group">
                                             <label for="">Color</label>
                                             <div class="mr-2 quantity">
-                                                <select name="" id="">
+                                                <select name="color_id" id="">
                                                     <option value="" selected disabled>Select One</option>
                                                     @foreach($colors as $color)
                                                         @php
@@ -171,7 +173,7 @@
                                         <div class="product-form-group">
                                             <label for="">Sizes</label>
                                             <div class="mr-2 quantity">
-                                                <select name="" id="">
+                                                <select name="size_id" id="">
                                                     <option value="" selected disabled>Select One</option>
                                                     @foreach($sizes as $size)
                                                         @php
@@ -195,8 +197,8 @@
                             </div>
                             <!-- this button will be onclik  -->
                             <div class="col-md-4">
-                                <a href="javascript:;" class="btn btn-lg btn-danger wishlist_size"  onclick="buyonw">
-                                    <i class="fa fa-shopping-bag mr-2"></i>Buy now
+                                <a href="javascript:;" class="btn btn-lg btn-danger wishlist_size"  onclick="buynow_product_submit({{$product->id}})">
+                                    <i class="fa fa-shopping-bag mr-2"></i> Buy now
                                 </a>
                             </div>
                             <!-- this button will be onclik  -->
@@ -207,14 +209,15 @@
                             </div>
                         </div>
                     </form>
-                    <form action="{{ route('customer.wishlist.store') }}" id="wishlist_product_submit_form_{{ $product->id }}" method="POST">
+                    <form action="{{ route('customer.wishlist.store') }}"  method="POST" id="wishlist_product_submit_form_{{ $product->id }}">
                         <!-- this form only for wishlist  -->
                         @csrf
                         <input type="hidden" name="product_id" value="{{$product->id}}">
                     </form>
-                    <form action="" id="buynow">
+                    <form action="{{ route('buynow') }}" method="POST" id="buynow_product_submit_form_{{ $product->id }}">
+                        @csrf
                         <!-- this form only for buynow  -->
-                        <input type="hidden" name="product_id" value="{{$product->id}}">
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
                     </form>
                     <hr>
                     <div class="row">
@@ -541,6 +544,12 @@
 	<script>
 		function wishlist_product_submit(id) {
 		    document.getElementById('wishlist_product_submit_form_'+id).submit();
+		}
+	</script>
+    <!-- product buynow  area  -->
+	<script>
+		function buynow_product_submit(id) {
+		    document.getElementById('buynow_product_submit_form_'+id).submit();
 		}
 	</script>
     <!-- product qty up down button  -->

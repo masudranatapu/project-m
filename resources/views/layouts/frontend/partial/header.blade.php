@@ -3,7 +3,7 @@
     $website = App\Models\Website::latest()->first();
 @endphp
 <div class="header_top top_three d-none d-md-block">
-    <div class="container">   
+    <div class="container">
         <div class="row align-items-center">
             <div class="col-lg-6 col-md-6">
                 <div class="welcome_text">
@@ -38,7 +38,7 @@
                             </ul>
                         </li>
                     </ul>
-                </div>   
+                </div>
             </div>
         </div>
     </div>
@@ -88,40 +88,50 @@
                             <i class="fa fa-cart-plus" aria-hidden="true"></i>
                             <span class="cont">My Cart</span>
                         </a>
-                        <span class="cart_count">2</span>
+                        <span class="cart_count">
+                            @if(session('cart'))
+                                {{ count(session('cart')) }}
+                            @else
+                                0
+                            @endif
+                        </span>
                         <div class="mini_cart">
+                            
                             <div class="items_nunber">
-                                <span>2 Items in Cart</span>
+                                <span>
+                                    @if(session('cart'))
+                                        {{ count(session('cart')) }}
+                                    @else
+                                        0
+                                    @endif
+                                    Items in Cart
+                                </span>
                             </div>
                             <div class="cart_button checkout">
-                                <a href="checkout.html">Proceed to Checkout</a>
+                                <a href="{{ route('customer.checkout.index') }}">Proceed to Checkout</a>
                             </div>
-                            <div class="cart_item">
-                                <div class="cart_img">
-                                    <a href="#"><img src="assets/img/cart/cart1.jpg" alt=""></a>
-                                </div>
-                                <div class="cart_info">
-                                    <a href="#">Mr.Coffee 12-Cup</a>
-                                    <form action="#">
-                                        <input min="0" max="100" type="number">
-                                        <span>$60.00</span>
-                                    </form>
-                                </div>
-                            </div>
-                            <div class="cart_item">
-                                <div class="cart_img">
-                                    <a href="#"><img src="assets/img/cart/cart2.jpg" alt=""></a>
-                                </div>
-                                <div class="cart_info">
-                                    <a href="#">Lid Cover Cookware</a>
-                                    <form action="#">
-                                        <input min="0" max="100" type="number">
-                                        <span>$160.00</span>
-                                    </form>
-                                </div>
-                            </div>
+                            @if(session('cart'))
+                                @foreach(session('cart') as $key => $cartdetails)
+                                    <div class="cart_item">
+                                        <div class="cart_img remove_min_cart_image">
+                                            <img src="{{ asset($cartdetails['image']) }}" alt="">
+                                        </div>
+                                        <div class="cart_info m-0 p-0">
+                                            {{ $cartdetails['name'] }}
+                                            <br>
+                                            <b>{{$cartdetails['price']}} Tk</b>
+                                            <br>
+                                            <td class="text-center">
+                                                <a href="{{ route('cart.remove', $key) }}" onclick="return confirm('Are you sure, you want to remove this product from cart ? ')" class="btn text-danger" title="Product remove form cart">
+                                                    <i class="fa fa-times"></i>
+                                                </a>
+                                            </td>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @endif
                             <div class="cart_button view_cart">
-                                <a href="#">View and Edit Cart</a>
+                                <a href="{{ route('cart') }}">View and Edit Cart</a>
                             </div>
                         </div>
                     </div>
@@ -186,10 +196,10 @@
                             <li><a href="{{ route('blog') }}">Blog</a></li>
                             <li><a href="{{ route('contact') }}">Contact Us</a></li>
                         </ul>
-                    </nav>     
+                    </nav>
                 </div>
                 <div class="main_menu_inner">
-                    <div class="main_menu d-none d-lg-block"> 
+                    <div class="main_menu d-none d-lg-block">
                         <ul>
                             <li><a href="{{route('home')}}">Home</a></li>
                             <li><a href="{{ route('about') }}">About</a></li>

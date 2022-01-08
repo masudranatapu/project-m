@@ -21,8 +21,10 @@ use App\Http\Controllers\Admin\CategoryController;
 
 use App\Http\Controllers\Customer\InformationController;
 use App\Http\Controllers\Customer\WishlistController;
+use App\Http\Controllers\Customer\CheckoutController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\ViewController;
+use App\Http\Controllers\CartController;
 
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +60,15 @@ Route::get('searching-product', [SearchController::class, 'searching'])->name('s
 // product details and  view related
 Route::get('category-product/{slug}', [ViewController::class, 'category'])->name('category');
 Route::get('product-details/{slug}', [ViewController::class, 'productDetails'])->name('productdetails');
+// cart area routes 
+Route::get('cart', [CartController::class, 'cart'])->name('cart');
+Route::get('add-to-cart/{product_id}', [CartController::class, 'addToCart'])->name('add_to_cart');
+Route::post('add-to-cart-with-quantity', [CartController::class, 'addToCartWithQuantity'])->name('addtocart.withQuantity');
+Route::post('add-to-cart-with-size-color-quantity', [CartController::class, 'addToCartWithSizeColorQuantity'])->name('addtocart.withSizeColorQuantity');
+Route::post('buy-product-with-quantity', [CartController::class, 'buyNowWithQuantity'])->name('buynow');
+Route::post('buy-product-with-size-color-quantity', [CartController::class, 'buyNowWithSizeColorQuantity'])->name('buynow.sizecolor.quantity');
+Route::get('cart-remove/{id}', [CartController::class, 'cartRemove'])->name('cart.remove');
+Route::patch('update-cart', [CartController::class, 'cartUpdate'])->name('update_cart');
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
@@ -72,7 +83,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::resource('brands', BrandController::class);
     Route::get('brands-inactive/{id}', [BrandController::class, 'brandsInactive'])->name('brands.inactive');
     Route::get('brands-active/{id}', [BrandController::class, 'brandsActive'])->name('brands.active');
-    // unit section 
+    // unit section
         // size
     Route::resource('size', SizeController::class);
     Route::get('size-inactive/{id}', [SizeController::class, 'sizeInactive'])->name('size.inactive');
@@ -117,10 +128,13 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
     Route::get('my-wishlist', [WishlistController::class, 'index'])->name('wishlist');
     Route::post('my-wishlist', [WishlistController::class, 'wishlistStore'])->name('wishlist.store');
     Route::post('destroy/my-wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
-    // my order view 
+    // my order view
     Route::get('my-order', [WishlistController::class, 'orderIndex'])->name('order');
+    // checkout 
+    Route::get('checkout-product', [CheckoutController::class, 'index'])->name('checkout.index');
+
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer'], function () {
-    // wishlist area with un authentication 
+    // wishlist area with un authentication
     Route::post('review', [WishlistController::class, 'review'])->name('review');
 });

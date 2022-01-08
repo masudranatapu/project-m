@@ -115,7 +115,7 @@
                                         @endif
                                     </div>
                                     <div class="product-action">
-                                        <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Add to cart">
+                                        <a href="{{ route('add_to_cart', $product->id) }}" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Add to cart">
                                             Add to cart
                                         </a>
                                     </div>
@@ -186,7 +186,7 @@
                                         @endif
                                     </div>
                                     <div class="product-action">
-                                        <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Add to cart">
+                                        <a href="{{ route('add_to_cart', $product->id) }}" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Add to cart">
                                             Add to cart
                                         </a>
                                     </div>
@@ -257,7 +257,7 @@
                                         @endif
                                     </div>
                                     <div class="product-action">
-                                        <a href="#" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Add to cart">
+                                        <a href="{{ route('add_to_cart', $product->id) }}" class="btn-product pbtn-sm ml-0 text-capitalize rounded-pill" title="Add to cart">
                                             Add to cart
                                         </a>
                                     </div>
