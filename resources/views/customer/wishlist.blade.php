@@ -104,7 +104,7 @@
                                                     <i class="fa fa-eye"></i>
                                                 </button>
                                                 <button title="Remove Wishlist" class="btn btn-danger waves-effect" type="button" onclick="deleteData({{ $wishlist->id }})">
-                                                    <span>Remove</span>
+                                                    <i class="fa fa-times"></i>
                                                 </button>
                                                 <form id="delete-form-{{ $wishlist->id }}" action="{{ route('customer.wishlist.destroy', $wishlist->id) }}" method="POST" style="display: none;">
                                                     @csrf
@@ -146,10 +146,14 @@
                                                                 </ul>
                                                             </div>
                                                             <div class="card-footer">
-                                                                <a href="#" class="btn btn-lg btn-success add_to_cart_size">
-                                                                    <i class="fa fa-shopping-bag mr-2"></i>
-                                                                    Buy Now
-                                                                </a>
+                                                                <form action="{{ route('buynow') }}" method="POST">
+                                                                    @csrf
+                                                                    <input type="hidden" name="product_id" value="{{ $wishlist->product_id }}">
+                                                                    <button type="submit" class="btn btn-lg btn-success add_to_cart_size">
+                                                                        <i class="fa fa-shopping-bag mr-2"></i>
+                                                                        Buy Now
+                                                                    </button>
+                                                                </form>
                                                                 <a href="{{ route('add_to_cart', $wishlist->product_id) }}" class="btn btn-lg btn-success add_to_cart_size float-right">
                                                                     <i class="fa fa-cart-plus mr-2"></i>
                                                                     Add To Cart

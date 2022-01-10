@@ -222,7 +222,15 @@
                 </li>
                 </ul>
             </li>
-            
+            <!-- category area  -->
+            <li class="nav-item">
+                <a href="{{ route('admin.vat-gift-amount.index') }}" class="nav-link {{ Request::is('admin/vat-gift-amount') ? 'active' : '' }}">
+                    <i class="nav-icon fas fa-hand-holding-heart"></i>
+                    <p>
+                        Vat & Gift
+                    </p>
+                </a>
+            </li>
             <li class="nav-item {{ Request::is('admin/blogs') || Request::is('admin/slider') || Request::is('admin/policy') || Request::is('admin/clints') || Request::is('admin/abouts') ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon far fa-plus-square"></i>

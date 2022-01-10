@@ -38,9 +38,9 @@
             </div>
         </div>
     </div>
-    <div class="our_services bg-white">
-        <div class="container">
-            <form action="">
+    <form action="">
+        <div class="our_services bg-white">
+            <div class="container">
                 <div class="row">
                     <div class="col-md-7">
                         <div class="card">
@@ -51,17 +51,17 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="">Your Name</label>
-                                        <input type="text" value="" placeholder="Your Name">
+                                        <input type="text" value="{{ Auth::user()->name }}" placeholder="Your Name">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Your Email</label>
-                                        <input type="email"  placeholder="Your Email">
+                                        <input type="email" value="{{ Auth::user()->email }}"  placeholder="Your Email">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-6">
                                         <label for="">Area / District/ City</label>
-                                        <select name="" id="">
+                                        <select name="bill_div_id" id="billing_div_id">
                                             <option value="" disabled selected>Select One</option>
                                             @foreach($divisions as $division)
                                                 <option value="{{ $division->id }}">{{ $division->name }}</option>
@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Zone / Thana / </label>
-                                        <select name="" id="">
+                                        <select name="bill_dis_id" id="bill_dis_id">
                                             
                                         </select>
                                     </div>
@@ -80,13 +80,13 @@
                                     </div>
                                     <div class="col-md-6 mt-3">
                                         <label for="">Phone Number</label>
-                                        <input type="text"  placeholder="Phone Number">
+                                        <input type="text" value="{{ Auth::user()->phone }}" placeholder="Phone Number">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label for="">Your Address</label>
-                                        <textarea name="" id="" cols="30" rows="3" placeholder="Your Address"></textarea>
+                                        <textarea name="" id="" cols="30" rows="3" placeholder="Your Address">{{ Auth::user()->address }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -101,11 +101,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="">Your Name</label>
-                                        <input type="text" value="" placeholder="Your Name">
+                                        <input type="text" value="{{ Auth::user()->name }}" placeholder="Your Name">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Your Email</label>
-                                        <input type="email"  placeholder="Your Email">
+                                        <input type="email" value="{{ Auth::user()->email }}"  placeholder="Your Email">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
@@ -130,13 +130,13 @@
                                     </div>
                                     <div class="col-md-6 mt-3">
                                         <label for="">Phone Number</label>
-                                        <input type="text"  placeholder="Phone Number">
+                                        <input type="text" value="{{ Auth::user()->phone }}" placeholder="Phone Number">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label for="">Your Address</label>
-                                        <textarea name="" id="" cols="30" rows="3" placeholder="Your Address"></textarea>
+                                        <textarea name="" id="" cols="30" rows="3" placeholder="Your Address">{{ Auth::user()->address }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -199,21 +199,29 @@
                                         Sub Total
                                         <span class="pull-right">{{ $total }} Tk</span>
                                     </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Gift Wrapping
-                                        <span class="pull-right">0 TK</span>
-                                    </li>
+                                    @if($vatsgifts->status == 1)
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span class="d-flex gap-2 align-items-center flex-wrap">
+                                                <input style="width: auto;" type="checkbox" name="" id="gift">
+                                                <label class="mb-0 lable-cursor" for="gift">Gift Wrapping</label>
+                                            </span>
+                                            <span class="pull-right text-danger"> <span>{{ $vatsgifts->gift_amount }}</span> TK</span>
+                                        </li>
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <span class="d-flex gap-2 align-items-center flex-wrap">
+                                                <input style="width: auto;" type="checkbox" name="" id="vat">
+                                                <label class="mb-0 lable-cursor" for="vat">Vat</label>
+                                            </span>
+                                            <span class="pull-right text-danger">{{ $vatsgifts->vat_amount }} Tk</span>
+                                        </li>
+                                    @endif
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         Delivery Charge
-                                        <span class="pull-right"> 0 Tk</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Vat
-                                        <span class="pull-right">0 Tk</span>
+                                        <span class="pull-right"> <span id="deliveryCharge"> 0 </span> Tk</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         Grand Total
-                                        <span class="pull-right">{{ $total + 0 }} Tk</span>
+                                        <span class="pull-right">{{ $total }} Tk</span>
                                     </li>
                                 </ul>
                             </div>
@@ -228,9 +236,9 @@
                         </div>
                     </div>
                 </div>
-            </form>
+            </div>
         </div>
-    </div>
+    </form>
 @endsection
 
 @push('js')

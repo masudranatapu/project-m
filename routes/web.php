@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\HappyClintController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\VatAndGiftController;
 
 use App\Http\Controllers\Customer\InformationController;
 use App\Http\Controllers\Customer\WishlistController;
@@ -118,6 +119,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     // category
     Route::resource('category', CategoryController::class);
     Route::get('/category/parent-chlid/ajax/{cate_id}', [CategoryController::class, 'parentChild']);
+    // vat and gift amount 
+    Route::resource('vat-gift-amount', VatAndGiftController::class);
+    Route::get('vat-gift-amount-inactive/{id}', [VatAndGiftController::class, 'vatGiftInactive'])->name('vat-gift-amount.inactive');
+    Route::get('vat-gift-amount-active/{id}', [VatAndGiftController::class, 'vatGiftActive'])->name('vat-gift-amount.active');
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth', 'customer']], function () {
     Route::get('/information', [InformationController::class, 'information'])->name('dashboard');
@@ -132,6 +137,8 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
     Route::get('my-order', [WishlistController::class, 'orderIndex'])->name('order');
     // checkout 
     Route::get('checkout-product', [CheckoutController::class, 'index'])->name('checkout.index');
+
+    Route::get('division-district/id', [CheckoutController::class, 'divisionDistrict']);
 
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer'], function () {

@@ -165,10 +165,6 @@
                                     <span class="pull-right">{{ $total }} Tk</span>
                                 </li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">
-                                    Vat
-                                    <span class="pull-right"> 0 Tk</span>
-                                </li>
-                                <li class="list-group-item d-flex justify-content-between align-items-center">
                                     Grand Total
                                     <span class="pull-right">{{ $total + 0 }} Tk</span>
                                 </li>

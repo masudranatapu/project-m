@@ -6355,3 +6355,10 @@ textarea {
 .footer_area {
 	background-color: #E7EFD3;
 }
+.gap-2 {
+	column-gap: 5px;
+	grid-row-gap: 5px;
+}
+.lable-cursor {
+	cursor: pointer;
+}

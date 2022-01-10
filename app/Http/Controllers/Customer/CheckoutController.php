@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Division;
 use App\Models\District;
+use App\Models\VatAndGift;
 
 class CheckoutController extends Controller
 {
@@ -14,6 +15,13 @@ class CheckoutController extends Controller
     {
         $title = "Checkout";
         $divisions = Division::latest()->get();
-        return view('customer.checkout', compact('title', 'divisions'));
+        $vatsgifts = VatAndGift::latest()->first();
+        return view('customer.checkout', compact('title', 'divisions', 'vatsgifts'));
+    }
+    // get district id for cehcktout 
+    public function divisionDistrict($id)
+    {
+        $data = District::where('division_id', $id)->latest()->get();
+        return json_encode($data);
     }
 }
