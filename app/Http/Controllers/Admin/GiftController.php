@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\VatAndGift;
+use App\Models\Gift;
 use Brian2694\Toastr\Facades\Toastr;
 
-class VatAndGiftController extends Controller
+class GiftController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class VatAndGiftController extends Controller
     public function index()
     {
         //
-        $title = "Vat & Gift";
-        $vatandgifts = VatAndGift::latest()->get();
-        return view('admin.vatandgift.index', compact('title', 'vatandgifts'));
+        $title = "Gift Amount";
+        $giftamounts = Gift::latest()->get();
+        return view('admin.vatandgift.gift', compact('title', 'giftamounts'));
     }
 
     /**
@@ -49,14 +49,13 @@ class VatAndGiftController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function vatGiftInactive($id)
+    public function giftInactive($id)
     {
         //
-        VatAndGift::findOrFail($id)->update(['status' => '0']);
-        Toastr::success('Vat & Gift Successfully active :-)','Success');
+        Gift::findOrFail($id)->update(['status' => '0']);
+        Toastr::success('Gift amount uccessfully inactive :-)','Success');
         return redirect()->back();
     }
-
 
     /**
      * Show the form for editing the specified resource.
@@ -64,11 +63,11 @@ class VatAndGiftController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function vatGiftActive($id)
+    public function giftActive($id)
     {
         //
-        VatAndGift::findOrFail($id)->update(['status' => '1']);
-        Toastr::success('Vat & Gift Successfully active :-)','Success');
+        Gift::findOrFail($id)->update(['status' => '1']);
+        Toastr::success('Gift amount uccessfully active :-)','Success');
         return redirect()->back();
     }
 
@@ -83,15 +82,13 @@ class VatAndGiftController extends Controller
     {
         //
         $this->validate($request, [
-            'vat_amount' => 'required',
             'gift_amount' => 'required',
         ]);
-        VatAndGift::findOrFail($id)->update([
-            'vat_amount' => $request->vat_amount,
+        Gift::findOrFail($id)->update([
             'gift_amount' => $request->gift_amount,
             'status' => $request->status,
         ]);
-        Toastr::success('Vat & Gift Successfully update :-)','Success');
+        Toastr::success('Gift amount successfully update :-)','Success');
         return redirect()->back();
     }
 

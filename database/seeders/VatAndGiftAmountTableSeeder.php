@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\VatAndGift;
+use App\Models\Vat;
+use App\Models\Gift;
 
 class VatAndGiftAmountTableSeeder extends Seeder
 {
@@ -15,9 +16,12 @@ class VatAndGiftAmountTableSeeder extends Seeder
     public function run()
     {
         //
-        VatAndGift::insert([
-            'vat_amount' => '0',
+        Gift::insert([
             'gift_amount' => '0',
+            'status' => '0',
+        ]);
+        Vat::insert([
+            'vat_amount' => '0',
             'status' => '0',
         ]);
     }

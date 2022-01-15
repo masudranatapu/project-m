@@ -15,7 +15,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>About Us</h1>
+                    <h1>Vat Amount</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -48,31 +48,33 @@
                                     <tr>
                                         <th>SL No</th>
                                         <th>Vat Amount</th>
-                                        <th>Gift Amount</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($vatandgifts as $key => $vatandgift)
+                                    @foreach($vatamounts as $key => $vatamount)
                                         <tr>
                                             <td>{{ $key + 1 }}</td>
-                                            <td>{{ $vatandgift->vat_amount }} Tk</td>
-                                            <td>{{ $vatandgift->gift_amount }} Tk</td>
+                                            <td>{{ $vatamount->vat_amount }} % </td>
                                             <td>
-                                                @if($vatandgift->status == 1)
+                                                @if($vatamount->status == 1)
                                                     <span class="badge bg-success text-white">Active</span>
                                                 @else 
                                                     <span class="badge bg-info text-white">Inctive</span>
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if($vatandgift->status == 1)
-                                                    <a title="Inactive Vat & Gift" href="{{ route('admin.vat-gift-amount.inactive', $vatandgift->id) }}" class="btn btn-danger"><i class="fa fa-angle-down"></i></a>
+                                                @if($vatamount->status == 1)
+                                                    <a title="Inactive vat amount" href="{{ route('admin.vat.inactive', $vatamount->id) }}" class="btn btn-danger">
+                                                        <i class="fa fa-angle-down"></i>
+                                                    </a>
                                                 @else
-                                                    <a title="Active Vat & Gift" href="{{ route('admin.vat-gift-amount.active', $vatandgift->id) }}" class="btn btn-success"><i class="fa fa-angle-up"></i></a>
+                                                    <a title="Active vat amount" href="{{ route('admin.vat.active', $vatamount->id) }}" class="btn btn-success">
+                                                        <i class="fa fa-angle-up"></i>
+                                                    </a>
                                                 @endif
-                                                <button type="button" title="Edit Vat & Gift Amount" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
+                                                <button type="button" title="Edit Vat Amount" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
                                             </td>
@@ -86,19 +88,13 @@
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form class="form-horizontal" action="{{ route('admin.vat-gift-amount.update', $vatandgift->id)}}"  method="POST">
+                                                            <form class="form-horizontal" action="{{ route('admin.vat-amount.update', $vatamount->id)}}"  method="POST">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-3 col-form-label">Vat Amount</label>
                                                                     <div class="col-sm-9">
-                                                                        <input type="text" class="form-control" name="vat_amount" value="{{$vatandgift->vat_amount}}">
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group row">
-                                                                    <label class="col-sm-3 col-form-label">Gift Amount</label>
-                                                                    <div class="col-sm-9">
-                                                                        <input type="text" class="form-control" name="gift_amount" value="{{$vatandgift->gift_amount}}">
+                                                                        <input type="text" class="form-control" name="vat_amount" value="{{$vatamount->vat_amount}}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -106,8 +102,8 @@
                                                                     <div class="col-sm-9">
                                                                         <select name="status" class="form-control">
                                                                             <option value="" disabled >Select One</option>
-                                                                            <option @if($vatandgift->status == 1) selected @endif value="1">Active</option>
-                                                                            <option @if($vatandgift->status == 0) selected @endif value="0">Inactive</option>
+                                                                            <option @if($vatamount->status == 1) selected @endif value="1">Active</option>
+                                                                            <option @if($vatamount->status == 0) selected @endif value="0">Inactive</option>
                                                                         </select>
                                                                     </div>
                                                                 </div>
@@ -128,7 +124,6 @@
                                     <tr>
                                         <th>SL No</th>
                                         <th>Vat Amount</th>
-                                        <th>Gift Amount</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                     </tr>

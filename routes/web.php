@@ -18,7 +18,8 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\Admin\HappyClintController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
-use App\Http\Controllers\Admin\VatAndGiftController;
+use App\Http\Controllers\Admin\VatController;
+use App\Http\Controllers\Admin\GiftController;
 
 use App\Http\Controllers\Customer\InformationController;
 use App\Http\Controllers\Customer\WishlistController;
@@ -119,10 +120,14 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     // category
     Route::resource('category', CategoryController::class);
     Route::get('/category/parent-chlid/ajax/{cate_id}', [CategoryController::class, 'parentChild']);
-    // vat and gift amount 
-    Route::resource('vat-gift-amount', VatAndGiftController::class);
-    Route::get('vat-gift-amount-inactive/{id}', [VatAndGiftController::class, 'vatGiftInactive'])->name('vat-gift-amount.inactive');
-    Route::get('vat-gift-amount-active/{id}', [VatAndGiftController::class, 'vatGiftActive'])->name('vat-gift-amount.active');
+    // vat  amount 
+    Route::resource('vat-amount', VatController::class);
+    Route::get('vat-amount-inactive/{id}', [VatController::class, 'vatInactive'])->name('vat.inactive');
+    Route::get('vat-amount-active/{id}', [VatController::class, 'vatActive'])->name('vat.active');
+    // gift amount 
+    Route::resource('gift-amount', GiftController::class);
+    Route::get('gift-amount-inactive/{id}', [GiftController::class, 'giftInactive'])->name('gift.inactive');
+    Route::get('gift-amount-active/{id}', [GiftController::class, 'giftActive'])->name('gift.active');
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth', 'customer']], function () {
     Route::get('/information', [InformationController::class, 'information'])->name('dashboard');

@@ -195,33 +195,36 @@
                                     </tbody>
                                 </table>
                                 <ul class="list-group">
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Sub Total
-                                        <span class="pull-right">{{ $total }} Tk</span>
-                                    </li>
-                                    @if($vatsgifts->status == 1)
+                                    @if($giftamounts->status == 1)
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                <input style="width: auto;" type="checkbox" name="" id="gift">
+                                                <input value="{{ $giftamounts->gift_amount }}" style="width: auto;" type="checkbox" id="gift">
                                                 <label class="mb-0 lable-cursor" for="gift">Gift Wrapping</label>
                                             </span>
-                                            <span class="pull-right text-danger"> <span>{{ $vatsgifts->gift_amount }}</span> TK</span>
+                                            <span class="pull-right text-danger" id="color_gift">{{ $giftamounts->gift_amount }} TK</span>
                                         </li>
+                                    @endif
+                                    @if($vatamounts->status == 1)
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                <input style="width: auto;" type="checkbox" name="" id="vat">
+                                                <input value="{{ $vatamounts->vat_amount }}" style="width: auto;" type="checkbox" id="vat">
                                                 <label class="mb-0 lable-cursor" for="vat">Vat</label>
+                                                <small>( Vat will applicable to purchase )</small>
                                             </span>
-                                            <span class="pull-right text-danger">{{ $vatsgifts->vat_amount }} Tk</span>
+                                            <span class="pull-right text-danger"> {{ $vatamounts->vat_amount }}  TK</span>
                                         </li>
                                     @endif
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         Delivery Charge
-                                        <span class="pull-right"> <span id="deliveryCharge"> 0 </span> Tk</span>
+                                        <span class="pull-right"> 0 Tk</span>
+                                    </li>
+                                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                                        Sub Total
+                                        <span class="pull-right"> <span id="sub_total">{{ $total }}</span> Tk</span>
                                     </li>
                                     <li class="list-group-item d-flex justify-content-between align-items-center">
                                         Grand Total
-                                        <span class="pull-right">{{ $total }} Tk</span>
+                                        <span class="pull-right"><span id="grand_total">{{ $total }}</span> Tk</span>
                                     </li>
                                 </ul>
                             </div>
@@ -245,6 +248,75 @@
     <script>
         $(".shippingInformation").click(function(){
             $("#shippingDisplay").slideToggle();
+        });
+    </script>
+    <script>
+        // $("#checkbox").click(function() {
+        //     var checkbox = $("#checkbox").val();
+        //     // alert(checkbox);
+        //     if(checkbox == 0 ) {
+        //         checkbox = 1;
+        //         alert(checkbox);
+        //         break
+        //     }
+        //     if(checkbox == 1){
+        //         checkbox = 0;
+        //         alert(checkbox);
+        //         break
+        //     }
+        // });
+        $('#gift').change(function(){
+            var c = this.checked ? '1' : '0';
+            // alert(c);
+            if( c == '1') {
+                var gift_amount = $("#gift").val();
+                // alert(gift_amount);
+                var sub_total = $("#sub_total").text();
+                var grand_total = $("#grand_total").text();
+                var subtotal = (parseInt(sub_total) + parseInt(gift_amount));
+                $("#sub_total").empty().html(subtotal);
+
+                var grand_total = (parseInt(grand_total) + parseInt(gift_amount));
+                $("#grand_total").empty().html(grand_total);
+                $("#color_gift").css("color", "yellow !important");
+            }else {
+                var gift_amount = $("#gift").val();
+                // alert(gift_amount);
+                var sub_total = $("#sub_total").text();
+                var grand_total = $("#grand_total").text();
+                var subtotal = (parseInt(sub_total) - parseInt(gift_amount));
+                $("#sub_total").empty().html(subtotal);
+
+                var grand_total = (parseInt(grand_total) - parseInt(gift_amount));
+                $("#grand_total").empty().html(grand_total);
+            }
+        });
+
+        $('#vat').change(function(){
+            var c = this.checked ? '1' : '0';
+            // alert(c);
+            if( c == '1') {
+                var gift_amount = $("#vat").val();
+                // alert(gift_amount);
+                var sub_total = $("#sub_total").text();
+                var grand_total = $("#grand_total").text();
+                var subtotal = (parseInt(sub_total) + parseInt(gift_amount));
+                $("#sub_total").empty().html(subtotal);
+
+                var grand_total = (parseInt(grand_total) + parseInt(gift_amount));
+                $("#grand_total").empty().html(grand_total);
+                $("#color_gift").css("color", "yellow !important");
+            }else {
+                var gift_amount = $("#vat").val();
+                // alert(gift_amount);
+                var sub_total = $("#sub_total").text();
+                var grand_total = $("#grand_total").text();
+                var subtotal = (parseInt(sub_total) - parseInt(gift_amount));
+                $("#sub_total").empty().html(subtotal);
+
+                var grand_total = (parseInt(grand_total) - parseInt(gift_amount));
+                $("#grand_total").empty().html(grand_total);
+            }
         });
     </script>
 @endpush
