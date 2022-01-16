@@ -148,20 +148,20 @@
                                 <h4>Checkout Summary</h4>
                             </div>
                             <div class="card-body">
-                                <table class="table table-bordered">
-                                    <thead>
-                                        <tr>
-                                            <th width="10%">Image</th>
-                                            <th width="50%">Name</th>
-                                            <th width="20%">Price</th>
-                                            <th width="20%">Subtotal</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @php 
-                                            $total = 0;
-                                        @endphp
-                                        @if(session('cart'))
+                                @php 
+                                    $total = 0;
+                                @endphp
+                                @if(session('cart'))
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th width="10%">Image</th>
+                                                <th width="50%">Name</th>
+                                                <th width="20%">Price</th>
+                                                <th width="20%">Subtotal</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
                                             @foreach(session('cart') as $key => $checkoutDetails)
                                                 @php
                                                     $total += $checkoutDetails['price'] * $checkoutDetails['quantity'];
@@ -191,50 +191,46 @@
                                                     <td class="text-center">{{ $checkoutDetails['price'] * $checkoutDetails['quantity'] }} Tk</td>
                                                 </tr>
                                             @endforeach
+                                        </tbody>
+                                    </table>
+                                    <ul class="list-group">
+                                        @if($giftamounts->status == 1)
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span class="d-flex gap-2 align-items-center flex-wrap">
+                                                    <input value="{{ $giftamounts->gift_amount }}" name="gift" style="width: auto;" type="checkbox" id="gift">
+                                                    <label class="mb-0 lable-cursor" for="gift">Gift Wrapping</label>
+                                                </span>
+                                                <span class="pull-right text-danger" id="color_gift">{{ $giftamounts->gift_amount }} TK</span>
+                                            </li>
                                         @endif
-                                    </tbody>
-                                </table>
-                                <ul class="list-group">
-                                    @if($giftamounts->status == 1)
+                                        @if($vatamounts->status == 1)
+                                            @php
+                                                $vatprice = ($total * $vatamounts->vat_amount) / 100 ;
+                                            @endphp
+                                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                                <span class="d-flex gap-2 align-items-center flex-wrap">
+                                                    <input value="{{ $vatprice }}" name="vat" style="width: auto;" type="checkbox" id="vat">
+                                                    <label class="mb-0 lable-cursor" for="vat">Vat</label>
+                                                    <small>( VAT will be applicable on total purchase )</small>
+                                                </span>
+                                                <span class="pull-right text-danger"> {{ $vatprice }} TK</span>
+                                            </li>
+                                        @endif
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                <input value="{{ $giftamounts->gift_amount }}" style="width: auto;" type="checkbox" id="gift">
-                                                <label class="mb-0 lable-cursor" for="gift">Gift Wrapping</label>
-                                            </span>
-                                            <span class="pull-right text-danger" id="color_gift">{{ $giftamounts->gift_amount }} TK</span>
+                                            Delivery Charge
+                                            <span class="pull-right"> 0 Tk</span>
                                         </li>
-                                    @endif
-                                    @if($vatamounts->status == 1)
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                <input value="{{ $vatamounts->vat_amount }}" style="width: auto;" type="checkbox" id="vat">
-                                                <label class="mb-0 lable-cursor" for="vat">Vat</label>
-                                                <small>( Vat will applicable to purchase )</small>
-                                            </span>
-                                            <span class="pull-right text-danger"> {{ $vatamounts->vat_amount }}  TK</span>
+                                            <input type="hidden" class="sub_total_amount" name="sub_total" value="{{$total}}">
+                                            Sub Totals
+                                            <span class="pull-right"> <span id="sub_total">{{ $total }}</span> Tk</span>
                                         </li>
-                                    @endif
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Delivery Charge
-                                        <span class="pull-right"> 0 Tk</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Sub Total
-                                        <span class="pull-right"> <span id="sub_total">{{ $total }}</span> Tk</span>
-                                    </li>
-                                    <li class="list-group-item d-flex justify-content-between align-items-center">
-                                        Grand Total
-                                        <span class="pull-right"><span id="grand_total">{{ $total }}</span> Tk</span>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <div class="card mt-3">
-                            <div class="card-header bg-info text-white">
-                                <h4>Payment Method</h4>
-                            </div>
-                            <div class="card-body">
-
+                                        <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            Grand Total
+                                            <span class="pull-right"><span id="grand_total">{{ $total }}</span> Tk</span>
+                                        </li>
+                                    </ul>
+                                @endif
                             </div>
                         </div>
                     </div>
@@ -275,10 +271,10 @@
                 var grand_total = $("#grand_total").text();
                 var subtotal = (parseInt(sub_total) + parseInt(gift_amount));
                 $("#sub_total").empty().html(subtotal);
+                $(".sub_total_amount").empty().val(subtotal);
 
                 var grand_total = (parseInt(grand_total) + parseInt(gift_amount));
                 $("#grand_total").empty().html(grand_total);
-                $("#color_gift").css("color", "yellow !important");
             }else {
                 var gift_amount = $("#gift").val();
                 // alert(gift_amount);
@@ -289,6 +285,7 @@
 
                 var grand_total = (parseInt(grand_total) - parseInt(gift_amount));
                 $("#grand_total").empty().html(grand_total);
+                $(".sub_total_amount").empty().val(subtotal);
             }
         });
 
@@ -302,10 +299,10 @@
                 var grand_total = $("#grand_total").text();
                 var subtotal = (parseInt(sub_total) + parseInt(gift_amount));
                 $("#sub_total").empty().html(subtotal);
+                $(".sub_total_amount").empty().val(subtotal);
 
                 var grand_total = (parseInt(grand_total) + parseInt(gift_amount));
                 $("#grand_total").empty().html(grand_total);
-                $("#color_gift").css("color", "yellow !important");
             }else {
                 var gift_amount = $("#vat").val();
                 // alert(gift_amount);
@@ -313,6 +310,7 @@
                 var grand_total = $("#grand_total").text();
                 var subtotal = (parseInt(sub_total) - parseInt(gift_amount));
                 $("#sub_total").empty().html(subtotal);
+                $(".sub_total_amount").empty().val(subtotal);
 
                 var grand_total = (parseInt(grand_total) - parseInt(gift_amount));
                 $("#grand_total").empty().html(grand_total);
