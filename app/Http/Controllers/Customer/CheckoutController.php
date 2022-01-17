@@ -20,10 +20,4 @@ class CheckoutController extends Controller
         $giftamounts = Gift::latest()->first();
         return view('customer.checkout', compact('title', 'divisions', 'vatamounts', 'giftamounts'));
     }
-    // get district id for cehcktout 
-    public function divisionDistrict($id)
-    {
-        $data = District::where('division_id', $id)->latest()->get();
-        return json_encode($data);
-    }
 }

@@ -71,7 +71,7 @@
                                     <div class="col-md-6">
                                         <label for="">Zone / Thana / </label>
                                         <select name="bill_dis_id" id="bill_dis_id">
-                                            
+                                            <option disabled selected> First Select Area/ District / City</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mt-3">
@@ -167,6 +167,10 @@
                                                     $total += $checkoutDetails['price'] * $checkoutDetails['quantity'];
                                                 @endphp
                                                 <tr>
+                                                    <input type="hidden" name="product_id[]" value="{{ $key }}">
+                                                    <input type="hidden" name="quantity[]" value="{{ $checkoutDetails['quantity'] }}">
+                                                    <input type="hidden" name="size_id[]" value="{{ $checkoutDetails['size_id'] }}">
+                                                    <input type="hidden" name="color_id[]" value="{{ $checkoutDetails['color_id'] }}">
                                                     <th class="text-center">
                                                         <img class="checkout_image_size" src="{{asset($checkoutDetails['image'])}}" alt="">
                                                     </th>
@@ -197,7 +201,7 @@
                                         @if($giftamounts->status == 1)
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                    <input value="{{ $giftamounts->gift_amount }}" name="gift" style="width: auto;" type="checkbox" id="gift">
+                                                    <input value="{{ $giftamounts->gift_amount }}" name="gift_amount" style="width: auto;" type="checkbox" id="gift">
                                                     <label class="mb-0 lable-cursor" for="gift">Gift Wrapping</label>
                                                 </span>
                                                 <span class="pull-right text-danger" id="color_gift">{{ $giftamounts->gift_amount }} TK</span>
@@ -209,7 +213,7 @@
                                             @endphp
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                    <input value="{{ $vatprice }}" name="vat" style="width: auto;" type="checkbox" id="vat">
+                                                    <input value="{{ $vatprice }}" name="vat_amount" style="width: auto;" type="checkbox" id="vat">
                                                     <label class="mb-0 lable-cursor" for="vat">Vat</label>
                                                     <small>( VAT will be applicable on total purchase )</small>
                                                 </span>
@@ -217,6 +221,7 @@
                                             </li>
                                         @endif
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
+                                            <input type="hidden" name="shipping_amount" value="0">
                                             Delivery Charge
                                             <span class="pull-right"> 0 Tk</span>
                                         </li>
@@ -247,24 +252,10 @@
         });
     </script>
     <script>
-        // $("#checkbox").click(function() {
-        //     var checkbox = $("#checkbox").val();
-        //     // alert(checkbox);
-        //     if(checkbox == 0 ) {
-        //         checkbox = 1;
-        //         alert(checkbox);
-        //         break
-        //     }
-        //     if(checkbox == 1){
-        //         checkbox = 0;
-        //         alert(checkbox);
-        //         break
-        //     }
-        // });
         $('#gift').change(function(){
-            var c = this.checked ? '1' : '0';
+            var giftChecked = this.checked ? '1' : '0';
             // alert(c);
-            if( c == '1') {
+            if( giftChecked == '1') {
                 var gift_amount = $("#gift").val();
                 // alert(gift_amount);
                 var sub_total = $("#sub_total").text();
@@ -288,11 +279,10 @@
                 $(".sub_total_amount").empty().val(subtotal);
             }
         });
-
         $('#vat').change(function(){
-            var c = this.checked ? '1' : '0';
+            var vatChecked = this.checked ? '1' : '0';
             // alert(c);
-            if( c == '1') {
+            if( vatChecked == '1') {
                 var gift_amount = $("#vat").val();
                 // alert(gift_amount);
                 var sub_total = $("#sub_total").text();

@@ -142,7 +142,7 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
     Route::get('my-order', [WishlistController::class, 'orderIndex'])->name('order');
     // checkout 
     Route::get('checkout-product', [CheckoutController::class, 'index'])->name('checkout.index');
-
+    Route::get('checkout-product/ajax/{billing_div_id}', [CheckoutController::class, 'billingDivId']);
     Route::get('division-district/id', [CheckoutController::class, 'divisionDistrict']);
 
 });
