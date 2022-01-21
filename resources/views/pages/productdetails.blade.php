@@ -52,7 +52,7 @@
 @section('content')
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area commun_bread py-3 grey-section">
-        <div class="container">   
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
@@ -64,7 +64,7 @@
                     </div>
                 </div>
             </div>
-        </div>         
+        </div>
     </div>
     <!--breadcrumbs area end-->
     <div class="category_section py-4">
@@ -128,7 +128,7 @@
                     <form action="{{ route('addtocart.withSizeColorQuantity') }}" method="POST">
                         @csrf 
                         <input type="hidden" name="product_id" value="{{ $product->id }}">
-                        <div class="row">   
+                        <div class="row">
                             <div class="col-md-4">
                                 <div class="product-form product-qty">
                                     <div class="product-form-group">
@@ -242,7 +242,7 @@
                         <div class="categorie_banner_title">
                             <h3>Similar Products</h3>
                         </div>
-                    </div>    
+                    </div>
                 </div>
                 <div class="row cat">
                     <div class="categorie_banner_active owl-carousel">
@@ -319,10 +319,10 @@
                                         <li class="list-group-item">Stock Status : @if($product->availability == 1) <span class="badge bg-success text-white">In Stock</span> @else  <span class="badge bg-danger">Out Of Stock</span> @endif</li>
                                     </ul>
                                     @if($product->meta_description)
-                                    <h5 class="mt-3">Meta Description</h5>
-                                    <p class="text-justify">
-                                        {!! $product->meta_description !!}
-                                    </p>
+                                        <h5 class="mt-3">Meta Description</h5>
+                                        <p class="text-justify">
+                                            {!! $product->meta_description !!}
+                                        </p>
                                     @endif
                                     <h5 class="mt-3">Product Description</h5>
                                     <p class="text-justify">
@@ -540,7 +540,7 @@
 @endsection
 
 @push('js')
-    <!-- product wishlist area  -->    
+    <!-- product wishlist area  -->
 	<script>
 		function wishlist_product_submit(id) {
 		    document.getElementById('wishlist_product_submit_form_'+id).submit();
@@ -565,7 +565,6 @@
                     $(this).parents('.quantity').find('.qty-input').val(value);
                 }
             });
-
             $('.decrement-btn').click(function (e) {
                 e.preventDefault();
                 var decre_value = $(this).parents('.quantity').find('.qty-input').val();

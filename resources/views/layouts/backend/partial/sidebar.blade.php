@@ -3,7 +3,6 @@
     <img src="{{asset('backend/dist/img/AdminLTELogo.png')}}" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
     <span class="brand-text font-weight-light">AdminLTE 3</span>
 </a>
-
 <div class="sidebar">
     <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
@@ -58,7 +57,6 @@
                     </li>
                 </ul>
             </li>
-
             <li class="nav-item {{ Request::is('admin/division') || Request::is('admin/district') ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-street-view"></i>
@@ -90,67 +88,6 @@
                     </p>
                 </a>
             </li>
-            
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                <i class="nav-icon fas fa-table"></i>
-                <p>
-                    Tables
-                    <i class="fas fa-angle-left right"></i>
-                </p>
-                </a>
-                <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="pages/tables/simple.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Simple Tables</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/tables/data.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>DataTables</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/tables/jsgrid.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>jsGrid</p>
-                    </a>
-                </li>
-                </ul>
-            </li>
-            
-            <li class="nav-item">
-                <a href="#" class="nav-link">
-                <i class="nav-icon far fa-envelope"></i>
-                <p>
-                    Mailbox
-                    <i class="fas fa-angle-left right"></i>
-                </p>
-                </a>
-                <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="pages/mailbox/mailbox.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Inbox</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/mailbox/compose.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Compose</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/mailbox/read-mail.html" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>Read</p>
-                    </a>
-                </li>
-                </ul>
-            </li>
-
             <li class="nav-item {{ Request::is('admin/vat-amount') || Request::is('admin/gift-amount') ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-hand-holding-heart"></i>

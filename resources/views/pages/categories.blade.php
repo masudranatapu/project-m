@@ -15,7 +15,7 @@
 @section('content')
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area commun_bread py-3 grey-section">
-        <div class="container">   
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
@@ -27,18 +27,17 @@
                     </div>
                 </div>
             </div>
-        </div>         
+        </div>
     </div>
     <!--breadcrumbs area end-->
-    
     <div class="category_section  py-4 ">
         <div class="container">
             <div class="row">
-                <div class="col-12">   
+                <div class="col-12">
                     <div class="categorie_banner_title">
                         <h3>Categories</h3>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="row cat">
                 @foreach($categories as $key => $category)
@@ -60,7 +59,6 @@
             </div>
         </div>
     </div>
-
     <div class="category_section  py-4 ">
         <div class="container">
             <div class="breadcrumbs_area commun_bread py-3 grey-section mb-1">
@@ -70,11 +68,11 @@
                             <h4 class="text-center">All Sub Category</h4>
                         </div>
                     </div>
-                </div>      
+                </div>
             </div>
             <div class="row mt-2">
                 <div class="col-md-6">
-                    <div class="col-12">   
+                    <div class="col-12">
                         <div class="categorie_banner_title">
                             <h3>Sub Categories</h3>
                         </div>
@@ -88,7 +86,7 @@
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="col-12">   
+                    <div class="col-12">
                         <div class="categorie_banner_title">
                             <h3>Sub Sub Categories</h3>
                         </div>
@@ -104,7 +102,6 @@
             </div>
         </div>
     </div>
-    
 @endsection
 
 @push('js')

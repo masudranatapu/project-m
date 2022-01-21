@@ -17,7 +17,7 @@
 @section('content')
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area commun_bread py-3 grey-section">
-        <div class="container">   
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-        </div>         
+        </div>
     </div>
     <!--breadcrumbs area end-->
     <div class="category_section  py-4 ">
@@ -37,7 +37,7 @@
             <div class="row">
                 <div class="col-12">
                     <h3>{{ $about->name }}</h3>
-                    <p class="text-justify" >{{ $about->details }}</p>
+                    <p class="text-justify" >{!! $about->details !!}</p>
                 </div>
             </div>
         </div>

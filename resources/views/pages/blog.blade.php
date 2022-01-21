@@ -19,7 +19,7 @@
 @section('content')
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area commun_bread py-3 grey-section">
-        <div class="container">   
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
@@ -31,17 +31,17 @@
                     </div>
                 </div>
             </div>
-        </div>         
+        </div>
     </div>
     <!--breadcrumbs area end-->
     <div class="category_section  py-4 ">
         <div class="container">
             <div class="row">
-                <div class="col-12">   
+                <div class="col-12">
                     <div class="categorie_banner_title">
                         <h3>Blogs</h3>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="row cat">
                 @foreach($blogs as $key => $blog)

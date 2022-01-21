@@ -23,7 +23,7 @@
 @section('content')
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area commun_bread py-3 grey-section">
-        <div class="container">   
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
@@ -35,10 +35,10 @@
                     </div>
                 </div>
             </div>
-        </div>         
+        </div>
     </div>
     <div class="our_services bg-white">
-        <div class="container">   
+        <div class="container">
             <div class="row">
                 <div class="col-md-3">
                     <div class="card" style="width: 18rem;">
@@ -48,7 +48,7 @@
                         </div>
                         <div class="list-group">
                             <a href="{{ route('customer.dashboard') }}" class="list-group-item list-group-item-action {{ Route::is('customer.dashboard') ? 'active' : '' }}">
-                                My Profile    
+                                My Profile
                             </a>
                             <a href="{{ route('customer.order') }}" class="list-group-item list-group-item-action {{ Route::is('customer.order') ? 'active' : '' }}">
                                 Orders
@@ -170,7 +170,7 @@
                     </div>
                 </div>
             </div>
-        </div>         
+        </div>
     </div>
 @endsection
 

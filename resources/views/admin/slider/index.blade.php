@@ -268,7 +268,7 @@
             }
         }
     </script>
-    <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
+    <script src="{{asset('massage/sweetalert/sweetalert.all.js')}}"></script>
     <script type="text/javascript">
         function deleteData(id) {
             swal({

@@ -20,4 +20,8 @@ class CheckoutController extends Controller
         $giftamounts = Gift::latest()->first();
         return view('customer.checkout', compact('title', 'divisions', 'vatamounts', 'giftamounts'));
     }
+    public function getDivDis($billing_div_id)
+    {
+        return $billing_div_id;
+    }
 }

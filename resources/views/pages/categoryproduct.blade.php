@@ -17,7 +17,7 @@
 @section('content')
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area commun_bread py-3 grey-section">
-        <div class="container">   
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
             </div>
-        </div>         
+        </div>
     </div>
     <!--breadcrumbs area end-->
     <div class="category_section  py-4 ">
@@ -80,7 +80,6 @@
                             <a href="" class="list-group-item list-group-item-action">{{$brand->name}}</a>
                         @endforeach
                     </div>
-
                     <div class="list-group">
                         <a href="javascript:;" class="list-group-item list-group-item-action  active text-white">
                             Price 
@@ -91,7 +90,7 @@
                     </div>
                 </div>
                 <div class="col-md-9 bg-info">
-
+                    
                 </div>
             </div>
         </div>

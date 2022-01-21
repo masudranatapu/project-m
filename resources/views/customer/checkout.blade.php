@@ -38,7 +38,7 @@
             </div>
         </div>
     </div>
-    <form action="">
+    <form action="{{ route('customer.checkout.store') }}">
         <div class="our_services bg-white">
             <div class="container">
                 <div class="row">
@@ -306,5 +306,23 @@
                 $("#grand_total").empty().html(grand_total);
             }
         });
+    </script>
+    <script>
+        $("#billing_div_id").on('change', function() {
+            var billing_div_id = $("#billing_div_id").val();
+            // alert(billing_div_id);
+            if(billing_div_id){
+                $.ajax({
+                    url         : "{{ url('customer/division-distric/ajax') }}/" + billing_div_id ,
+                    type        : 'GET',
+                    dataType    : 'json',
+                    success     : function(data) {
+                        // console.log("success");
+                    },
+                });
+            }else {
+                alert("Select Your Division");
+            }
+        })
     </script>
 @endpush

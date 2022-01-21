@@ -72,9 +72,7 @@
                                             <div class="form-group row">
                                                 <label class="col-sm-2 col-form-label">Details</label>
                                                 <div class="col-sm-10">
-                                                    <textarea class="form-control summernote" name="details" placeholder="Details">
-
-                                                    </textarea>
+                                                    <textarea class="form-control summernote" name="details" placeholder="Details"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -161,9 +159,7 @@
                                                                 <div class="form-group row">
                                                                     <label class="col-sm-2 col-form-label">Details</label>
                                                                     <div class="col-sm-10">
-                                                                        <textarea class="form-control summernote" name="details" placeholder="Details">
-                                                                            {{$policy->details}}
-                                                                        </textarea>
+                                                                        <textarea class="form-control summernote" name="details" placeholder="Details">{{$policy->details}}</textarea>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -231,7 +227,7 @@
             $('.summernote').summernote()
         })
     </script>
-    <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
+    <script src="{{asset('massage/sweetalert/sweetalert.all.js')}}"></script>
     <script type="text/javascript">
         function deleteData(id) {
             swal({

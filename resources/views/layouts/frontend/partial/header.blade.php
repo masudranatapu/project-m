@@ -43,7 +43,6 @@
         </div>
     </div>
 </div>
-
 <div class="header_middel middel_three">
     <div class="container">
         <div class="row align-items-center">
@@ -140,7 +139,6 @@
         </div>
     </div>
 </div>
-
 <div class="header_bottom bottom_three">
     <div class="container">
         <div class="row">

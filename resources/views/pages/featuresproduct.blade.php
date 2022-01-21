@@ -15,7 +15,7 @@
 @section('content')
     <!--breadcrumbs area start-->
     <div class="breadcrumbs_area commun_bread py-3 grey-section">
-        <div class="container">   
+        <div class="container">
             <div class="row">
                 <div class="col-12">
                     <div class="breadcrumb_content">
@@ -27,9 +27,9 @@
                     </div>
                 </div>
             </div>
-        </div>         
+        </div>
     </div>
-    <!--breadcrumbs area end-->s
+    <!--breadcrumbs area end-->
     <div class="new_arrival_section  py-4 bg-white">
         <div class="container">
             <div class="row cat">
@@ -84,7 +84,7 @@
 @endsection
 
 @push('js')
-    <!-- product wishlist area  -->    
+    <!-- product wishlist area  -->
 	<script>
 		function wishlist_product_submit(id) {
 		    document.getElementById('wishlist_product_submit_form_'+id).submit();

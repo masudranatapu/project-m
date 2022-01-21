@@ -129,7 +129,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::get('gift-amount-inactive/{id}', [GiftController::class, 'giftInactive'])->name('gift.inactive');
     Route::get('gift-amount-active/{id}', [GiftController::class, 'giftActive'])->name('gift.active');
 });
-Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer', 'middleware' => ['auth', 'customer']], function () {
+Route::group(['as' => 'customer.', 'prefix' => 'customer', 'middleware' => ['auth', 'customer']], function () {
     Route::get('/information', [InformationController::class, 'information'])->name('dashboard');
     Route::get('profile-setting', [InformationController::class, 'profile'])->name('profile');
     Route::post('profile/{id}', [InformationController::class, 'profileUpdate'])->name('profile.update');
@@ -141,10 +141,8 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Custo
     // my order view
     Route::get('my-order', [WishlistController::class, 'orderIndex'])->name('order');
     // checkout 
-    Route::get('checkout-product', [CheckoutController::class, 'index'])->name('checkout.index');
-    Route::get('checkout-product/ajax/{billing_div_id}', [CheckoutController::class, 'billingDivId']);
-    Route::get('division-district/id', [CheckoutController::class, 'divisionDistrict']);
-
+    Route::resource('checkout', CheckoutController::class);
+    Route::get('division-distric/ajax/{billing_div_id}', [CheckoutController::class, 'getDivDis']);
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer'], function () {
     // wishlist area with un authentication

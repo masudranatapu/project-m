@@ -19,8 +19,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Create Product</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Create Product</li>
                     </ol>
                 </div>
             </div>
@@ -349,9 +349,9 @@
                             $('#subsubcategory').html('');
                             $('#sub_cate_display').show();
                             var d =$('#subcategory').empty();
-                                $('#subcategory').append('<option value="" disabled selected> Select One </option>');
-                                $.each(data, function(key, value){
-                                    $('#subcategory').append('<option value="'+ value.id +'">' + value.name + '</option>');
+                            $('#subcategory').append('<option value="" disabled selected> Select One </option>');
+                            $.each(data, function(key, value){
+                                $('#subcategory').append('<option value="'+ value.id +'">' + value.name + '</option>');
                             });
                         },
                     });

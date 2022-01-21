@@ -19,8 +19,8 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Product</li>
+                        <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Product</li>
                     </ol>
                 </div>
             </div>
@@ -167,7 +167,7 @@
             $("body").addClass('sidebar-collapse').trigger('collapsed.pushMenu');
         }
     </script>
-    <script src="https://unpkg.com/sweetalert2@7.19.1/dist/sweetalert2.all.js"></script>
+    <script src="{{asset('massage/sweetalert/sweetalert.all.js')}}"></script>
     <script type="text/javascript">
         function deleteData(id) {
             swal({

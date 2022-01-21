@@ -18,7 +18,7 @@
     <div class="slider_area slider_three owl-carousel mb-0">
         @foreach($sliders as $key => $slider)
             <div class="single_slider">
-                <a href="#">
+                <a href="javascript:;">
                     <img src="{{asset($slider->image)}}" alt="slider image">
                 </a>
             </div>
@@ -32,7 +32,7 @@
                     <div class="categorie_banner_title">
                         <h3>Categories</h3>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="row cat">
                 @foreach($categories as $key => $category)
@@ -62,7 +62,7 @@
                             <i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i>
                         </a>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </div>
@@ -74,7 +74,7 @@
                     <div class="categorie_banner_title">
                         <h3>Best deals</h3>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="row cat">
                 <div class="categorie_banner_active owl-carousel">
@@ -133,7 +133,7 @@
                             <i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i>
                         </a>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </div>
@@ -145,7 +145,7 @@
                     <div class="categorie_banner_title">
                         <h3>Features</h3>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="row cat">
                 <div class="categorie_banner_active owl-carousel">
@@ -204,7 +204,7 @@
                             <i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i>
                         </a>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </div>
@@ -216,7 +216,7 @@
                     <div class="categorie_banner_title">
                         <h3>Hot Deals</h3>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="row cat">
                 <div class="categorie_banner_active owl-carousel">
@@ -275,7 +275,7 @@
                             <i class="fa fa-angle-double-right ml-2" aria-hidden="true"></i>
                         </a>
                     </div>
-                </div>    
+                </div>
             </div>
         </div>
     </div>
@@ -283,11 +283,11 @@
     <div class="how_to_buy bg-white py-4 pb-5">
         <div class="container">
             <div class="row">
-                <div class="col-12">   
+                <div class="col-12">
                     <div class="categorie_banner_title mt-2">
                         <h3 class="text-center">how to buy</h3>
                     </div>
-                </div>    
+                </div>
             </div>
             <div class="brand_inner">  
                 <div class="row">
@@ -330,7 +330,7 @@
                                 <h5 class="item--title mb-0"> Waiting to Delivery</h5>
                             </div>
                         </div>
-                    </div>                           
+                    </div>
                 </div>
             </div>     
         </div>
@@ -338,7 +338,7 @@
     <!-- support section  -->
     <div class="py-4 grey-section border-bottom">
         <div class="container">
-            <div class="shipping_contact">   
+            <div class="shipping_contact">
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="single_shipping justify-content-start">
@@ -357,7 +357,7 @@
                                 <span class="pe-7s-mail"></span>
                             </div>
                             <div class="shipping_content">
-                                <h3><a href="mailto:{{ $website->email }}">{{ $website->email }}</a></h3>
+                                <h3><a class="text-lowercase" href="mailto:{{ $website->email }}">{{ $website->email }}</a></h3>
                                 <p>Orders Support!</p>
                             </div>
                         </div>
@@ -380,7 +380,7 @@
 @endsection
 
 @push('js')
-    <!-- product wishlist area  -->    
+    <!-- product wishlist area  -->
 	<script>
 		function wishlist_product_submit(id) {
 		    document.getElementById('wishlist_product_submit_form_'+id).submit();
