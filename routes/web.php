@@ -142,7 +142,8 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'middleware' => ['aut
     Route::get('my-order', [WishlistController::class, 'orderIndex'])->name('order');
     // checkout 
     Route::resource('checkout', CheckoutController::class);
-    Route::get('division-distric/ajax/{billing_div_id}', [CheckoutController::class, 'getDivDis']);
+    Route::get('division-distric-billing/ajax/{billing_div_id}', [CheckoutController::class, 'getDivDisBilling']);
+    Route::get('division-distric-shipping/ajax/{shipping_div_id}', [CheckoutController::class, 'getDivDisShipping']);
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer'], function () {
     // wishlist area with un authentication

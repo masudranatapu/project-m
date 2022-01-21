@@ -70,7 +70,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Zone / Thana / </label>
-                                        <select name="bill_dis_id" id="bill_dis_id">
+                                        <select name="bill_dis_id" id="billing_dis_id">
                                             <option disabled selected> First Select Area/ District / City</option>
                                         </select>
                                     </div>
@@ -111,7 +111,7 @@
                                 <div class="row mt-3">
                                     <div class="col-md-6">
                                         <label for="">Area / District/ City</label>
-                                        <select name="" id="">
+                                        <select name="" id="shipping_div_id">
                                             <option value="" disabled selected>Select One</option>
                                             @foreach($divisions as $division)
                                                 <option value="{{ $division->id }}">{{ $division->name }}</option>
@@ -120,8 +120,8 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Zone / Thana / </label>
-                                        <select name="" id="">
-                                            
+                                        <select name="" id="shipping_dis_id">
+                                            <option disabled selected> First Select Area/ District / City</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mt-3">
@@ -201,8 +201,8 @@
                                         @if($giftamounts->status == 1)
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                    <input value="{{ $giftamounts->gift_amount }}" name="gift_amount" style="width: auto;" type="checkbox" id="gift">
-                                                    <label class="mb-0 lable-cursor" for="gift">Gift Wrapping</label>
+                                                    <input value="{{ $giftamounts->gift_amount }}" name="gift_amount" style="width: auto;" type="checkbox" id="giftChecked">
+                                                    <label class="mb-0 lable-cursor" for="giftChecked">Gift Wrapping</label>
                                                 </span>
                                                 <span class="pull-right text-danger" id="color_gift">{{ $giftamounts->gift_amount }} TK</span>
                                             </li>
@@ -213,22 +213,22 @@
                                             @endphp
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                    <input value="{{ $vatprice }}" name="vat_amount" style="width: auto;" type="checkbox" id="vat">
-                                                    <label class="mb-0 lable-cursor" for="vat">Vat</label>
+                                                    <input value="{{ $vatprice }}" name="vat_amount" style="width: auto;" type="checkbox" id="vatChecked">
+                                                    <label class="mb-0 lable-cursor" for="vatChecked">Vat</label>
                                                     <small>( VAT will be applicable on total purchase )</small>
                                                 </span>
                                                 <span class="pull-right text-danger"> {{ $vatprice }} TK</span>
                                             </li>
                                         @endif
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <input type="hidden" name="shipping_amount" value="0">
-                                            Delivery Charge
-                                            <span class="pull-right"> 0 Tk</span>
+                                            <input type="hidden" name="shipping_amount" id="shipping_amount" value="0">
+                                            Delivery Amount
+                                            <span class="pull-right"> <span id="delivery_amount"> </span> Tk</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <input type="hidden" class="sub_total_amount" name="sub_total" value="{{$total}}">
+                                            <input type="hidden" name="sub_total" id="sub_total" value="{{$total}}">
                                             Sub Totals
-                                            <span class="pull-right"> <span id="sub_total">{{ $total }}</span> Tk</span>
+                                            <span class="pull-right"> <span id="show_sub_total">{{ $total }}</span> Tk</span>
                                         </li>
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
                                             Grand Total
@@ -252,77 +252,85 @@
         });
     </script>
     <script>
-        $('#gift').change(function(){
+        $('#giftChecked').change(function(){
             var giftChecked = this.checked ? '1' : '0';
             // alert(c);
             if( giftChecked == '1') {
-                var gift_amount = $("#gift").val();
-                // alert(gift_amount);
-                var sub_total = $("#sub_total").text();
-                var grand_total = $("#grand_total").text();
-                var subtotal = (parseInt(sub_total) + parseInt(gift_amount));
-                $("#sub_total").empty().html(subtotal);
-                $(".sub_total_amount").empty().val(subtotal);
-
-                var grand_total = (parseInt(grand_total) + parseInt(gift_amount));
-                $("#grand_total").empty().html(grand_total);
+                
             }else {
-                var gift_amount = $("#gift").val();
-                // alert(gift_amount);
-                var sub_total = $("#sub_total").text();
-                var grand_total = $("#grand_total").text();
-                var subtotal = (parseInt(sub_total) - parseInt(gift_amount));
-                $("#sub_total").empty().html(subtotal);
 
-                var grand_total = (parseInt(grand_total) - parseInt(gift_amount));
-                $("#grand_total").empty().html(grand_total);
-                $(".sub_total_amount").empty().val(subtotal);
             }
         });
-        $('#vat').change(function(){
+        $('#vatChecked').change(function(){
             var vatChecked = this.checked ? '1' : '0';
             // alert(c);
             if( vatChecked == '1') {
-                var gift_amount = $("#vat").val();
-                // alert(gift_amount);
-                var sub_total = $("#sub_total").text();
-                var grand_total = $("#grand_total").text();
-                var subtotal = (parseInt(sub_total) + parseInt(gift_amount));
-                $("#sub_total").empty().html(subtotal);
-                $(".sub_total_amount").empty().val(subtotal);
-
-                var grand_total = (parseInt(grand_total) + parseInt(gift_amount));
-                $("#grand_total").empty().html(grand_total);
+                
             }else {
-                var gift_amount = $("#vat").val();
-                // alert(gift_amount);
-                var sub_total = $("#sub_total").text();
-                var grand_total = $("#grand_total").text();
-                var subtotal = (parseInt(sub_total) - parseInt(gift_amount));
-                $("#sub_total").empty().html(subtotal);
-                $(".sub_total_amount").empty().val(subtotal);
-
-                var grand_total = (parseInt(grand_total) - parseInt(gift_amount));
-                $("#grand_total").empty().html(grand_total);
+                
             }
         });
     </script>
     <script>
+        // for billing informaiton 
         $("#billing_div_id").on('change', function() {
             var billing_div_id = $("#billing_div_id").val();
             // alert(billing_div_id);
+            var sub_total = $("#sub_total").val();
+            // alert(sub_total);
+            var grand_total = $("#grand_total").text();
+            // alert(grand_total);
             if(billing_div_id){
                 $.ajax({
-                    url         : "{{ url('customer/division-distric/ajax') }}/" + billing_div_id ,
+                    url         : "{{ url('customer/division-distric-billing/ajax') }}/" + billing_div_id ,
                     type        : 'GET',
                     dataType    : 'json',
                     success     : function(data) {
-                        // console.log("success");
+                        // console.log(data);
+                        $("#billing_dis_id").empty();
+                        $('#billing_dis_id').append('<option value=""> Select One </option>');
+                        $.each(data[0], function(key, value){
+                            $('#billing_dis_id').append('<option value="'+ value.id +'">' + value.name + '</option>');
+                        });
+                        $("#delivery_amount").text(data[1]);
+                        $("#shipping_amount").val(data[1]);
+                        $("#show_sub_total").text(parseInt(data[1]) + parseInt(sub_total));
+                        $("#grand_total").text(parseInt(data[1]) + parseInt(sub_total));
                     },
                 });
             }else {
-                alert("Select Your Division");
-            }
-        })
+                alert("Select your division");
+            };
+        });
+        // for shipping information 
+        $("#shipping_div_id").on('change', function() {
+            var shipping_div_id = $("#shipping_div_id").val();
+            // alert(shipping_div_id);
+            var sub_total = $("#sub_total").val();
+            // alert(sub_total);
+            var grand_total = $("#grand_total").text();
+            // alert(grand_total);
+            if(shipping_div_id){
+                $.ajax({
+                    url         : "{{ url('customer/division-distric-shipping/ajax') }}/" + shipping_div_id ,
+                    type        : 'GET',
+                    dataType    : 'json',
+                    success     : function(data) {
+                        // console.log(data);
+                        $("#shipping_dis_id").empty();
+                        $('#shipping_dis_id').append('<option value=""> Select One </option>');
+                        $.each(data[0], function(key, value){
+                            $('#shipping_dis_id').append('<option value="'+ value.id +'">' + value.name + '</option>');
+                        });
+                        $("#delivery_amount").text(data[1]);
+                        $("#shipping_amount").val(data[1]);
+                        $("#show_sub_total").text(parseInt(data[1]) + parseInt(sub_total));
+                        $("#grand_total").text(parseInt(data[1]) + parseInt(sub_total));
+                    },
+                });
+            }else {
+                alert("Select your division");
+            };
+        });
     </script>
 @endpush
