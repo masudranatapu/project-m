@@ -98,7 +98,7 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-3 col-form-label">Gift Amount</label>
+                                                                    <label class="col-sm-3 col-form-label">Vat Status</label>
                                                                     <div class="col-sm-9">
                                                                         <select name="status" class="form-control">
                                                                             <option value="" disabled >Select One</option>
@@ -109,7 +109,7 @@
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <div class="offset-sm-3 col-sm-9">
-                                                                        <button type="submit" class="btn btn-success">Update Vat & Gift</button>
+                                                                        <button type="submit" class="btn btn-success">Update Vat</button>
                                                                     </div>
                                                                 </div>
                                                             </form>

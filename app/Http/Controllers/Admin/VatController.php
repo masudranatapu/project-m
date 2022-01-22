@@ -19,7 +19,7 @@ class VatController extends Controller
         //
         $title = "Vat Amount";
         $vatamounts = Vat::latest()->get();
-        return view('admin.vatandgift.vat', compact('title', 'vatamounts'));
+        return view('admin.vats.vat', compact('title', 'vatamounts'));
     }
 
     /**

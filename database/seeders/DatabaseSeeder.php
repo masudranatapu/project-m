@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
         $this->call(UserTableSeeder::class);
         $this->call(WebsiteTableSedder::class);
         $this->call(AboutTableSeeder::class);
-        $this->call(VatAndGiftAmountTableSeeder::class);
+        $this->call(VatTableSeeder::class);
     }
 }

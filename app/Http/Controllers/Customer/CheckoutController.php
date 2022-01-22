@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Division;
 use App\Models\District;
-use App\Models\Gift;
 use App\Models\Vat;
 
 class CheckoutController extends Controller
@@ -17,8 +16,7 @@ class CheckoutController extends Controller
         $title = "Checkout";
         $divisions = Division::latest()->get();
         $vatamounts = Vat::latest()->first();
-        $giftamounts = Gift::latest()->first();
-        return view('customer.checkout', compact('title', 'divisions', 'vatamounts', 'giftamounts'));
+        return view('customer.checkout', compact('title', 'divisions', 'vatamounts'));
     }
     // for billing informaiton
     public function getDivDisBilling($billing_div_id)

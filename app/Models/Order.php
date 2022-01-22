@@ -15,7 +15,6 @@ class Order extends Model
         'size_id',
         'color_id',
         'quantity',
-        'gift_amount',
         'vat_amount',
         'shipping_amount',
         'sub_total',

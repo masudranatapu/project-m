@@ -88,28 +88,11 @@
                     </p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('admin/vat-amount') || Request::is('admin/gift-amount') ? 'menu-open' : '' }}">
-                <a href="#" class="nav-link">
+            <li class="nav-item">
+                <a href="{{ route('admin.vat-amount.index') }}" class="nav-link {{ Request::is('admin/vat-amount') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-hand-holding-heart"></i>
-                    <p>
-                        Gift & Vats
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
+                    <p>Vat</p>
                 </a>
-                <ul class="nav nav-treeview">
-                    <li class="nav-item">
-                        <a href="{{ route('admin.vat-amount.index') }}" class="nav-link {{ Request::is('admin/vat-amount') ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Vat</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.gift-amount.index') }}" class="nav-link {{ Request::is('admin/gift-amount') ? 'active' : '' }}">
-                            <i class="far fa-circle nav-icon"></i>
-                            <p>Gift</p>
-                        </a>
-                    </li>
-                </ul>
             </li>
             <li class="nav-item {{ Request::is('admin/blogs') || Request::is('admin/slider') || Request::is('admin/policy') || Request::is('admin/clints') || Request::is('admin/abouts') ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link">

@@ -21,7 +21,6 @@ class CreateOrdersTable extends Migration
             $table->string('size_id');
             $table->string('color_id');
             $table->string('quantity');
-            $table->string('gift_amount')->nullable();
             $table->string('vat_amount')->nullable();
             $table->string('shipping_amount');
             $table->string('sub_total');

@@ -198,26 +198,17 @@
                                         </tbody>
                                     </table>
                                     <ul class="list-group">
-                                        @if($giftamounts->status == 1)
-                                            <li class="list-group-item d-flex justify-content-between align-items-center">
-                                                <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                    <input value="{{ $giftamounts->gift_amount }}" name="gift_amount" style="width: auto;" type="checkbox" id="giftChecked">
-                                                    <label class="mb-0 lable-cursor" for="giftChecked">Gift Wrapping</label>
-                                                </span>
-                                                <span class="pull-right text-danger" id="color_gift">{{ $giftamounts->gift_amount }} TK</span>
-                                            </li>
-                                        @endif
                                         @if($vatamounts->status == 1)
                                             @php
                                                 $vatprice = ($total * $vatamounts->vat_amount) / 100 ;
                                             @endphp
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                    <input value="{{ $vatprice }}" name="vat_amount" style="width: auto;" type="checkbox" id="vatChecked">
+                                                    <input value="{{ round($vatprice) }}" name="vat_amount" style="width: auto;" type="checkbox" id="vatChecked">
                                                     <label class="mb-0 lable-cursor" for="vatChecked">Vat</label>
                                                     <small>( VAT will be applicable on total purchase )</small>
                                                 </span>
-                                                <span class="pull-right text-danger"> {{ $vatprice }} TK</span>
+                                                <span class="pull-right text-danger"> {{ round($vatprice) }} TK</span>
                                             </li>
                                         @endif
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -252,15 +243,6 @@
         });
     </script>
     <script>
-        $('#giftChecked').change(function(){
-            var giftChecked = this.checked ? '1' : '0';
-            // alert(c);
-            if( giftChecked == '1') {
-                
-            }else {
-
-            }
-        });
         $('#vatChecked').change(function(){
             var vatChecked = this.checked ? '1' : '0';
             // alert(c);

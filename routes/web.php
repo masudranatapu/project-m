@@ -19,7 +19,6 @@ use App\Http\Controllers\Admin\HappyClintController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\VatController;
-use App\Http\Controllers\Admin\GiftController;
 
 use App\Http\Controllers\Customer\InformationController;
 use App\Http\Controllers\Customer\WishlistController;
@@ -124,10 +123,6 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::resource('vat-amount', VatController::class);
     Route::get('vat-amount-inactive/{id}', [VatController::class, 'vatInactive'])->name('vat.inactive');
     Route::get('vat-amount-active/{id}', [VatController::class, 'vatActive'])->name('vat.active');
-    // gift amount 
-    Route::resource('gift-amount', GiftController::class);
-    Route::get('gift-amount-inactive/{id}', [GiftController::class, 'giftInactive'])->name('gift.inactive');
-    Route::get('gift-amount-active/{id}', [GiftController::class, 'giftActive'])->name('gift.active');
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'middleware' => ['auth', 'customer']], function () {
     Route::get('/information', [InformationController::class, 'information'])->name('dashboard');
