@@ -204,11 +204,11 @@
                                             @endphp
                                             <li class="list-group-item d-flex justify-content-between align-items-center">
                                                 <span class="d-flex gap-2 align-items-center flex-wrap">
-                                                    <input value="{{ round($vatprice) }}" name="vat_amount" style="width: auto;" type="checkbox" id="vatChecked">
-                                                    <label class="mb-0 lable-cursor" for="vatChecked">Vat</label>
+                                                    <input type="hidden" name="vat_amount" id="get_vat" value="{{ round($vatprice) }}">
+                                                    <label class="mb-0 lable-cursor">Vat</label>
                                                     <small>( VAT will be applicable on total purchase )</small>
                                                 </span>
-                                                <span class="pull-right text-danger"> {{ round($vatprice) }} TK</span>
+                                                <span class="pull-right"> <span id="vatDisplay" style="display:none; ">{{ round($vatprice) }} </span> TK</span>
                                             </li>
                                         @endif
                                         <li class="list-group-item d-flex justify-content-between align-items-center">
@@ -243,23 +243,21 @@
         });
     </script>
     <script>
-        $('#vatChecked').change(function(){
-            var vatChecked = this.checked ? '1' : '0';
-            // alert(c);
-            if( vatChecked == '1') {
-                
-            }else {
-                
-            }
-        });
-    </script>
-    <script>
         // for billing informaiton 
         $("#billing_div_id").on('change', function() {
             var billing_div_id = $("#billing_div_id").val();
             // alert(billing_div_id);
             var sub_total = $("#sub_total").val();
             // alert(sub_total);
+
+            // check vat should be giving for product 
+            var get_vat = $("#get_vat").val();
+            if(get_vat) {
+                var get_vat_amount = $("#get_vat").val();
+            }else {
+                var get_vat_amount = 0;
+            }
+            // alert(get_vat);
             var grand_total = $("#grand_total").text();
             // alert(grand_total);
             if(billing_div_id){
@@ -271,13 +269,14 @@
                         // console.log(data);
                         $("#billing_dis_id").empty();
                         $('#billing_dis_id').append('<option value=""> Select One </option>');
+                        $("#vatDisplay").show();
                         $.each(data[0], function(key, value){
                             $('#billing_dis_id').append('<option value="'+ value.id +'">' + value.name + '</option>');
                         });
                         $("#delivery_amount").text(data[1]);
                         $("#shipping_amount").val(data[1]);
-                        $("#show_sub_total").text(parseInt(data[1]) + parseInt(sub_total));
-                        $("#grand_total").text(parseInt(data[1]) + parseInt(sub_total));
+                        $("#show_sub_total").text(parseInt(data[1]) + parseInt(sub_total) + parseInt(get_vat_amount));
+                        $("#grand_total").text(parseInt(data[1]) + parseInt(sub_total) + parseInt(get_vat_amount));
                     },
                 });
             }else {
@@ -290,6 +289,15 @@
             // alert(shipping_div_id);
             var sub_total = $("#sub_total").val();
             // alert(sub_total);
+
+            // check vat should be giving for product 
+            var get_vat = $("#get_vat").val();
+            if(get_vat) {
+                var get_vat_amount = $("#get_vat").val();
+            }else {
+                var get_vat_amount = 0;
+            }
+            // alert(get_vat);
             var grand_total = $("#grand_total").text();
             // alert(grand_total);
             if(shipping_div_id){
@@ -301,13 +309,14 @@
                         // console.log(data);
                         $("#shipping_dis_id").empty();
                         $('#shipping_dis_id').append('<option value=""> Select One </option>');
+                        $("#vatDisplay").show();
                         $.each(data[0], function(key, value){
                             $('#shipping_dis_id').append('<option value="'+ value.id +'">' + value.name + '</option>');
                         });
                         $("#delivery_amount").text(data[1]);
                         $("#shipping_amount").val(data[1]);
-                        $("#show_sub_total").text(parseInt(data[1]) + parseInt(sub_total));
-                        $("#grand_total").text(parseInt(data[1]) + parseInt(sub_total));
+                        $("#show_sub_total").text(parseInt(data[1]) + parseInt(sub_total) + parseInt(get_vat_amount));
+                        $("#grand_total").text(parseInt(data[1]) + parseInt(sub_total) + parseInt(get_vat_amount));
                     },
                 });
             }else {
