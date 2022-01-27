@@ -28,9 +28,26 @@ class WebsiteController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function addRemoveRow(Request $request)
     {
         //
+        $website_row = $request->id;
+
+        $data = NULL;
+        $data .=    '<tr id="website_remove_row_'.$website_row.'">';
+        $data .=        '<th>
+                            <input type="text" name="icon[]" class="form-control" placeholder="Icon form frontawsome">
+                        </th>';
+        $data .=        '<td>
+                            <input type="text" name="link[]" class="form-control" placeholder="Website link like https://... ">
+                        </td>';
+        $data .=        '<td class="text-center">
+                            <button type="button" onclick="websiteRemovieRow(this)" id="'.$website_row.'" class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </button>
+                        </td>';
+        $data .=    '</tr>';
+        return $data;
     }
 
     /**
@@ -118,9 +135,16 @@ class WebsiteController extends Controller
             $website = Website::findOrFail($id);
             $fav_icon_url = $website->favicon;
         }
-        $icon = trim(implode('|', $request->icon), '|');
-        $link = trim(implode('|', $request->link), '|');
-
+        if($request->icon) {
+            $icon = trim(implode('|', $request->icon), '|');
+        }else {
+            $icon = NULL;
+        }
+        if($request->link) {
+            $link = trim(implode('|', $request->link), '|');
+        }else {
+            $link = NULL;
+        }
         Website::findOrFail($id)->update([
             'name' => $request->name,
             'email' => $request->email,

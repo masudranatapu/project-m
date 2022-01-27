@@ -10,7 +10,7 @@
 
 @section('content')
     <section class="content">
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
                 <div class="col-md-12 mt-3">
                     <div class="card card-info">
@@ -92,35 +92,51 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-header bg-success">
-                                <h3 class="card-title">Additional Information</h3>
+                            <div class="card-header bg-primary">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <h3>Additional Information</h3>
+                                    </div>
+                                    <div class="col-md-6 text-right">
+                                            <input type="hidden" id="website_row_number" value="{{ rand(111, 999) }}">
+                                        <button type="button" class="btn btn-sm btn-success" onclick="addNewAdditionalInfo()">
+                                            <i class="fa fa-plus"></i>
+                                        </button>
+                                    </div>
+                                </div>
                             </div>
-                            <table class="card-body table table-striped">
-                                <tbody id="diagnosis">
-                                    @php
-                                        $icon = explode("|",$website->icon);
-                                        $link = explode("|",$website->link);
-                                    @endphp
-                                    @foreach($icon as $key=>$icon)
+                            <div class="card-body">
+                                <table class="table table-striped">
+                                    <thead>
                                         <tr>
-                                            <td>
-                                                <input type="text" name="icon[]" autocomplete="off" class="form-control" value="{{$icon}}" placeholder="Sofil Icon from front awsome">
-                                            </td>
-
-                                            <td>
-                                                <input type="text" name="link[]" class="form-control" value="@if(isset($link[$key])){{$link[$key]}}@endif" placeholder="Link">
-                                            </td>
-                                            <td class="text-center">
-                                            <div class="btn btn-group">
-                                                <button type="button" class="btn btn-primary DiaAddBtn">+</button>
-                                                <button type="button" class="btn btn-danger DiaRemoveBtn">-</button>
-                                                </div>
-                                            </td>
+                                            <th>Website Icon</th>
+                                            <th>Website Link</th>
+                                            <th class="text-center">Action</th>
                                         </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-
+                                    </thead>
+                                    <tbody id="show_row">
+                                        @php
+                                            $icon = explode("|",$website->icon);
+                                            $link = explode("|",$website->link);
+                                        @endphp
+                                        @foreach($icon as $key=>$icon)
+                                            <tr id="website_remove_row_{{$key}}">
+                                                <td>
+                                                    <input type="text" name="icon[]" value="{{$icon}}" class="form-control" placeholder="Icon form frontawsome">
+                                                </td>
+                                                <td>
+                                                    <input type="text" name="link[]" value="@if(isset($link[$key])){{$link[$key]}}@endif" class="form-control" placeholder="Website link like https://">
+                                                </td>
+                                                <td class="text-center">
+                                                    <button type="button" onclick="websiteRemovieRow(this)" id="{{$key}}" class="btn btn-sm btn-danger">
+                                                        <i class="fa fa-trash"></i>
+                                                    </button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                             <div class="card-footer">
                                 <div class="form-group row">
                                     <label for="inputPassword3" class="col-sm-4 col-form-label"></label>
@@ -173,5 +189,36 @@
                 reader.readAsDataURL(input.files[0]);
             }
         }
+    </script>
+    <script>
+        function addNewAdditionalInfo() {
+            // alert('helo');
+            var website_row_number = $("#website_row_number").val();
+            // alert(amount_id);
+
+            var new_row_number = Math.floor(Math.random()*(999-100+1)+100);
+            if($("#website_remove_row_" + website_row_number).new_row_number == 0) {
+                var new_id = Math.floor(Math.random()*(999-100+1)+100);
+            }
+            $.ajax({
+                type    : "POST",
+                url     : "{{ route('admin.row.addremove') }}",
+                data    : {
+                    id      : website_row_number,
+                    _token  : '{{csrf_token()}}',
+                },
+                success:function(data) {
+                    console.log(data);
+                    $('#show_row').append(data);
+                    $('#website_row_number').val(new_row_number);
+                },
+            });
+        };
+        function websiteRemovieRow(obj) {
+            // alert('Hell');
+            var website_row_number = obj.id;
+            // alert(website_row_number);
+            $("#website_remove_row_" + website_row_number).remove();
+        };
     </script>
 @endpush

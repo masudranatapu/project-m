@@ -18,8 +18,8 @@ class CreateOrdersTable extends Migration
             $table->string('user_id')->nullable();
             $table->string('order_code');
             $table->string('product_id');
-            $table->string('size_id');
-            $table->string('color_id');
+            $table->string('size_id')->nullable();
+            $table->string('color_id')->nullable();
             $table->string('quantity');
             $table->string('vat_amount')->nullable();
             $table->string('shipping_amount');

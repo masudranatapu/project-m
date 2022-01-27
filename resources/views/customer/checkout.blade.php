@@ -11,11 +11,11 @@
 @push('css')
     <style>
         .checkout_image_size {
-            width: 50px;
-            height: 50px;
+            width: 30px;
+            height: 30px;
         }
         hr {
-            margin: 2px 0;
+            margin: 1px 0;
             border-bottom: 1px solid #bbbcbf;
         }
     </style>
@@ -38,7 +38,8 @@
             </div>
         </div>
     </div>
-    <form action="{{ route('customer.checkout.store') }}">
+    <form action="{{ route('customer.checkout.store') }}" method="POST">
+        @csrf
         <div class="our_services bg-white">
             <div class="container">
                 <div class="row">
@@ -51,17 +52,17 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="">Your Name</label>
-                                        <input type="text" value="{{ Auth::user()->name }}" placeholder="Your Name">
+                                        <input type="text" value="{{ Auth::user()->name }}" name="billing_name" placeholder="Your Name">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Your Email</label>
-                                        <input type="email" value="{{ Auth::user()->email }}"  placeholder="Your Email">
+                                        <input type="email" value="{{ Auth::user()->email }}" name="billing_email" placeholder="Your Email">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-6">
                                         <label for="">Area / District/ City</label>
-                                        <select name="bill_div_id" id="billing_div_id">
+                                        <select name="billing_division_id" id="billing_div_id">
                                             <option value="" disabled selected>Select One</option>
                                             @foreach($divisions as $division)
                                                 <option value="{{ $division->id }}">{{ $division->name }}</option>
@@ -70,23 +71,23 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Zone / Thana / </label>
-                                        <select name="bill_dis_id" id="billing_dis_id">
+                                        <select name="billing_district_id" id="billing_dis_id">
                                             <option disabled selected> First Select Area/ District / City</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mt-3">
                                         <label for="">Thana Code</label>
-                                        <input type="text"  placeholder="Thana Code">
+                                        <input type="text" name="billing_thana_code"  placeholder="Thana Code">
                                     </div>
                                     <div class="col-md-6 mt-3">
                                         <label for="">Phone Number</label>
-                                        <input type="text" value="{{ Auth::user()->phone }}" placeholder="Phone Number">
+                                        <input type="text" value="{{ Auth::user()->phone }}" name="billing_phone" placeholder="Phone Number">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label for="">Your Address</label>
-                                        <textarea name="" id="" cols="30" rows="3" placeholder="Your Address">{{ Auth::user()->address }}</textarea>
+                                        <textarea id="" cols="30" rows="3" name="billing_address" placeholder="Your Address">{{ Auth::user()->address }}</textarea>
                                     </div>
                                 </div>
                             </div>
@@ -101,17 +102,17 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         <label for="">Your Name</label>
-                                        <input type="text" value="{{ Auth::user()->name }}" placeholder="Your Name">
+                                        <input type="text" value="" name="shipping_name" placeholder="Your Name">
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Your Email</label>
-                                        <input type="email" value="{{ Auth::user()->email }}"  placeholder="Your Email">
+                                        <input type="email" value="" name="shipping_email" placeholder="Your Email">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-6">
                                         <label for="">Area / District/ City</label>
-                                        <select name="" id="shipping_div_id">
+                                        <select name="shipping_division_id" id="shipping_div_id">
                                             <option value="" disabled selected>Select One</option>
                                             @foreach($divisions as $division)
                                                 <option value="{{ $division->id }}">{{ $division->name }}</option>
@@ -120,23 +121,23 @@
                                     </div>
                                     <div class="col-md-6">
                                         <label for="">Zone / Thana / </label>
-                                        <select name="" id="shipping_dis_id">
+                                        <select name="shipping_district_id" id="shipping_dis_id">
                                             <option disabled selected> First Select Area/ District / City</option>
                                         </select>
                                     </div>
                                     <div class="col-md-6 mt-3">
                                         <label for="">Thana Code</label>
-                                        <input type="text"  placeholder="Thana Code">
+                                        <input type="text" name="shipping_thana_code" placeholder="Thana Code">
                                     </div>
                                     <div class="col-md-6 mt-3">
                                         <label for="">Phone Number</label>
-                                        <input type="text" value="{{ Auth::user()->phone }}" placeholder="Phone Number">
+                                        <input type="text" value="" name="shipping_phone" placeholder="Phone Number">
                                     </div>
                                 </div>
                                 <div class="row mt-3">
                                     <div class="col-md-12">
                                         <label for="">Your Address</label>
-                                        <textarea name="" id="" cols="30" rows="3" placeholder="Your Address">{{ Auth::user()->address }}</textarea>
+                                        <textarea name="shipping_address" id="" cols="30" rows="3" placeholder="Your Address"></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -227,6 +228,31 @@
                                         </li>
                                     </ul>
                                 @endif
+                            </div>
+                            <div class="card-header bg-success text-white">
+                                <h4>Payment Getway</h4>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <select name="payment_method" id="" class="form-control">
+                                            <option value="" disabled>Select One</option>
+                                            <option value="Cash" selected >Cash On Delivery</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <div class="form-group">
+                                            <h6 class="my-2">Agent Number : 01551066777 </h6>
+                                            <label>Mobile No : </label>
+                                            <input type="text" class="form-control" name="payment_mobile_number" placeholder="Enter mobile no">
+                                            <label>Transection ID : </label>
+                                            <input type="text" class="form-control" name="payment_transaction_id" placeholder="Enter TrxID">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <button type="submit" class="btn btn-success cursor">Confirm Order</button>
                             </div>
                         </div>
                     </div>

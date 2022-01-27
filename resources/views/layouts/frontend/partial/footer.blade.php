@@ -13,7 +13,7 @@
                         <ul>
                             <li><i class="ion-location"></i>{{ $website->address }}</li>
                             <li><i class="ion-ios-telephone"></i><a href="tel:{{$website->phone }}">{{$website->phone }}</a></li>
-                            <li><i class="ion-ios-email"></i><a href="mailto:{{ $website->email }}">{{$website->email}}</a></li>
+                            <li><i class="ion-ios-email"></i><a class="text-lowercase" href="mailto:{{ $website->email }}">{{$website->email}}</a></li>
                         </ul>
                     </div>
                 </div>

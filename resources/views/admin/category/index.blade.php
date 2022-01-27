@@ -7,6 +7,13 @@
 @push('css')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
+    <style type="text/css">
+        .category_image_size {
+            height: 50px;
+            width: 50px;
+            border-radius: 50%;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -172,7 +179,7 @@
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                <img src="{{ asset($category->image) }}" style="height: 80px; width: 120px;" alt="">
+                                                <img src="@if($category->image) {{ asset($category->image) }} @else {{ asset('demomedia/category.png') }} @endif" class="category_image_size" alt="">
                                             </td>
                                             <td class="text-center">
                                                 <i class="{{$category->icon}}" style="font-size: 45px;"></i>

@@ -91,9 +91,14 @@
                                         @endif
                                     </div>
                                     <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart bg-success" data-toggle="modal" data-target="#addCartModal" title="Buy Now">
+                                        <a href="javascript:;" onclick="buynow_product_submit({{$product->id}})" class="btn-product-icon btn-cart bg-success" title="Buy Now">
                                             <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                                         </a>
+                                        <form action="{{ route('buynow') }}" method="POST" id="buynow_product_submit_form_{{ $product->id }}">
+                                            @csrf
+                                            <!-- this form only for buynow  -->
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        </form>
                                         <a href="javascript:;" class="btn-product-icon btn-wishlist bg-success" onclick="wishlist_product_submit({{$product->id}})" title="Add to wishlist">
                                             <i class="fa fa-heart-o" aria-hidden="true"></i>
                                         </a>
@@ -162,9 +167,14 @@
                                         @endif
                                     </div>
                                     <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart bg-success" data-toggle="modal" data-target="#addCartModal" title="Buy Now">
+                                        <a href="javascript:;" onclick="buynow_product_submit({{$product->id}})" class="btn-product-icon btn-cart bg-success" title="Buy Now">
                                             <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                                         </a>
+                                        <form action="{{ route('buynow') }}" method="POST" id="buynow_product_submit_form_{{ $product->id }}">
+                                            @csrf
+                                            <!-- this form only for buynow  -->
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        </form>
                                         <a href="javascript:;" class="btn-product-icon btn-wishlist bg-success" onclick="wishlist_product_submit({{$product->id}})" title="Add to wishlist">
                                             <i class="fa fa-heart-o" aria-hidden="true"></i>
                                         </a>
@@ -233,9 +243,14 @@
                                         @endif
                                     </div>
                                     <div class="product-action-vertical">
-                                        <a href="#" class="btn-product-icon btn-cart bg-success" data-toggle="modal" data-target="#addCartModal" title="Buy Now">
+                                        <a href="javascript:;" onclick="buynow_product_submit({{$product->id}})" class="btn-product-icon btn-cart bg-success" title="Buy Now">
                                             <i class="fa fa-shopping-bag" aria-hidden="true"></i>
                                         </a>
+                                        <form action="{{ route('buynow') }}" method="POST" id="buynow_product_submit_form_{{ $product->id }}">
+                                            @csrf
+                                            <!-- this form only for buynow  -->
+                                            <input type="hidden" name="product_id" value="{{ $product->id }}">
+                                        </form>
                                         <a href="javascript:;" class="btn-product-icon btn-wishlist bg-success" onclick="wishlist_product_submit({{$product->id}})" title="Add to wishlist">
                                             <i class="fa fa-heart-o" aria-hidden="true"></i>
                                         </a>
@@ -384,6 +399,12 @@
 	<script>
 		function wishlist_product_submit(id) {
 		    document.getElementById('wishlist_product_submit_form_'+id).submit();
+		}
+	</script>
+    <!-- product buynow  area  -->
+	<script>
+		function buynow_product_submit(id) {
+		    document.getElementById('buynow_product_submit_form_'+id).submit();
 		}
 	</script>
 @endpush

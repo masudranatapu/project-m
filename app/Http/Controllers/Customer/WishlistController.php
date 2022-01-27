@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Review;
 use App\Models\Wishlist;
+use App\Models\Order;
+use App\Models\BillingAddress;
+use App\Models\ShippingAddress;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
 use Auth;
@@ -22,7 +25,8 @@ class WishlistController extends Controller
     public function orderIndex()
     {
         $title = "Order View";
-        return view('customer.order', compact('title'));
+        $orders = Order::where('user_id', Auth::user()->id)->latest()->get();
+        return view('customer.order', compact('title', 'orders'));
     }
     public function wishlistStore(Request $request)
     {
@@ -61,5 +65,13 @@ class WishlistController extends Controller
         Wishlist::findOrFail($id)->delete();
         Toastr::warning('Your product remove from wishlist :-)','success');
         return redirect()->back();
+    }
+    public function orderView($id)
+    {
+        $title = "Order View";
+        $orders = Order::where('id', $id)->latest()->first();
+        $billinginfo = BillingAddress::where('order_id', $id)->latest()->first();
+        $shippinginfo = ShippingAddress::where('order_id', $id)->latest()->first();
+        return view('customer.orderview', compact('title', 'orders', 'billinginfo', 'shippinginfo'));
     }
 }

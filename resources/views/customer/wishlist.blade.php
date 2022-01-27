@@ -100,6 +100,9 @@
                                             <td>{{ $wishlist['product']['name'] }}</td>
                                             <td>{{ $wishlist['product']['sell_price'] }}</td>
                                             <td>
+                                                <a href="{{ route('add_to_cart', $wishlist->product_id) }}" class="btn btn-lg btn-info add_to_cart_size">
+                                                    <i class="fa fa-cart-plus mr-2"></i>
+                                                </a>
                                                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#view_for_add_to_cart_{{$key}}">
                                                     <i class="fa fa-eye"></i>
                                                 </button>

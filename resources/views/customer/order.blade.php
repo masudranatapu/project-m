@@ -76,28 +76,43 @@
                 <div class="col-md-9">
                     <div class="card">
                         <div class="card-header bg-info">
-                            <h4 class="text-white">Your Wishlist Product List</h4>
+                            <h4 class="text-white">Your Order List</h4>
                         </div>
                         <div class="card-body">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
-                                    <th scope="col">#SL</th>
-                                    <th scope="col">Product Image</th>
-                                    <th scope="col">Name </th>
-                                    <th scope="col">Price</th>
-                                    <th scope="col">Action</th>
+                                    <th>Order Code</th>
+                                    <th>Date</th>
+                                    <th>Pyment Method</th>
+                                    <th>Price</th>
+                                    <th>Order Status</th>
+                                    <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>1</td>
-                                        <td>Masud</td>
-                                        <td>Rana</td>
-                                        <td>Tapu</td>
-                                        <td>Price</td>
-                                        <td>Action</td>
-                                    </tr>
+                                    @foreach($orders as $key => $order)
+                                        <tr class="@if($order->order_status == 'Canceled') text-danger @endif">
+                                            <td>{{ $order->order_code }}</td>
+                                            <td>{{ $order->created_at->format('d M Y h:i A') }}</td>
+                                            <td>{{ $order->payment_method }}</td>
+                                            <td>{{ $order->total }} TK</td>
+                                            <td>{{ $order->order_status }}</td>
+                                            <td>
+                                                <a href="{{ route('customer.order.view', $order->id) }}" class="btn btn-success" title="Order View">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                @if($order->order_status == "Pending")
+                                                    <button title="Cancle Order" class="btn btn-danger" type="button" onclick="deleteData({{ $order->id }})">
+                                                        <i class="fa fa-times"></i>
+                                                    </button>
+                                                    <form id="delete-form-{{ $order->id }}" action="{{ route('customer.order.cancel', $order->id) }}" method="get" style="display: none;">
+                                                        @csrf
+                                                    </form>
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
@@ -119,7 +134,7 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes, remove it!',
+                confirmButtonText: 'Yes, cancle order!',
                 cancelButtonText: 'No, cancel!',
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',

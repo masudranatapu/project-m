@@ -38,7 +38,6 @@ use App\Http\Controllers\CartController;
 |
 */
 
-
 Route::get('/', [HomeController::class, 'welcome'])->name('home');
 
 Auth::routes();
@@ -80,7 +79,8 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::post('pass-updated/{id}', [DashboardController::class, 'updatePass'])->name('password.update');
     // website seeting
     Route::resource('website', WebsiteController::class);
-    // brand 
+    Route::post('get-add-row-', [WebsiteController::class, 'addRemoveRow'])->name('row.addremove');
+    // brand
     Route::resource('brands', BrandController::class);
     Route::get('brands-inactive/{id}', [BrandController::class, 'brandsInactive'])->name('brands.inactive');
     Route::get('brands-active/{id}', [BrandController::class, 'brandsActive'])->name('brands.active');
@@ -119,7 +119,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     // category
     Route::resource('category', CategoryController::class);
     Route::get('/category/parent-chlid/ajax/{cate_id}', [CategoryController::class, 'parentChild']);
-    // vat  amount 
+    // vat  amount
     Route::resource('vat-amount', VatController::class);
     Route::get('vat-amount-inactive/{id}', [VatController::class, 'vatInactive'])->name('vat.inactive');
     Route::get('vat-amount-active/{id}', [VatController::class, 'vatActive'])->name('vat.active');
@@ -135,10 +135,12 @@ Route::group(['as' => 'customer.', 'prefix' => 'customer', 'middleware' => ['aut
     Route::post('destroy/my-wishlist/{id}', [WishlistController::class, 'destroy'])->name('wishlist.destroy');
     // my order view
     Route::get('my-order', [WishlistController::class, 'orderIndex'])->name('order');
-    // checkout 
+    Route::get('my-order-view/{id}', [WishlistController::class, 'orderView'])->name('order.view');
+    // checkout
     Route::resource('checkout', CheckoutController::class);
     Route::get('division-distric-billing/ajax/{billing_div_id}', [CheckoutController::class, 'getDivDisBilling']);
     Route::get('division-distric-shipping/ajax/{shipping_div_id}', [CheckoutController::class, 'getDivDisShipping']);
+    Route::get('order-cancel/{id}', [CheckoutController::class, 'orderCancel'])->name('order.cancel');
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'namespace' => 'Customer'], function () {
     // wishlist area with un authentication

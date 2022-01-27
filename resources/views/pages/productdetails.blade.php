@@ -197,7 +197,7 @@
                             </div>
                             <!-- this button will be onclik  -->
                             <div class="col-md-4">
-                                <a href="javascript:;" class="btn btn-lg btn-danger wishlist_size"  onclick="buynow_product_submit({{$product->id}})">
+                                <a href="javascript:;" class="btn btn-lg btn-danger wishlist_size" onclick="buynow_product_submit({{$product->id}})">
                                     <i class="fa fa-shopping-bag mr-2"></i> Buy now
                                 </a>
                             </div>
