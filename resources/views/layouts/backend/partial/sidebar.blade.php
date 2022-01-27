@@ -1,7 +1,7 @@
 <!-- Brand Logo -->
 <a href="{{ route('admin.dashboard') }}" class="brand-link">
-    <img src="{{asset('backend/dist/img/AdminLTELogo.png')}}" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
-    <span class="brand-text font-weight-light">AdminLTE 3</span>
+    <img src="{{asset('demomedia/logofriendsit.png')}}" alt="" class="brand-image elevation-3" style="opacity: .8">
+    <span class="brand-text font-weight-light">Friend's IT</span>
 </a>
 <div class="sidebar">
     <nav class="mt-2">

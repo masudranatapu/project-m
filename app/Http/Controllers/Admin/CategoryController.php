@@ -20,8 +20,9 @@ class CategoryController extends Controller
         //
         $title = "Category";
         $categories = Category::where('parent_id', NULL)->where('child_id', NULL)->latest()->get();
+        $child_categories = Category::where('parent_id', '!=', NULL)->where('child_id', NULL)->latest()->get();
         $allcategory = Category::latest()->get();
-        return view('admin.category.index', compact('title', 'categories', 'allcategory'));
+        return view('admin.category.index', compact('title', 'categories', 'allcategory', 'child_categories'));
     }
 
     /**

@@ -11,7 +11,12 @@
         $website = App\Models\Website::latest()->first();
     @endphp
 @push('css')
-
+    <style>
+        .slider-image-size {
+            width: 100%;
+            height: 536px;
+        }
+    </style>
 @endpush
 
 @section('content')
@@ -19,7 +24,7 @@
         @foreach($sliders as $key => $slider)
             <div class="single_slider">
                 <a href="javascript:;">
-                    <img src="{{asset($slider->image)}}" alt="slider image">
+                    <img class="slider-image-size" src="{{asset($slider->image)}}" alt="slider image">
                 </a>
             </div>
         @endforeach
