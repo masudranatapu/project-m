@@ -5,6 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Category;
+use App\Models\Product;
+use App\Models\Order;
 use Illuminate\Support\Facades\Hash;
 use Brian2694\Toastr\Facades\Toastr;
 use Carbon\Carbon;
@@ -16,7 +19,11 @@ class DashboardController extends Controller
     public function index()
     {
         $title = "Admin Dashboard";
-        return view('admin.index', compact('title'));
+        $category = Category::latest()->get();
+        $product = Product::latest()->get();
+        $order = Order::latest()->get();
+        $user = User::where('role_id', 2)->latest()->get();
+        return view('admin.index', compact('title', 'category', 'product', 'order', 'user'));
     }
     public function profile()
     {
@@ -86,5 +93,11 @@ class DashboardController extends Controller
             Toastr::warning('something is worng. Please try agian :-)','warning');
             return redirect()->back();
         }
+    }
+    public function allUsers()
+    {
+        $title = "All User";
+        $users = User::where('role_id', 2)->latest()->get();
+        return view('admin.user.index', compact('title', 'users'));
     }
 }

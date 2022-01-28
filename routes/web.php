@@ -60,7 +60,7 @@ Route::get('searching-product', [SearchController::class, 'searching'])->name('s
 // product details and  view related
 Route::get('category-product/{slug}', [ViewController::class, 'category'])->name('category');
 Route::get('product-details/{slug}', [ViewController::class, 'productDetails'])->name('productdetails');
-// cart area routes 
+// cart area routes
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{product_id}', [CartController::class, 'addToCart'])->name('add_to_cart');
 Route::post('add-to-cart-with-quantity', [CartController::class, 'addToCartWithQuantity'])->name('addtocart.withQuantity');
@@ -77,6 +77,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::get('profile', [DashboardController::class, 'profile'])->name('profile');
     Route::post('profile/{id}', [DashboardController::class, 'profileUpdate'])->name('profile.update');
     Route::post('pass-updated/{id}', [DashboardController::class, 'updatePass'])->name('password.update');
+    Route::get('all-users', [DashboardController::class, 'allUsers'])->name('all.user');
     // website seeting
     Route::resource('website', WebsiteController::class);
     Route::post('get-add-row-', [WebsiteController::class, 'addRemoveRow'])->name('row.addremove');
@@ -93,18 +94,18 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::resource('color', ColorController::class);
     Route::get('color-inactive/{id}', [ColorController::class, 'colorInactive'])->name('color.inactive');
     Route::get('color-active/{id}', [ColorController::class, 'colorActive'])->name('color.active');
-    // Location section 
+    // Location section
     Route::resource('division', DivisionController::class);
     Route::resource('district', DistrictController::class);
     // blog section
     Route::resource('blogs', BlogController::class);
     Route::get('blog-inactive/{id}', [BlogController::class, 'blogInactive'])->name('blog.inactive');
     Route::get('blog-active/{id}', [BlogController::class, 'blogActive'])->name('blog.active');
-    // slider section 
+    // slider section
     Route::resource('slider', SliderController::class);
     Route::get('slider-inactive/{id}', [SliderController::class, 'sliderInactive'])->name('slider.inactive');
     Route::get('slider-active/{id}', [SliderController::class, 'sliderActive'])->name('slider.active');
-    // policy section 
+    // policy section
     Route::resource('policy', PolicyController::class);
     Route::get('policy-inactive/{id}', [PolicyController::class, 'policyInactive'])->name('policy.inactive');
     Route::get('policy-active/{id}', [PolicyController::class, 'policyActive'])->name('policy.active');
@@ -112,7 +113,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::resource('abouts', AboutController::class);
     // happy clints
     Route::resource('clints', HappyClintController::class);
-    // product 
+    // product
     Route::resource('products', ProductController::class);
     Route::get('product-category/ajax/{category_id}', [ProductController::class, 'productCategory']);
     Route::get('product-subcategory/ajax/{subcategory_id}', [ProductController::class, 'productSubcategory']);

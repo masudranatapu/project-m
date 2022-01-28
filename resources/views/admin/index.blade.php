@@ -33,11 +33,13 @@
                             <i class="fas fa-cog"></i>
                         </span>
                         <div class="info-box-content">
-                            <span class="info-box-text">CPU Traffic</span>
-                                <span class="info-box-number">
-                                    10
-                                <small>%</small>
-                            </span>
+                            <a href="{{route('admin.products.index')}}">
+                                <span class="info-box-text">Product</span>
+                                    <span class="info-box-number">
+                                        {{ $product->count() }}
+                                    </span>
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -46,10 +48,14 @@
                         <span class="info-box-icon bg-danger elevation-1">
                             <i class="fas fa-thumbs-up"></i>
                         </span>
-
                         <div class="info-box-content">
-                            <span class="info-box-text">Likes</span>
-                            <span class="info-box-number">41,410</span>
+                            <a href="{{route('admin.category.index')}}">
+                                <span class="info-box-text">Category</span>
+                                    <span class="info-box-number">
+                                        {{ $category->count() }}
+                                    </span>
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -60,8 +66,13 @@
                             <i class="fas fa-shopping-cart"></i>
                         </span>
                         <div class="info-box-content">
-                            <span class="info-box-text">Sales</span>
-                            <span class="info-box-number">760</span>
+                            <a href="">
+                                <span class="info-box-text">Order</span>
+                                    <span class="info-box-number">
+                                        {{ $order->count() }}
+                                    </span>
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>
@@ -71,8 +82,13 @@
                             <i class="fas fa-users"></i>
                         </span>
                         <div class="info-box-content">
-                            <span class="info-box-text">New Members</span>
-                            <span class="info-box-number">2,000</span>
+                            <a href="{{ route('admin.all.user') }}">
+                                <span class="info-box-text">User</span>
+                                    <span class="info-box-number">
+                                        {{ $user->count() }}
+                                    </span>
+                                </span>
+                            </a>
                         </div>
                     </div>
                 </div>

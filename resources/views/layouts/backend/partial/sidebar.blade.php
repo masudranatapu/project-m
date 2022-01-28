@@ -94,7 +94,7 @@
                     <p>Vat</p>
                 </a>
             </li>
-            <li class="nav-item {{ Request::is('admin/blogs') || Request::is('admin/slider') || Request::is('admin/policy') || Request::is('admin/clints') || Request::is('admin/abouts') ? 'menu-open' : '' }}">
+            <li class="nav-item {{ Request::is('admin/blogs') || Request::is('admin/slider') || Request::is('admin/policy') || Request::is('admin/clints') || Request::is('admin/abouts') || Request::is('admin/all-users') ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon far fa-plus-square"></i>
                     <p>
@@ -131,6 +131,12 @@
                         <a href="{{ route('admin.clints.index') }}" class="nav-link {{ Request::is('admin/clints') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Happy Clints</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.all.user') }}" class="nav-link {{ Request::is('admin/all-users') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>All Users</p>
                         </a>
                     </li>
                 </ul>
