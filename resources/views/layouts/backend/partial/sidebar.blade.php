@@ -88,6 +88,87 @@
                     </p>
                 </a>
             </li>
+            @php
+                $pendingOrders = App\Models\Order::where('order_status', 'Pending')->latest()->get();
+                $confirmedOrders = App\Models\Order::where('order_status', 'Confirmed')->latest()->get();
+                $processingOrders = App\Models\Order::where('order_status', 'Processing')->latest()->get();
+                $deliveredOrders = App\Models\Order::where('order_status', 'Delivered')->latest()->get();
+                $successedOrders = App\Models\Order::where('order_status', 'Successed')->latest()->get();
+                $canceledOrders = App\Models\Order::where('order_status', 'Canceled')->latest()->get();
+            @endphp
+            <li class="nav-item {{ Request::is('admin/orders') || Request::is('admin/orders-pending') || Request::is('admin/orders-confirmed') || Request::is('admin/orders-processing') ||Request::is('admin/orders-delivered') || Request::is('admin/orders-successed') || Request::is('admin/orders-canceled') ? 'menu-open' : '' }}">
+                <a href="javascript:;" class="nav-link">
+                    <i class="nav-icon fas fa-shopping-basket"></i>
+                    <p>
+                        Order Management
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{route('admin.orders.pending')}}" class="nav-link {{ Request::is('admin/orders-pending') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Pending Order
+                                <span class="badge badge-info right">{{$pendingOrders->count()}}</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.orders.confirmed')}}" class="nav-link {{ Request::is('admin/orders-confirmed') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Confirmed Order
+                                <span class="badge badge-info right">{{ $confirmedOrders->count() }}</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.orders.processing')}}" class="nav-link {{ Request::is('admin/orders-processing') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Processing Order
+                                <span class="badge badge-info right">{{ $processingOrders->count() }}</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.orders.delivered')}}" class="nav-link {{ Request::is('admin/orders-delivered') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Delivered Order
+                                <span class="badge badge-info right">{{ $deliveredOrders->count() }}</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.orders.successed')}}" class="nav-link {{ Request::is('admin/orders-successed') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Successed Order
+                                <span class="badge badge-info right">{{ $successedOrders->count() }}</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{route('admin.orders.canceled')}}" class="nav-link {{ Request::is('admin/orders-canceled') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                Canceled Order
+                                <span class="badge badge-info right">{{ $canceledOrders->count() }}</span>
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.orders.index') }}" class="nav-link {{ Request::is('admin/orders') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>
+                                All Orders
+                            </p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
             <li class="nav-item">
                 <a href="{{ route('admin.vat-amount.index') }}" class="nav-link {{ Request::is('admin/vat-amount') ? 'active' : '' }}">
                     <i class="nav-icon fas fa-hand-holding-heart"></i>
@@ -95,7 +176,7 @@
                 </a>
             </li>
             <li class="nav-item {{ Request::is('admin/blogs') || Request::is('admin/slider') || Request::is('admin/policy') || Request::is('admin/clints') || Request::is('admin/abouts') || Request::is('admin/all-users') ? 'menu-open' : '' }}">
-                <a href="#" class="nav-link">
+                <a href="avascript:;" class="nav-link">
                     <i class="nav-icon far fa-plus-square"></i>
                     <p>
                         Extras
@@ -142,7 +223,7 @@
                 </ul>
             </li>
             <li class="nav-item {{ Request::is('admin/website') ? 'menu-open' : '' }}">
-                <a href="#" class="nav-link">
+                <a href="javascript:;" class="nav-link">
                     <i class="nav-icon fas fa-cogs"></i>
                     <p>
                         Website Setting

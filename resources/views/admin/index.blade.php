@@ -66,7 +66,7 @@
                             <i class="fas fa-shopping-cart"></i>
                         </span>
                         <div class="info-box-content">
-                            <a href="">
+                            <a href="{{ route('admin.orders.index') }}">
                                 <span class="info-box-text">Order</span>
                                     <span class="info-box-number">
                                         {{ $order->count() }}

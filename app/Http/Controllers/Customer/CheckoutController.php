@@ -208,6 +208,7 @@ class CheckoutController extends Controller
     {
         Order::findOrFail($id)->update([
             'order_status' => 'Canceled',
+            'status' => 'Paid Canceled',
         ]);
         Toastr::warning('Order successfully cancel :-)','Success');
         return redirect()->back();

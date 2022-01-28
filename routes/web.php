@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\HappyClintController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\VatController;
+use App\Http\Controllers\Admin\OrderController;
 
 use App\Http\Controllers\Customer\InformationController;
 use App\Http\Controllers\Customer\WishlistController;
@@ -124,6 +125,16 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::resource('vat-amount', VatController::class);
     Route::get('vat-amount-inactive/{id}', [VatController::class, 'vatInactive'])->name('vat.inactive');
     Route::get('vat-amount-active/{id}', [VatController::class, 'vatActive'])->name('vat.active');
+    // Orders 
+    Route::resource('orders', OrderController::class);
+    Route::get('orders-pending', [OrderController::class, 'ordersPending'])->name('orders.pending');
+    Route::get('orders-confirmed', [OrderController::class, 'ordersConfirmed'])->name('orders.confirmed');
+    Route::get('orders-processing', [OrderController::class, 'ordersProcessing'])->name('orders.processing');
+    Route::get('orders-delivered', [OrderController::class, 'ordersDelivered'])->name('orders.delivered');
+    Route::get('orders-successed', [OrderController::class, 'ordersSuccessed'])->name('orders.successed');
+    Route::get('orders-canceled', [OrderController::class, 'ordersCanceled'])->name('orders.canceled');
+    // order status change 
+    Route::post('orders-status', [OrderController::class, 'ordersStatus'])->name('orders.status');
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'middleware' => ['auth', 'customer']], function () {
     Route::get('/information', [InformationController::class, 'information'])->name('dashboard');
