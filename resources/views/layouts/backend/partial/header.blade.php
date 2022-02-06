@@ -31,12 +31,12 @@
   </li>
   <li class="nav-item dropdown user user-menu">
     <a class="nav-link" data-toggle="dropdown" href="#">
-      <img src="@if(Auth::user()->image) {{asset(Auth::user()->image)}} @else {{asset('default/AdminLTELogo.png')}} @endif" class="user-image">
+      <img src="@if(Auth::user()->image) {{asset(Auth::user()->image)}} @else {{asset('demomedia/demoprofile.png')}} @endif" class="user-image">
       <span class="hidden-xs">{{ Auth::user()->name }}</span>
     </a>
     <ul class="dropdown-menu">
       <li class="user-header">
-        <img src="@if(Auth::user()->image) {{asset(Auth::user()->image)}} @else {{asset('default/AdminLTELogo.png')}} @endif" class="img-circle">
+        <img src="@if(Auth::user()->image) {{asset(Auth::user()->image)}} @else {{asset('demomedia/demoprofile.png')}} @endif" class="img-circle">
         <p>
             {{ Auth::user()->name }}
             <small>Admin since {{Auth::user()->created_at}}</small>

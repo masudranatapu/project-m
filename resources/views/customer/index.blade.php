@@ -38,7 +38,7 @@
             <div class="row">
                 <div class="col-md-3">
                     <div class="card" style="width: 18rem;">
-                        <img class="card-img-top" src=" @if(Auth::user()->image) {{ asset(Auth::user()->image) }} @else {{ asset('demomedia/demoprofile.png') }} @endif" alt="Card image cap">
+                        <img class="card-img-top" src="@if(Auth::user()->image) {{ asset(Auth::user()->image) }} @else {{ asset('demomedia/demoprofile.png') }} @endif" alt="Card image cap">
                         <div class="card-body">
                             <h5 class="card-title">{{ Auth::user()->name }}</h5>
                         </div>

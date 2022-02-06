@@ -18,7 +18,6 @@
                 @include('layouts.backend.partial.header')
             </nav>
             <!-- /.navbar -->
-
             <!-- Main Sidebar Container -->
             <aside class="main-sidebar sidebar-dark-primary elevation-4">
                 @include('layouts.backend.partial.sidebar')
@@ -27,13 +26,11 @@
             <div class="content-wrapper">
                 @yield('content')
             </div>
-
             <!-- Main Footer -->
             <footer class="main-footer">
                 @include('layouts.backend.partial.footer')
             </footer>
         </div>
-
         @include('layouts.backend.partial.foot')
         <script src="{{asset('massage/toastr/toastr.js')}}"></script>
         {!! Toastr::message() !!}

@@ -22,13 +22,10 @@
         <header class="header_area">
             @include('layouts.frontend.partial.header')
         </header>
-
         @yield('content')
-
         <div class="footer_area footer_three pt-4 grey-section">
             @include('layouts.frontend.partial.footer')
         </div>
-        
         @include('layouts.frontend.partial.foot')
         <script src="{{asset('massage/toastr/toastr.js')}}"></script>
         {!! Toastr::message() !!}

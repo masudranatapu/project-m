@@ -275,7 +275,6 @@
             // alert(billing_div_id);
             var sub_total = $("#sub_total").val();
             // alert(sub_total);
-
             // check vat should be giving for product 
             var get_vat = $("#get_vat").val();
             if(get_vat) {
@@ -315,7 +314,6 @@
             // alert(shipping_div_id);
             var sub_total = $("#sub_total").val();
             // alert(sub_total);
-
             // check vat should be giving for product 
             var get_vat = $("#get_vat").val();
             if(get_vat) {
