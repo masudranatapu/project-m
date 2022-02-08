@@ -27,10 +27,10 @@
             <!-- brand area  -->
             <li class="nav-item">
                 <a href="{{ route('admin.brands.index') }}" class="nav-link {{ Request::is('admin/brands') ? 'active' : '' }}">
-                <i class="nav-icon fas fa-code-branch"></i>
-                <p>
-                    Brand
-                </p>
+                    <i class="nav-icon fas fa-code-branch"></i>
+                    <p>
+                        Brand
+                    </p>
                 </a>
             </li>
             <!-- unit area  -->
@@ -45,13 +45,13 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{ route('admin.size.index') }}" class="nav-link {{ Request::is('admin/size') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Size</p>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('admin.color.index') }}" class="nav-link {{ Request::is('admin/color') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
+                            <i class="far fa-circle nav-icon"></i>
                             <p>Color</p>
                         </a>
                     </li>
@@ -68,8 +68,8 @@
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="{{ route('admin.division.index') }}" class="nav-link {{ Request::is('admin/division') ? 'active' : '' }}">
-                        <i class="far fa-circle nav-icon"></i>
-                        <p>Division</p>
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Division</p>
                         </a>
                     </li>
                     <li class="nav-item">
@@ -165,6 +165,35 @@
                             <p>
                                 All Orders
                             </p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item {{ Request::is('admin/purchase') || Request::is('admin/district') ? 'menu-open' : '' }}">
+                <a href="#" class="nav-link">
+                    <i class="nav-icon fas fa-briefcase"></i>
+                    <p>
+                        Stock Management
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav nav-treeview">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.purchase.index') }}" class="nav-link {{ Request::is('admin/purchase') ? 'active' : '' }}">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Purchase Product</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Sold Product</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="" class="nav-link">
+                            <i class="far fa-circle nav-icon"></i>
+                            <p>Stock Report</p>
                         </a>
                     </li>
                 </ul>

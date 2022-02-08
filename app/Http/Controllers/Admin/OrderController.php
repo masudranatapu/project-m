@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\Sold;
+use App\Models\Product;
 use App\Models\BillingAddress;
 use App\Models\ShippingAddress;
 use Brian2694\Toastr\Facades\Toastr;
@@ -152,57 +154,65 @@ class OrderController extends Controller
         $orderStatus = $request->order_status;
 
         if($orderStatus == "Pending"){
-
             Order::findOrFail($ordersId)->update([
                 'order_status' => 'Pending',
             ]);
-            Toastr::info('Order successfully pending :-)','info');
-            return redirect()->back();
 
         }elseif($orderStatus == "Confirmed") {
-
             Order::findOrFail($ordersId)->update([
                 'order_status' => 'Confirmed',
             ]);
-            Toastr::success('Order successfully confirmed :-)','success');
-            return redirect()->back();
-            
         }elseif($orderStatus == "Processing") {
-
             Order::findOrFail($ordersId)->update([
                 'order_status' => 'Processing',
             ]);
-            Toastr::success('Order successfully processing done :-)','success');
-            return redirect()->back();
 
         }elseif($orderStatus == "Delivered") {
-
             Order::findOrFail($ordersId)->update([
                 'order_status' => 'Delivered',
                 'status' => 'Paid',
             ]);
-            Toastr::success('Order successfully delivered done:-)','success');
-            return redirect()->back();
 
         }elseif($orderStatus == "Successed") {
+
             Order::findOrFail($ordersId)->update([
                 'order_status' => 'Successed',
                 'status' => 'Paid',
             ]);
-            Toastr::success('Order successfully successed :-)','success');
-            return redirect()->back();
+
+            $allorders = Order::findOrFail($ordersId);
+
+            $product_id = explode(",", $allorders->product_id);
+            $myproudct_id = array_values($product_id);
+            $allproducts = Product::whereIn('id', $myproudct_id)->get();
+            
+            $quantity = explode(",", $allorders->quantity);
+
+            $myQuantity = array_combine($myproudct_id, $quantity);
+
+            foreach($allproducts as $key => $allproduct){
+                Sold::insert([
+                    'order_id' => $ordersId,
+                    'order_code' => $allorders->order_code,
+                    'product_id' => $allproduct->id,
+                    'product_code' => $allproduct->product_code,
+                    'name' => $allproduct->name,
+                    'quantity' => $myQuantity[$allproduct->id],
+                ]);
+            }
 
         }elseif($orderStatus == "Canceled") {
-
+            
             Order::findOrFail($ordersId)->update([
                 'order_status' => 'Canceled',
                 'status' => 'Return Paid',
             ]);
-            Toastr::success('Order successfully Canceled :-)','success');
-            return redirect()->back();
+
         }else {
             Toastr::error('Select your order status :-)','info');
             return redirect()->back();
         }
+        Toastr::success('Order successfully '. $orderStatus . ' :-)','success');
+        return redirect()->back();
     }
 }
