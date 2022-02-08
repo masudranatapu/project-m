@@ -198,6 +198,7 @@ class OrderController extends Controller
                     'product_code' => $allproduct->product_code,
                     'name' => $allproduct->name,
                     'quantity' => $myQuantity[$allproduct->id],
+                    'created_at' => Carbon::now(),
                 ]);
             }
 

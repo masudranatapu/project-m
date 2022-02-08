@@ -169,7 +169,7 @@
                     </li>
                 </ul>
             </li>
-            <li class="nav-item {{ Request::is('admin/purchase') || Request::is('admin/district') ? 'menu-open' : '' }}">
+            <li class="nav-item {{ Request::is('admin/purchase') || Request::is('admin/sold-product') || Request::is('admin/sold-product-report') ? 'menu-open' : '' }}">
                 <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-briefcase"></i>
                     <p>
@@ -185,13 +185,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ route('admin.sold-product.index') }}" class="nav-link {{ Request::is('admin/sold-product') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Sold Product</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="" class="nav-link">
+                        <a href="{{ route('admin.sold-product.report') }}" class="nav-link {{ Request::is('admin/sold-product-report') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Stock Report</p>
                         </a>

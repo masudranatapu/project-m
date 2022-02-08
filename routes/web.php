@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\VatController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PurchaseController;
+use App\Http\Controllers\Admin\StockController;
 
 use App\Http\Controllers\Customer\InformationController;
 use App\Http\Controllers\Customer\WishlistController;
@@ -136,10 +137,13 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::get('orders-canceled', [OrderController::class, 'ordersCanceled'])->name('orders.canceled');
     // order status change 
     Route::post('orders-status', [OrderController::class, 'ordersStatus'])->name('orders.status');
-    // purchase product
+    // purchase sold and stock  report product
     Route::resource('purchase', PurchaseController::class);
     Route::post('stock-purchase', [PurchaseController::class, 'stockPurchase'])->name('stock.purchase');
-    
+    Route::resource('sold-product', StockController::class);
+    Route::get('sold-search', [StockController::class, 'soldSearch'])->name('sold.search');
+    Route::get('sold-product-report', [StockController::class, 'showReport'])->name('sold-product.report');
+    Route::get('sold-product-report-search', [StockController::class, 'showReportSearch'])->name('sold-product-report.search');
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'middleware' => ['auth', 'customer']], function () {
     Route::get('/information', [InformationController::class, 'information'])->name('dashboard');
