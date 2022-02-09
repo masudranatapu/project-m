@@ -24,7 +24,7 @@ class CreateProductsTable extends Migration
             $table->string('size_id')->nullable();
             $table->string('color_id')->nullable();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->integer('sell_price');
             $table->integer('discount');
             $table->integer('regular_price')->nullable();

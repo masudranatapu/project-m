@@ -14,13 +14,37 @@ class ViewController extends Controller
     //
     public function category($slug)
     {
-        $title =  $slug;
+        $findCategory = Category::where('slug', $slug)->first();
+        $title =  $findCategory->name;
+        $products = Product::where('category_id', $findCategory->id)->orWhere('subcategory_id', $findCategory->id)->orWhere('subsubcategory_id', $findCategory->id)->latest()->get();
         $categories = Category::where('parent_id', NULL)->where('child_id', NULL)->latest()->get();
         $subcategories = Category::where('parent_id', '!=', NULL)->where('child_id', NULL)->latest()->get();
         $subsubcategories = Category::where('parent_id', '!=', NULL)->where('child_id', '!=', NULL)->latest()->get();
         $brands = Brand::where('status', 1)->latest()->get();
-
-        return view('pages.categoryproduct', compact('title', 'categories', 'subcategories', 'subsubcategories', 'brands'));
+        return view('pages.categoryproduct', compact('title', 'products', 'categories', 'subcategories', 'subsubcategories', 'brands'));
+    }
+    
+    public function brand($slug)
+    {
+        $findBrands = Brand::where('slug', $slug)->first();
+        $title =  $findBrands->name;
+        $products = Product::where('brand_id', $findBrands->id)->latest()->get();
+        $categories = Category::where('parent_id', NULL)->where('child_id', NULL)->latest()->get();
+        $subcategories = Category::where('parent_id', '!=', NULL)->where('child_id', NULL)->latest()->get();
+        $subsubcategories = Category::where('parent_id', '!=', NULL)->where('child_id', '!=', NULL)->latest()->get();
+        $brands = Brand::where('status', 1)->latest()->get();
+        return view('pages.categoryproduct', compact('title', 'categories', 'subcategories', 'subsubcategories', 'brands', 'products'));
+    }
+    
+    public function priceProduct(Request $request)
+    {
+        $title = "Price By Products";
+        $categories = Category::where('parent_id', NULL)->where('child_id', NULL)->latest()->get();
+        $subcategories = Category::where('parent_id', '!=', NULL)->where('child_id', NULL)->latest()->get();
+        $subsubcategories = Category::where('parent_id', '!=', NULL)->where('child_id', '!=', NULL)->latest()->get();
+        $brands = Brand::where('status', 1)->latest()->get();
+        $products = Product::whereBetween('sell_price', [$request->min_price, $request->max_price])->get();
+        return view('pages.categoryproduct', compact('title', 'categories', 'subcategories', 'subsubcategories', 'brands', 'products'));
     }
 
     public function productDetails($slug)

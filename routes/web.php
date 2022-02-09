@@ -50,7 +50,6 @@ Route::get('blogs', [HomeController::class, 'blogs'])->name('blog');
 Route::get('blogs/{slug}', [HomeController::class, 'blogDetails'])->name('blog.details');
 Route::get('contact-us', [HomeController::class, 'contactUs'])->name('contact');
 Route::post('contact-us', [HomeController::class, 'contact'])->name('contact.us');
-Route::get('all-category', [HomeController::class, 'allCategory'])->name('all.category');
 Route::get('policy/{slug}', [HomeController::class, 'policy'])->name('policy.details');
 // product related routes
 Route::get('all-product-shop', [HomeController::class , 'shop'] )->name('shop');
@@ -59,10 +58,14 @@ Route::get('features-product', [HomeController::class, 'features'])->name('featu
 Route::get('hotdeals-product', [HomeController::class, 'hotdeals'])->name('hotdeals');
 // searching
 Route::get('searching-product', [SearchController::class, 'searching'])->name('searching');
-
-// product details and  view related
+// cateogory , subcateogory , subsubcateogory , brand and   price product related
+Route::get('all-category', [HomeController::class, 'allCategory'])->name('all.category');
 Route::get('category-product/{slug}', [ViewController::class, 'category'])->name('category');
+Route::get('brand-product/{slug}', [ViewController::class, 'brand'])->name('brand');
+Route::get('product-price', [ViewController::class, 'priceProduct'])->name('price');
+// details and  view
 Route::get('product-details/{slug}', [ViewController::class, 'productDetails'])->name('productdetails');
+
 // cart area routes
 Route::get('cart', [CartController::class, 'cart'])->name('cart');
 Route::get('add-to-cart/{product_id}', [CartController::class, 'addToCart'])->name('add_to_cart');
