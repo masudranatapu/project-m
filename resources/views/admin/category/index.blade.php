@@ -72,7 +72,7 @@
                                             <div class="form-group row @if($categories->count() > 0 )  @else d-none @endif"> 
                                                 <label class="col-sm-3 col-form-label">Parent Category</label>
                                                 <div class="col-sm-9">
-                                                    <select name="parent_id" class="form-control parent">
+                                                    <select name="parent_id" id="parent" class="form-control">
                                                         <option value="" selected>None</option>
                                                         @foreach($categories as $categorie)
                                                             <option value="{{ $categorie->id }}">{{ $categorie->name }}</option>
@@ -81,10 +81,10 @@
                                                 </div>
                                             </div>
                                             @if($categories->count() > 0)
-                                                <div class="form-group row showchildcategory" style="display: none;">
+                                                <div class="form-group row" id="showchildcategory" style="display: none;">
                                                     <label class="col-sm-3 col-form-label">Parent Category</label>
                                                     <div class="col-sm-9">
-                                                        <select name="child_id" class="form-control child">
+                                                        <select name="child_id" id="child" class="form-control">
 
                                                         </select>
                                                     </div>
@@ -205,7 +205,7 @@
                                                                 <div class="form-group row @if($categories->count() > 0 )  @else d-none @endif"> 
                                                                     <label class="col-sm-3 col-form-label">Parent Category</label>
                                                                     <div class="col-sm-9">
-                                                                        <select name="parent_id" class="form-control parent">
+                                                                        <select name="parent_id" class="form-control">
                                                                             <option value="" selected>None</option>
                                                                             @foreach($categories as $categorie)
                                                                                 <option @if($category->parent_id == $categorie->id) selected @endif value="{{ $categorie->id }}">{{ $categorie->name }}</option>
@@ -214,10 +214,10 @@
                                                                     </div>
                                                                 </div>
                                                                 @if($categories->count() > 0)
-                                                                    <div class="form-group row showchildcategory">
+                                                                    <div class="form-group row">
                                                                         <label class="col-sm-3 col-form-label">Parent Category</label>
                                                                         <div class="col-sm-9">
-                                                                            <select name="child_id" class="form-control child">
+                                                                            <select name="child_id" class="form-control">
                                                                                 <option value="" selected disabled> Select One</option>
                                                                                 @foreach($child_categories as $child_category)
                                                                                     <option @if($child_category->child_id == $categorie->id) selected @endif value="{{$child_category->id}}">{{$child_category->name}}</option>
@@ -330,25 +330,25 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            $('.parent').on('change', function(){
+            $('#parent').on('change', function(event){
                 var cate_id = $(this).val();
                 // alert(cate_id);
                 if(cate_id) {
                     $.ajax({
-                        url: "{{  url('admin/category/parent-chlid/ajax/') }}/"+cate_id,
-                        type:"GET",
-                        dataType:"json",
-                        success:function(data) {
-                        var d =$('.child').empty();
-                            $('.showchildcategory').show();
-                            $('.child').append('<option value="" selected disabled >Select One</option>'); 
+                        url         : "{{  url('admin/category/parent-chlid/ajax/') }}/"+cate_id,
+                        type        : "GET",
+                        dataType    : "json",
+                        success     : function(data) {
+                            var d =$('#child').empty();
+                            $('#showchildcategory').show();
+                            $('#child').append('<option value="" selected disabled >Select One</option>'); 
                             $.each(data, function(key, value){
-                                $('.child').append('<option value="'+ value.id +'">' + value.name + '</option>');
+                                $('#child').append('<option value="'+ value.id +'">' + value.name + '</option>');
                             });
                         },
                     });
-                } else {
-                    alert('danger');
+                }else {
+                    alert('Select your parent category');
                 }
             });
         });

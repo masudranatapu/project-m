@@ -46,7 +46,7 @@
                 <div class="col-12 col-sm-6 col-md-3">
                     <div class="info-box mb-3">
                         <span class="info-box-icon bg-danger elevation-1">
-                            <i class="fas fa-thumbs-up"></i>
+                            <i class="fas fa-chart-pie"></i>
                         </span>
                         <div class="info-box-content">
                             <a href="{{route('admin.category.index')}}">
