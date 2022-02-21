@@ -15,13 +15,13 @@ use App\Http\Controllers\Admin\BlogController;
 use App\Http\Controllers\Admin\SliderController;
 use App\Http\Controllers\Admin\PolicyController;
 use App\Http\Controllers\Admin\AboutController;
-use App\Http\Controllers\Admin\HappyClintController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\VatController;
 use App\Http\Controllers\Admin\OrderController;
 use App\Http\Controllers\Admin\PurchaseController;
 use App\Http\Controllers\Admin\StockController;
+use App\Http\Controllers\Admin\ClientController;
 
 use App\Http\Controllers\Customer\InformationController;
 use App\Http\Controllers\Customer\WishlistController;
@@ -117,8 +117,7 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::get('policy-active/{id}', [PolicyController::class, 'policyActive'])->name('policy.active');
     // about us
     Route::resource('abouts', AboutController::class);
-    // happy clints
-    Route::resource('clints', HappyClintController::class);
+    
     // product
     Route::resource('products', ProductController::class);
     Route::get('product-category/ajax/{category_id}', [ProductController::class, 'productCategory']);
@@ -147,6 +146,10 @@ Route::group(['as' => 'admin.', 'prefix' => 'admin', 'middleware' => ['auth', 'a
     Route::get('sold-search', [StockController::class, 'soldSearch'])->name('sold.search');
     Route::get('sold-product-report', [StockController::class, 'showReport'])->name('sold-product.report');
     Route::get('sold-product-report-search', [StockController::class, 'showReportSearch'])->name('sold-product-report.search');
+    // client
+    Route::resource('clients', ClientController::class);
+    Route::get('client-inactive/{id}', [ClientController::class, 'clientInactive'])->name('client.inactive');
+    Route::get('client-active/{id}', [ClientController::class, 'clientActive'])->name('client.active');
 });
 Route::group(['as' => 'customer.', 'prefix' => 'customer', 'middleware' => ['auth', 'customer']], function () {
     Route::get('/information', [InformationController::class, 'information'])->name('dashboard');

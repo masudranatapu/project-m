@@ -60,7 +60,7 @@ class BrandController extends Controller
             'slug' => strtolower(str_replace(' ', '-', $request->name)),
             'image' => $image_url,
             'link' => $request->link,
-            'status' => $request->status,
+            'status' => "1",
             'created_at' => Carbon::now(),
         ]);
         Toastr::success('Brand Successfully Save :-)','Success');
@@ -129,7 +129,6 @@ class BrandController extends Controller
                 'slug' => strtolower(str_replace(' ', '-', $request->name)),
                 'image' => $image_url,
                 'link' => $request->link,
-                'status' => $request->status,
                 'updated_at' => Carbon::now(),
             ]);
             Toastr::success('Brand Successfully Save :-)','Success');
@@ -139,7 +138,6 @@ class BrandController extends Controller
                 'name'=> $request->name,
                 'slug' => strtolower(str_replace(' ', '-', $request->name)),
                 'link' => $request->link,
-                'status' => $request->status,
                 'updated_at' => Carbon::now(),
             ]);
             Toastr::success('Brand Successfully Save without image:-)','Success');

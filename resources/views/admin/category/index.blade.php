@@ -7,13 +7,6 @@
 @push('css')
     <!-- DataTables -->
     <link rel="stylesheet" href="{{asset('backend/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css')}}">
-    <style type="text/css">
-        .category_image_size {
-            height: 50px;
-            width: 50px;
-            border-radius: 50%;
-        }
-    </style>
 @endpush
 
 @section('content')
@@ -50,7 +43,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="text-right cutom_search" >
                                         <button type="button" title="Add Category" class="btn btn-primary" data-toggle="modal" data-target="#create">
-                                            <i class="fa fa-plus-circle"></i>
+                                            <i class="fa fa-plus-circle mr-2"></i>
                                             <span>Add Category</span>
                                         </button>
                                     </div>
@@ -136,19 +129,19 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Category</th>
-                                        <th>Sub Category</th>
-                                        <th>Sub Sub Category</th>
-                                        <th>Image</th>
-                                        <th>Icon</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Category</th>
+                                        <th class="text-center">Sub Category</th>
+                                        <th class="text-center">Sub Sub Category</th>
+                                        <th class="text-center">Image</th>
+                                        <th class="text-center">Icon</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($allcategory as $key => $category)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
                                             <td class="text-center">
                                                 @if($category->parent_id == NULL && $categorie->child_id == NULL)
                                                     {{ $category->name }}
@@ -179,7 +172,7 @@
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                <img src="@if($category->image) {{ asset($category->image) }} @else {{ asset('demomedia/category.png') }} @endif" class="category_image_size" alt="">
+                                                <img width="60" height="60" src="@if($category->image) {{ asset($category->image) }} @else {{ asset('demomedia/category.png') }} @endif">
                                             </td>
                                             <td class="text-center">
                                                 <i class="{{$category->icon}}" style="font-size: 45px;"></i>
@@ -215,7 +208,7 @@
                                                                 </div>
                                                                 @if($categories->count() > 0)
                                                                     <div class="form-group row">
-                                                                        <label class="col-sm-3 col-form-label">Parent Category</label>
+                                                                        <label class="col-sm-3 col-form-label">Child Category</label>
                                                                         <div class="col-sm-9">
                                                                             <select name="child_id" class="form-control">
                                                                                 <option value="" selected disabled> Select One</option>

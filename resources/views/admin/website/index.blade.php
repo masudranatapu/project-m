@@ -99,7 +99,7 @@
                                     </div>
                                     <div class="col-md-6 text-right">
                                             <input type="hidden" id="website_row_number" value="{{ rand(111, 999) }}">
-                                        <button type="button" class="btn btn-sm btn-success" onclick="addNewAdditionalInfo()">
+                                        <button type="button" class="btn btn-success" onclick="addNewAdditionalInfo()">
                                             <i class="fa fa-plus"></i>
                                         </button>
                                     </div>

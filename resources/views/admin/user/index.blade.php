@@ -58,26 +58,26 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>User Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Profile Image</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">User Name</th>
+                                        <th class="text-center">Email</th>
+                                        <th class="text-center">Phone</th>
+                                        <th class="text-center">Profile Image</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($users as $key => $user)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $user->name }}</td>
-                                            <td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $user->name }}</td>
+                                            <td class="text-center">
                                                 <a href="mailto:{{ $user->name }}">{{ $user->name }}</a>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <a href="tel:{{ $user->phone }}">{{ $user->phone }}</a>
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 <img class="user-image-size" src="@if($user->image) {{ asset($user->image) }} @else {{ asset('demomedia/demoprofile.png') }} @endif" alt="">
                                             </td>
                                             <td class="text-center">
@@ -127,16 +127,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>User Name</th>
-                                        <th>Email</th>
-                                        <th>Phone</th>
-                                        <th>Profile Image</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

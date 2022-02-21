@@ -44,7 +44,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="text-right cutom_search" >
                                         <button type="button" title="Add Blog" class="btn btn-primary" data-toggle="modal" data-target="#create">
-                                            <i class="fa fa-plus-circle"></i>
+                                            <i class="fa fa-plus-circle mr-2"></i>
                                             <span>Add Blog</span>
                                         </button>
                                     </div>
@@ -64,14 +64,14 @@
                                         <form class="form-horizontal" action="{{route('admin.blogs.store')}}" enctype="multipart/form-data" method="post">
                                             @csrf
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Blog Name</label>
-                                                <div class="col-sm-10">
+                                                <label class="col-md-2 text-right col-form-label">Blog Name</label>
+                                                <div class="col-md-10">
                                                     <input type="text" class="form-control" name="name" placeholder="Blog Name">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Blog Image</label>
-                                                <div class="col-sm-10">
+                                                <label class="col-md-2 text-right col-form-label">Blog Image</label>
+                                                <div class="col-md-10">
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" onChange="blogImage(this)" name="image" class="custom-file-input">
@@ -81,29 +81,19 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label"></label>
-                                                <div class="col-sm-10">
+                                                <label class="col-md-2 text-right col-form-label"></label>
+                                                <div class="col-md-10">
                                                     <div class="input-group">
-                                                        <img src="" id="showBlogImage" style="width: 100px; height: 100px;">
+                                                        <img width="100" height="100" src="{{ asset('demomedia/demo.jpg') }}" id="showBlogImage">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Details</label>
-                                                <div class="col-sm-10">
+                                                <label class="col-md-2 text-right col-form-label">Details</label>
+                                                <div class="col-md-10">
                                                     <textarea class="form-control summernote" name="details" placeholder="Details">
 
                                                     </textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Status</label>
-                                                <div class="col-sm-10">
-                                                    <select name="status" class="form-control">
-                                                        <option value="" disabled>Select One</option>
-                                                        <option value="1" selected>Active</option>
-                                                        <option value="0">Inactive</option>
-                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -121,36 +111,35 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Details</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Image</th>
+                                        <th class="text-center">Details</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($blogs as $key => $blog)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $blog->name }}</td>
-                                            <td>
-                                                <img src="{{ asset($blog->image) }}" style="height: 80px; width: 120px;" alt="">
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $blog->name }}</td>
+                                            <td class="text-center">
+                                                <img width="60" height="60" src="{{ asset($blog->image) }}">
                                             </td>
-                                            <td>{{ substr($blog->details, 0,  25) }}</td>
-                                            <td>
+                                            <td class="text-center">{{ substr($blog->details, 0,  25) }}</td>
+                                            <td class="text-center">
                                                 @if($blog->status == 1)
-                                                    <span class="badge bg-success">Active</span>
-                                                @else 
-                                                    <span class="badge bg-info">Inctive</span>
+                                                    <a title="Inactive Now" href="{{ route('admin.blog.inactive', $blog->id) }}" class="btn btn-success">
+                                                        Active
+                                                    </a>
+                                                @else
+                                                    <a title="Active Now" href="{{ route('admin.blog.active', $blog->id) }}" class="btn btn-danger">
+                                                        Inactive
+                                                    </a>
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if($blog->status == 1)
-                                                    <a title="Inactive Blog" href="{{ route('admin.blog.inactive', $blog->id) }}" class="btn btn-danger"><i class="fa fa-angle-down"></i></a>
-                                                @else
-                                                    <a title="Active Blog" href="{{ route('admin.blog.active', $blog->id) }}" class="btn btn-success"><i class="fa fa-angle-up"></i></a>
-                                                @endif
                                                 <button title="Edit Blog" type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
@@ -176,14 +165,14 @@
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label">Blog Name</label>
-                                                                    <div class="col-sm-10">
+                                                                    <label class="col-md-2 text-right col-form-label">Blog Name</label>
+                                                                    <div class="col-md-10">
                                                                         <input type="text" class="form-control" name="name" value="{{$blog->name}}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label">Blog Image</label>
-                                                                    <div class="col-sm-10">
+                                                                    <label class="col-md-2 text-right col-form-label">Blog Image</label>
+                                                                    <div class="col-md-10">
                                                                         <div class="input-group">
                                                                             <div class="custom-file">
                                                                                 <input type="file" onChange="editBlogimage(this)" name="image" class="custom-file-input">
@@ -193,29 +182,19 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label"></label>
-                                                                    <div class="col-sm-10">
+                                                                    <label class="col-md-2 text-right col-form-label"></label>
+                                                                    <div class="col-md-10">
                                                                         <div class="input-group">
                                                                             <img src="{{asset($blog->image)}}" id="editBlogImage" style="width: 100px; height: 100px;">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label">Details</label>
-                                                                    <div class="col-sm-10">
+                                                                    <label class="col-md-2 text-right col-form-label">Details</label>
+                                                                    <div class="col-md-10">
                                                                         <textarea class="form-control summernote" name="details" placeholder="Details">
                                                                             {{$blog->details}}
                                                                         </textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label">Status</label>
-                                                                    <div class="col-sm-10">
-                                                                        <select name="status" class="form-control">
-                                                                            <option value="" disabled selected>Select One</option>
-                                                                            <option @if($blog->status == 1) selected @endif value="1">Active</option>
-                                                                            <option @if($blog->status == 0) selected @endif value="0">Inactive</option>
-                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -231,16 +210,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Details</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

@@ -5,10 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Brian2694\Toastr\Facades\Toastr;
-use App\Models\Clint;
+use App\Models\Client;
 use Carbon\Carbon;
 
-class HappyClintController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -18,9 +18,9 @@ class HappyClintController extends Controller
     public function index()
     {
         //
-        $title = "Happy Clints";
-        $clints = Clint::latest()->get();
-        return view('admin.happyclint.index', compact('title', 'clints'));
+        $title = "Clients";
+        $clients = Client::latest()->get();
+        return view('admin.client.index', compact('title', 'clients'));
     }
 
     /**
@@ -44,28 +44,29 @@ class HappyClintController extends Controller
         //
         $this->validate($request, [
             'name' => 'required',
-            'clints_say' => 'required',
+            'client_say' => 'required',
         ]);
 
-        $clint_image = $request->file('image');
-        $slug = 'clint';
-        if(isset($clint_image)) {
-            $clint_image_name = $slug.'-'.uniqid().'.'.$clint_image->getClientOriginalExtension();
-            $upload_path = 'media/clint/';
-            $clint_image->move($upload_path, $clint_image_name);
+        $client_image = $request->file('image');
+        $slug = 'client';
+        if(isset($client_image)) {
+            $client_image_name = $slug.'-'.uniqid().'.'.$client_image->getClientOriginalExtension();
+            $upload_path = 'media/client/';
+            $client_image->move($upload_path, $client_image_name);
     
-            $image_url = $upload_path.$clint_image_name;
+            $image_url = $upload_path.$client_image_name;
         }else {
             $image_url = NULL;
         }
 
-        Clint::insert([
+        Client::insert([
             'name' => $request->name,
             'image' => $image_url,
-            'clints_say' => $request->clints_say,
+            'client_say' => $request->client_say,
+            'status' => "1",
             'created_at' => Carbon::now(),
         ]);
-        Toastr::success('Happy Clints Successfully Save :-)','Success');
+        Toastr::success('Clints Successfully Save :-)','Success');
         return redirect()->back();
     }
 
@@ -75,9 +76,13 @@ class HappyClintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+
+    public function clientActive($id)
     {
         //
+        Client::findOrFail($id)->update(['status' => '0']);
+        Toastr::info('Client Successfully Active :-)','Success');
+        return redirect()->back();
     }
 
     /**
@@ -86,9 +91,12 @@ class HappyClintController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function clientInactive($id)
     {
         //
+        Client::findOrFail($id)->update(['status' => '1']);
+        Toastr::info('Client Successfully Inactive :-)','Success');
+        return redirect()->back();
     }
 
     /**
@@ -103,41 +111,40 @@ class HappyClintController extends Controller
         //
         $this->validate($request, [
             'name' => 'required',
-            'clints_say' => 'required',
+            'client_say' => 'required',
         ]);
 
-        $clint_image = $request->file('image');
+        $client_image = $request->file('image');
         $slug = 'clint';
-        if(isset($clint_image)) {
-            $clint_image_name = $slug.'-'.uniqid().'.'.$clint_image->getClientOriginalExtension();
-            $upload_path = 'media/clint/';
-            $clint_image->move($upload_path, $clint_image_name);
+        if(isset($client_image)) {
+            $client_image_name = $slug.'-'.uniqid().'.'.$client_image->getClientOriginalExtension();
+            $upload_path = 'media/client/';
+            $client_image->move($upload_path, $client_image_name);
             
-            $old_clint_image = Clint::findOrFail($id);
-            if($old_clint_image->image){
-                unlink($old_clint_image->image);
+            $old_client_image = Client::findOrFail($id);
+            if($old_client_image->image){
+                unlink($old_client_image->image);
             }
 
-            $image_url = $upload_path.$clint_image_name;
+            $image_url = $upload_path.$client_image_name;
         
-            Clint::findOrFail($id)->update([
+            Client::findOrFail($id)->update([
                 'name' => $request->name,
                 'image' => $image_url,
-                'clints_say' => $request->clints_say,
+                'client_say' => $request->client_say,
                 'updated_at' => Carbon::now(),
             ]);
-            Toastr::success('Happy Clints Successfully Save :-)','Success');
+            Toastr::success('Clints Successfully Save :-)','Success');
             return redirect()->back();
         }else {
-            Clint::findOrFail($id)->update([
+            Client::findOrFail($id)->update([
                 'name' => $request->name,
-                'clints_say' => $request->clints_say,
+                'client_say' => $request->client_say,
                 'updated_at' => Carbon::now(),
             ]);
-            Toastr::success('Happy Clints Successfully Save Without Iamge :-)','Success');
+            Toastr::success('Clints Successfully Save Without Iamge :-)','Success');
             return redirect()->back();
         }
-
     }
 
     /**
@@ -149,15 +156,15 @@ class HappyClintController extends Controller
     public function destroy($id)
     {
         //
-        $clints = Clint::findOrFail($id);
-        $delteImage = $clints->image;
-
+        $clients = Client::findOrFail($id);
+        $delteImage = $clients->image;
+        
         if(file_exists($delteImage)) {
             unlink($delteImage);
         }
-        
-        $clints->delete();
-        Toastr::info('Clint Successfully delete :-)','Success');
+
+        $clients->delete();
+        Toastr::info('Client successfully delete :-)','Success');
         return redirect()->back();
     }
 }

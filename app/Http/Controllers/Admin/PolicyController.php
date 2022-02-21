@@ -45,13 +45,12 @@ class PolicyController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'details' => 'required',
-            'status' => 'required',
         ]);
         Policy::insert([
             'name'=> $request->name,
             'slug' => strtolower(str_replace('', '-', $request->name)),
             'details' => $request->details,
-            'status' => $request->status,
+            'status' => '1',
             'created_at' => Carbon::now(),
         ]);
         Toastr::success('Policy Successfully Save :-)','Success');
@@ -99,13 +98,11 @@ class PolicyController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'details' => 'required',
-            'status' => 'required',
         ]);
         Policy::findOrFail($id)->update([
             'name'=> $request->name,
             'slug' => strtolower(str_replace('', '-', $request->name)),
             'details' => $request->details,
-            'status' => $request->status,
             'updated_at' => Carbon::now(),
         ]);
         Toastr::info('Policy Successfully updated :-)','Success');

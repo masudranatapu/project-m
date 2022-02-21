@@ -100,20 +100,20 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Division</th>
-                                        <th>Name</th>
-                                        <th>Charge</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Division</th>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Charge</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($districts as $key => $district)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $district['division']['name'] }}</td>
-                                            <td>{{ $district->name }}</td>
-                                            <td>{{ $district->charge }} TK</td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $district['division']['name'] }}</td>
+                                            <td class="text-center">{{ $district->name }}</td>
+                                            <td class="text-center">{{ $district->charge }} TK</td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
@@ -175,15 +175,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Division</th>
-                                        <th>Name</th>
-                                        <th>Charge</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

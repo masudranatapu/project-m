@@ -112,7 +112,7 @@ class SliderController extends Controller
         $slug = 'slider';
         if(isset($slider_image)) {
             $slider_image_name = $slug.'-'.uniqid().'.'.$slider_image->getClientOriginalExtension();
-            $upload_path = 'extrafile/slider/';
+            $upload_path = 'media/slider/';
             $slider_image->move($upload_path, $slider_image_name);
 
             $sliderimage = Slider::findOrFail($id);

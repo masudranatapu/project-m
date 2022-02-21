@@ -75,10 +75,10 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Product code</th>
-                                        <th>Title</th>
-                                        <th>In Stock</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Product code</th>
+                                        <th class="text-center">Title</th>
+                                        <th class="text-center">In Stock</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -89,10 +89,10 @@
                                             $stock =  $purchases - $sold;
                                         @endphp
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $product->product_code }}</td>
-                                            <td>{{ $product->name }}</td>
-                                            <td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $product->product_code }}</td>
+                                            <td class="text-center">{{ $product->name }}</td>
+                                            <td class="text-center">
                                                 @if($stock <= 0)
                                                     <span class="bg-success text-white">No Product In Stock</span>
                                                 @else
@@ -102,14 +102,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Product code</th>
-                                        <th>Title</th>
-                                        <th>In Stock</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

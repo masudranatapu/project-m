@@ -46,26 +46,26 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Order Code</th>
-                                        <th>Order Date</th>
-                                        <th>Total</th>
-                                        <th>Payment Method</th>
-                                        <th>Payment Status</th>
-                                        <th>Order Status</th>
-                                        <th width="10%">Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Order Code</th>
+                                        <th class="text-center">Order Date</th>
+                                        <th class="text-center">Total</th>
+                                        <th class="text-center">Payment Method</th>
+                                        <th class="text-center">Payment Status</th>
+                                        <th class="text-center">Order Status</th>
+                                        <th class="text-center" width="10%">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($orders as $key => $order)
                                         <tr class="@if($order->order_status == 'Canceled') text-danger @endif">
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $order->order_code }}</td>
-                                            <td>{{ $order->created_at->format('d M Y h:i A') }}</td>
-                                            <td>{{ $order->total }} TK</td>
-                                            <td>{{ $order->payment_method }}</td>
-                                            <td>{{ $order->status }}</td>
-                                            <td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $order->order_code }}</td>
+                                            <td class="text-center">{{ $order->created_at->format('d M Y h:i A') }}</td>
+                                            <td class="text-center">{{ $order->total }} TK</td>
+                                            <td class="text-center">{{ $order->payment_method }}</td>
+                                            <td class="text-center">{{ $order->status }}</td>
+                                            <td class="text-center">
                                                 @if($order->order_status == 'Canceled')
                                                     <span class="badge bg-danger text-white">Canceled</span>
                                                 @else
@@ -102,18 +102,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Order Code</th>
-                                        <th>Order Date</th>
-                                        <th>Total</th>
-                                        <th>Payment Method</th>
-                                        <th>Payment Status</th>
-                                        <th>Order Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

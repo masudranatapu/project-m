@@ -124,34 +124,34 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Product Code</th>
-                                        <th>Product Image</th>
-                                        <th>Product Name</th>
-                                        <th>Quantity</th>
-                                        <th>Stock Status</th>
-                                        <th>date in Stock</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Product Code</th>
+                                        <th class="text-center">Product Image</th>
+                                        <th class="text-center">Product Name</th>
+                                        <th class="text-center">Quantity</th>
+                                        <th class="text-center">Stock Status</th>
+                                        <th class="text-center">date in Stock</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($purchases as $key => $purchase)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{$purchase->product_code}}</td>
-                                            <td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{$purchase->product_code}}</td>
+                                            <td class="text-center">
                                                 <img class="purchases_image_size" src="{{ asset($purchase['product']['thambnail']) }}" alt="">
                                             </td>
-                                            <td>{{$purchase->name}}</td>
-                                            <td>{{$purchase->quantity}}</td>
-                                            <td>
+                                            <td class="text-center">{{$purchase->name}}</td>
+                                            <td class="text-center">{{$purchase->quantity}}</td>
+                                            <td class="text-center">
                                                 @if($purchase->quantity > 0 )
                                                     <span class="badge bg-success text-white">Stock Available</span>
                                                 @else
                                                     <span class="badge bg-danger text-white">Out of Stock</span>
                                                 @endif
                                             </td>
-                                            <td>
+                                            <td class="text-center">
                                                 @if($purchase->updated_at)
                                                     {{ $purchase->updated_at->format('d M Y h:i A') }}
                                                 @else
@@ -230,18 +230,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Product Code</th>
-                                        <th>Product Image</th>
-                                        <th>Product Name</th>
-                                        <th>Quantity</th>
-                                        <th>Stock Status</th>
-                                        <th>date in Stock</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

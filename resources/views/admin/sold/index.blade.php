@@ -82,28 +82,28 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Order Id</th>
-                                        <th>Order Code</th>
-                                        <th>Product Id</th>
-                                        <th>Product Code</th>
-                                        <th>Product Name</th>
-                                        <th>quantity</th>
-                                        <th>Create</th>
-                                        <th>View</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Order Id</th>
+                                        <th class="text-center">Order Code</th>
+                                        <th class="text-center">Product Id</th>
+                                        <th class="text-center">Product Code</th>
+                                        <th class="text-center">Product Name</th>
+                                        <th class="text-center">quantity</th>
+                                        <th class="text-center">Create</th>
+                                        <th class="text-center">View</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($solds as $key => $sold)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $sold->order_id }}</td>
-                                            <td>{{ $sold->order_code }}</td>
-                                            <td>{{ $sold->product_id }}</td>
-                                            <td>{{ $sold->product_code }}</td>
-                                            <td>{{ $sold->name }}</td>
-                                            <td>{{ $sold->quantity }}</td>
-                                            <td>{{ $sold->created_at->format('d M Y h:i A') }}</td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $sold->order_id }}</td>
+                                            <td class="text-center">{{ $sold->order_code }}</td>
+                                            <td class="text-center">{{ $sold->product_id }}</td>
+                                            <td class="text-center">{{ $sold->product_code }}</td>
+                                            <td class="text-center">{{ $sold->name }}</td>
+                                            <td class="text-center">{{ $sold->quantity }}</td>
+                                            <td class="text-center">{{ $sold->created_at->format('d M Y h:i A') }}</td>
                                             <td class="text-center">
                                                 <button title="Edit Brand" type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
@@ -127,19 +127,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Order Id</th>
-                                        <th>Order Code</th>
-                                        <th>Product Id</th>
-                                        <th>Product Code</th>
-                                        <th>Product Name</th>
-                                        <th>quantity</th>
-                                        <th>Create</th>
-                                        <th>View</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

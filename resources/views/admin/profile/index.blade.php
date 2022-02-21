@@ -31,10 +31,10 @@
                     <div class="card card-primary card-outline">
                         <div class="card-body box-profile">
                             <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle" src="{{asset(Auth::user()->image)}}" >
+                                <img class="profile-user-img img-fluid img-circle" src="@if(Auth::user()->image) {{asset(Auth::user()->image)}} @else {{asset('demomedia/demoprofile.png')}} @endif">
                             </div>
                             <h3 class="profile-username text-center">{{Auth::user()->name}}</h3>
-                            <p class="text-muted text-center">Software Devloper</p>
+                            <p class="text-muted text-center">Admin Profile</p>
                             <ul class="list-group list-group-unbordered mb-3">
                                 <li class="list-group-item">
                                     <b>Name</b> 
@@ -97,7 +97,7 @@
                                     <div class="form-group row">
                                         <label class="col-sm-2 col-form-label">Current Image</label>
                                         <div class="col-sm-10">
-                                            <img src="{{asset(Auth::user()->image)}}" id="showTham" style="height: 100px; width: 100px;">
+                                            <img src="@if(Auth::user()->image) {{asset(Auth::user()->image)}} @else {{asset('demomedia/demoprofile.png')}} @endif" id="showTham" style="height: 100px; width: 100px;">
                                         </div>
                                     </div>
                                     <div class="form-group row">

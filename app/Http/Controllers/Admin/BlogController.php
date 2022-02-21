@@ -46,7 +46,6 @@ class BlogController extends Controller
             'name' => 'required',
             'image' => 'required',
             'details' => 'required',
-            'status' => 'required',
         ]);
 
         $blog_image = $request->file('image');
@@ -62,7 +61,7 @@ class BlogController extends Controller
             'slug' => strtolower(str_replace(' ', '-', $request->name)),
             'details' => $request->details,
             'image' => $image_url,
-            'status' => $request->status,
+            'status' => "1",
             'created_at' => Carbon::now(),
         ]);
         Toastr::success('Blog Successfully Save :-)','Success');
@@ -111,7 +110,6 @@ class BlogController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'details' => 'required',
-            'status' => 'required',
         ]);
 
         $blog_image = $request->file('image');
@@ -133,7 +131,6 @@ class BlogController extends Controller
                 'slug' => strtolower(str_replace(' ', '-', $request->name)),
                 'details' => $request->details,
                 'image' => $image_url,
-                'status' => $request->status,
                 'updated_at' => Carbon::now(),
             ]);
             Toastr::success('Blog Successfully Save :-)','Success');
@@ -143,7 +140,6 @@ class BlogController extends Controller
                 'name'=> $request->name,
                 'slug' => strtolower(str_replace(' ', '-', $request->name)),
                 'details' => $request->details,
-                'status' => $request->status,
                 'updated_at' => Carbon::now(),
             ]);
             Toastr::success('Blog Successfully Save without image:-)','Success');

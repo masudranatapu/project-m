@@ -89,18 +89,18 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Charge</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Charge</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($divisions as $key => $division)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $division->name }}</td>
-                                            <td>{{ $division->charge }} TK</td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $division->name }}</td>
+                                            <td class="text-center">{{ $division->charge }} TK</td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
@@ -151,14 +151,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Charge</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

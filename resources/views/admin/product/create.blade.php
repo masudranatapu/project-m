@@ -33,7 +33,14 @@
                 <div class="col-md-12">
                     <div class="card card-primary card-outline">
                         <div class="card-header">
-                            <h5>Create Product</h5>
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h5>Create Product</h5>
+                                </div>
+                                <div class="col-md-6 text-right">
+                                    <a href="{{ route('admin.products.index') }}" class="btn btn-info">Product List</a>
+                                </div>
+                            </div>
                         </div>
                         <form class="form-horizontal" action="{{ route('admin.products.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf

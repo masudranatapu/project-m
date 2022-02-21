@@ -16,12 +16,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>Clint</h1>
+                    <h1>Client</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                     <li class="breadcrumb-item"><a href="{{ route('admin.dashboard') }}">Home</a></li>
-                    <li class="breadcrumb-item active">Clints</li>
+                    <li class="breadcrumb-item active">Clients</li>
                     </ol>
                 </div>
             </div>
@@ -37,68 +37,66 @@
                             <div class="row">
                                 <div class="col-lg-8 col-md-8 col-sm-8">
                                     <h3>
-                                        <strong>Clint</strong>
-                                        <span class="badge bg-blue">{{ $clints->count() }}</span>
+                                        <strong>Client</strong>
+                                        <span class="badge bg-blue">{{ $clients->count() }}</span>
                                     </h3>
                                 </div>
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="text-right cutom_search" >
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create">
-                                            <i class="fa fa-plus-circle"></i>
-                                            <span>Add Clints</span>
+                                            <i class="fa fa-plus-circle mr-2"></i>
+                                            <span>Add Client</span>
                                         </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div class="modal fade" id="create">
-                            <div class="modal-dialog modal-lg">
+                            <div class="modal-dialog modal-xl">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h4 class="modal-title">Create Clints</h4>
+                                        <h4 class="modal-title">Create Client</h4>
                                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
                                     <div class="modal-body">
-                                        <form class="form-horizontal" action="{{route('admin.clints.store')}}" enctype="multipart/form-data" method="post">
+                                        <form class="form-horizontal" action="{{route('admin.clients.store')}}" enctype="multipart/form-data" method="post">
                                             @csrf
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Clint Name</label>
-                                                <div class="col-sm-10">
-                                                    <input type="text" class="form-control" name="name" placeholder="Clints name" required>
+                                                <label class="col-md-2 text-right col-form-label">Client Name</label>
+                                                <div class="col-md-10">
+                                                    <input type="text" class="form-control" name="name" placeholder="Clients name" required>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Clints Image</label>
-                                                <div class="col-sm-10">
+                                                <label class="col-md-2 text-right col-form-label">Client Image</label>
+                                                <div class="col-md-10">
                                                     <div class="input-group">
                                                         <div class="custom-file">
-                                                            <input type="file" onChange="HappyClintsImage(this)" name="image" class="custom-file-input">
+                                                            <input type="file" onChange="HappyClientsImage(this)" name="image" class="custom-file-input">
                                                             <label class="custom-file-label">Choose file</label>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label"></label>
-                                                <div class="col-sm-10">
+                                                <label class="col-md-2 text-right col-form-label"></label>
+                                                <div class="col-md-10">
                                                     <div class="input-group">
-                                                        <img src="" id="ShowHappyClintImage" style="width: 100px; height: 100px;">
+                                                        <img width="100" height="100" src="{{ asset('demomedia/demo.jpg') }}" id="ShowHappyClientImage">
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Clints  Say</label>
-                                                <div class="col-sm-10">
-                                                    <div class="input-group">
-                                                        <textarea name="clints_say" id="" cols="30" rows="10" class="summernote form-control"></textarea>
-                                                    </div>
+                                                <label class="col-md-2 text-right col-form-label">Clients  Say</label>
+                                                <div class="col-md-10">
+                                                    <textarea name="client_say" id="" cols="30" rows="10" class="summernote form-control"></textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
                                                 <div class="offset-sm-2 col-sm-10">
-                                                    <button type="submit" class="btn btn-success">Create</button>
+                                                    <button type="submit" class="btn btn-success">Create Client</button>
                                                 </div>
                                             </div>
                                         </form>
@@ -111,85 +109,95 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Clint Say</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Image</th>
+                                        <th class="text-center">Client Say</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach($clints as $key => $clint)
+                                    @foreach($clients as $key => $client)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $clint->name }}</td>
-                                            <td>
-                                                <img src="{{ asset($clint->image) }}" style="height: 80px; width: 120px;" alt="">
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $client->name }}</td>
+                                            <td class="text-center">
+                                                <img width="60" height="60" src="{{ asset($client->image) }}">
                                             </td>
-                                            <td> {!! substr($clint->clints_say, 0, 25) !!} </td>
+                                            <td class="text-center"> {!! substr($client->client_say, 0, 25) !!} </td>
+                                            <td class="text-center">
+                                                @if($client->status == 1)
+                                                    <a title="Inactive Now" href="{{ route('admin.client.inactive', $client->id) }}" class="btn btn-success">
+                                                        Active
+                                                    </a>
+                                                @else
+                                                    <a title="Active Now" href="{{ route('admin.client.active', $client->id) }}" class="btn btn-danger">
+                                                        Inactive
+                                                    </a>
+                                                @endif
+                                            </td>
                                             <td class="text-center">
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
-                                                <button class="btn btn-danger waves-effect" type="button" onclick="deleteData({{ $clint->id }})">
+                                                <button class="btn btn-danger waves-effect" type="button" onclick="deleteData({{ $client->id }})">
                                                     <i class="fa fa-trash"></i>
                                                 </button>
-                                                <form id="delete-form-{{ $clint->id }}" action="{{ route('admin.clints.destroy', $clint->id) }}" method="POST" style="display: none;">
+                                                <form id="delete-form-{{ $client->id }}" action="{{ route('admin.clients.destroy', $client->id) }}" method="POST" style="display: none;">
                                                     @csrf
                                                     @method('DELETE')
                                                 </form>
                                             </td>
                                             <div class="modal fade" id="edit_{{$key}}">
-                                                <div class="modal-dialog modal-lg">
+                                                <div class="modal-dialog modal-xl">
                                                     <div class="modal-content">
                                                         <div class="modal-header">
-                                                            <h4 class="modal-title">Edit Clints</h4>
+                                                            <h4 class="modal-title">Edit Clients</h4>
                                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                                 <span aria-hidden="true">&times;</span>
                                                             </button>
                                                         </div>
                                                         <div class="modal-body">
-                                                            <form class="form-horizontal" action="{{ route('admin.clints.update', $clint->id)}}" enctype="multipart/form-data" method="POST">
+                                                            <form class="form-horizontal" action="{{ route('admin.clients.update', $client->id)}}" enctype="multipart/form-data" method="POST">
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label">Clint Name</label>
-                                                                    <div class="col-sm-10">
-                                                                        <input type="text" class="form-control" name="name" value="{{$clint->name}}">
+                                                                    <label class="col-md-2 text-right col-form-label">Client Name</label>
+                                                                    <div class="col-md-10">
+                                                                        <input type="text" class="form-control" name="name" value="{{$client->name}}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label">Clint Image</label>
-                                                                    <div class="col-sm-10">
+                                                                    <label class="col-md-2 text-right col-form-label">Client Image</label>
+                                                                    <div class="col-md-10">
                                                                         <div class="input-group">
                                                                             <div class="custom-file">
-                                                                                <input type="file" onChange="HappyClintEditImage(this)" name="image" class="custom-file-input">
+                                                                                <input type="file" onChange="HappyClientEditImage(this)" name="image" class="custom-file-input">
                                                                                 <label class="custom-file-label">Choose file</label>
                                                                             </div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label"></label>
-                                                                    <div class="col-sm-10">
+                                                                    <label class="col-md-2 text-right col-form-label"></label>
+                                                                    <div class="col-md-10">
                                                                         <div class="input-group">
-                                                                            <img src="{{asset($clint->image)}}" class="EditShowHappyClintImage" style="width: 100px; height: 100px;">
+                                                                            <img width="100" height="100" src="{{ asset($client->image) }}" class="EditShowHappyClientImage">
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label">Clint Say</label>
-                                                                    <div class="col-sm-10">
+                                                                    <label class="col-md-2 text-right col-form-label">Client Say</label>
+                                                                    <div class="col-md-10">
                                                                         <div class="input-group">
-                                                                            <textarea name="clints_say" cols="30" rows=40" class="summernote form-control">
-                                                                                {{ $clint->clints_say }}
-                                                                            </textarea>
+                                                                            <textarea name="client_say" cols="30" rows=40" class="summernote form-control">{{ $client->client_say }}</textarea>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
                                                                     <div class="offset-sm-2 col-sm-10">
-                                                                        <button type="submit" class="btn btn-success">Update Clints</button>
+                                                                        <button type="submit" class="btn btn-success">Update Client</button>
                                                                     </div>
                                                                 </div>
                                                             </form>
@@ -200,15 +208,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>
@@ -244,22 +243,22 @@
         })
     </script>
     <script>
-        function HappyClintsImage(input) {
+        function HappyClientsImage(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('#ShowHappyClintImage').attr('src', e.target.result)
+                    $('#ShowHappyClientImage').attr('src', e.target.result)
                 }
                 reader.readAsDataURL(input.files[0]);
             }
         }
     </script>
     <script>
-        function HappyClintEditImage(input) {
+        function HappyClientEditImage(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
                 reader.onload = function(e) {
-                    $('.EditShowHappyClintImage').attr('src', e.target.result)
+                    $('.EditShowHappyClientImage').attr('src', e.target.result)
                 }
                 reader.readAsDataURL(input.files[0]);
             }

@@ -45,18 +45,18 @@
                             <table class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Details</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Details</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($abouts as $key => $about)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $about->name }}</td>
-                                            <td>{!! substr($about->details, 0,  26) !!}</td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $about->name }}</td>
+                                            <td class="text-center">{!! substr($about->details, 0,  26) !!}</td>
                                             <td class="text-center">
                                                 <button type="button" title="Edit About Us" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
@@ -102,14 +102,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Details</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

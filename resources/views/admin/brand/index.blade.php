@@ -43,7 +43,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="text-right cutom_search" >
                                         <button type="button" title="Add Brands" class="btn btn-primary" data-toggle="modal" data-target="#create">
-                                            <i class="fa fa-plus-circle"></i>
+                                            <i class="fa fa-plus-circle mr-2"></i>
                                             <span>Add Brands</span>
                                         </button>
                                     </div>
@@ -63,20 +63,20 @@
                                         <form class="form-horizontal" action="{{route('admin.brands.store')}}" enctype="multipart/form-data" method="post">
                                             @csrf
                                             <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label">brands Name</label>
-                                                <div class="col-sm-9">
-                                                    <input type="text" class="form-control" name="name" placeholder="Brands Name" required>
+                                                <label class="col-md-3 text-right col-form-label">Brands Name</label>
+                                                <div class="col-md-9">
+                                                    <input type="text" class="form-control" name="name" placeholder="Brands Name">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label">Brand Website Link</label>
-                                                <div class="col-sm-9">
+                                                <label class="col-md-3 text-right col-form-label">Brand Website Link</label>
+                                                <div class="col-md-9">
                                                     <input type="text" class="form-control" name="link" placeholder="Brand website link">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label">brands Image</label>
-                                                <div class="col-sm-9">
+                                                <label class="col-md-3 text-right col-form-label">brands Image</label>
+                                                <div class="col-md-9">
                                                     <div class="input-group">
                                                         <div class="custom-file">
                                                             <input type="file" onChange="brandImage(this)" name="image" class="custom-file-input" required>
@@ -86,21 +86,11 @@
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label"></label>
-                                                <div class="col-sm-9">
+                                                <label class="col-md-3 text-right col-form-label"></label>
+                                                <div class="col-md-9">
                                                     <div class="input-group">
-                                                        <img src="" id="showbrandImage" style="width: 100px; height: 100px;">
+                                                        <img src="{{ asset('demomedia/demo.jpg') }}" id="showbrandImage" style="width: 100px; height: 100px;">
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-3 col-form-label">Status</label>
-                                                <div class="col-sm-9">
-                                                    <select name="status" class="form-control">
-                                                        <option value="" disabled >Select One</option>
-                                                        <option value="1" selected>Active</option>
-                                                        <option value="0">Inactive</option>
-                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -118,34 +108,33 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Image</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($brands as $key => $brand)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $brand->name }}</td>
-                                            <td>
-                                                <img src="{{ asset($brand->image) }}" style="height: 80px; width: 120px;" alt="">
-                                            </td>
-                                            <td>
-                                                @if($brand->status == 1)
-                                                    <span class="badge bg-success">Active</span>
-                                                @else 
-                                                    <span class="badge bg-info">Inctive</span>
-                                                @endif
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $brand->name }}</td>
+                                            <td class="text-center">
+                                                <img width="60" height="60" src="{{ asset($brand->image) }}">
                                             </td>
                                             <td class="text-center">
                                                 @if($brand->status == 1)
-                                                    <a title="Inactive Brand" href="{{ route('admin.brands.inactive', $brand->id) }}" class="btn btn-danger"><i class="fa fa-angle-down"></i></a>
+                                                    <a title="Inactive Now" href="{{ route('admin.brands.inactive', $brand->id) }}" class="btn btn-success">
+                                                        Active
+                                                    </a>
                                                 @else
-                                                    <a title="Active Brand" href="{{ route('admin.brands.active', $brand->id) }}" class="btn btn-success"><i class="fa fa-angle-up"></i></a>
+                                                    <a title="Active Now" href="{{ route('admin.brands.active', $brand->id) }}" class="btn btn-danger">
+                                                        Inactive
+                                                    </a>
                                                 @endif
+                                            </td class="text-center">
+                                            <td class="text-center">
                                                 <button title="Edit Brand" type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
@@ -164,20 +153,20 @@
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-3 col-form-label">Brand Name</label>
-                                                                    <div class="col-sm-9">
+                                                                    <label class="col-md-3 text-right col-form-label">Brand Name</label>
+                                                                    <div class="col-md-9">
                                                                         <input type="text" class="form-control" name="name" value="{{$brand->name}}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-3 col-form-label">Brand Website Link</label>
-                                                                    <div class="col-sm-9">
+                                                                    <label class="col-md-3 text-right col-form-label">Brand Website Link</label>
+                                                                    <div class="col-md-9">
                                                                         <input type="text" class="form-control" name="link" value="{{$brand->link}}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-3 col-form-label">Brand Image</label>
-                                                                    <div class="col-sm-9">
+                                                                    <label class="col-md-3 text-right col-form-label">Brand Image</label>
+                                                                    <div class="col-md-9">
                                                                         <div class="input-group">
                                                                             <div class="custom-file">
                                                                                 <input type="file" onChange="brandImageUpdate(this)" name="image" class="custom-file-input">
@@ -187,21 +176,11 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-3 col-form-label"></label>
-                                                                    <div class="col-sm-9">
+                                                                    <label class="col-md-3 text-right col-form-label"></label>
+                                                                    <div class="col-md-9">
                                                                         <div class="input-group">
                                                                             <img src="{{asset($brand->image)}}" class="brandImageUpdateshow" style="width: 100px; height: 100px;">
                                                                         </div>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group row">
-                                                                    <label class="col-sm-3 col-form-label">Status</label>
-                                                                    <div class="col-sm-9">
-                                                                        <select name="status" class="form-control">
-                                                                            <option value="" disabled>Select One</option>
-                                                                            <option @if($brand->status == 1) selected @endif value="1">Active</option>
-                                                                            <option @if($brand->status == 0) selected @endif value="0">Inactive</option>
-                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -217,15 +196,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Image</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

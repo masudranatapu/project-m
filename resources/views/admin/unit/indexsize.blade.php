@@ -93,30 +93,29 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($sizes as $key => $size)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $size->name }}</td>
-                                            <td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $size->name }}</td>
+                                            <td class="text-center">
                                                 @if($size->status == 1)
-                                                    <span class="badge bg-success">Active</span>
-                                                @else 
-                                                    <span class="badge bg-info">Inctive</span>
+                                                    <a title="Inactive Now" href="{{ route('admin.size.inactive', $size->id) }}" class="btn btn-success">
+                                                        Active
+                                                    </a>
+                                                @else
+                                                    <a title="Active Now" href="{{ route('admin.size.active', $size->id) }}" class="btn btn-danger">
+                                                        Inactive
+                                                    </a>
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if($size->status == 1)
-                                                    <a href="{{ route('admin.size.inactive', $size->id) }}" class="btn btn-danger"><i class="fa fa-angle-down"></i></a>
-                                                @else
-                                                    <a href="{{ route('admin.size.active', $size->id) }}" class="btn btn-success"><i class="fa fa-angle-up"></i></a>
-                                                @endif
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
@@ -163,14 +162,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

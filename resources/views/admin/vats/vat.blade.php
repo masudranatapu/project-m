@@ -46,34 +46,29 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Vat Amount</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Vat Amount</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($vatamounts as $key => $vatamount)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $vatamount->vat_amount }} % </td>
-                                            <td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $vatamount->vat_amount }} % </td>
+                                            <td class="text-center">
                                                 @if($vatamount->status == 1)
-                                                    <span class="badge bg-success text-white">Active</span>
-                                                @else 
-                                                    <span class="badge bg-info text-white">Inctive</span>
+                                                    <a title="Inactive Now" href="{{ route('admin.vat.inactive', $vatamount->id) }}" class="btn btn-success">
+                                                        Active
+                                                    </a>
+                                                @else
+                                                    <a title="Active Now" href="{{ route('admin.vat.active', $vatamount->id) }}" class="btn btn-danger">
+                                                        Inactive
+                                                    </a>
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if($vatamount->status == 1)
-                                                    <a title="Inactive vat amount" href="{{ route('admin.vat.inactive', $vatamount->id) }}" class="btn btn-danger">
-                                                        <i class="fa fa-angle-down"></i>
-                                                    </a>
-                                                @else
-                                                    <a title="Active vat amount" href="{{ route('admin.vat.active', $vatamount->id) }}" class="btn btn-success">
-                                                        <i class="fa fa-angle-up"></i>
-                                                    </a>
-                                                @endif
                                                 <button type="button" title="Edit Vat Amount" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
@@ -120,14 +115,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Vat Amount</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

@@ -44,7 +44,7 @@
                                 <div class="col-lg-4 col-md-4 col-sm-4">
                                     <div class="text-right cutom_search" >
                                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#create">
-                                            <i class="fa fa-plus-circle"></i>
+                                            <i class="fa fa-plus-circle mr-2"></i>
                                             <span>Add Policy</span>
                                         </button>
                                     </div>
@@ -64,25 +64,15 @@
                                         <form class="form-horizontal" action="{{route('admin.policy.store')}}" enctype="multipart/form-data" method="post">
                                             @csrf
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Policy Name</label>
-                                                <div class="col-sm-10">
+                                                <label class="col-md-2 text-right">Policy Name</label>
+                                                <div class="col-md-10">
                                                     <input type="text" class="form-control" name="name" placeholder="Policy Name">
                                                 </div>
                                             </div>
                                             <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Details</label>
-                                                <div class="col-sm-10">
+                                                <label class="col-md-2 text-right">Details</label>
+                                                <div class="col-md-10">
                                                     <textarea class="form-control summernote" name="details" placeholder="Details"></textarea>
-                                                </div>
-                                            </div>
-                                            <div class="form-group row">
-                                                <label class="col-sm-2 col-form-label">Status</label>
-                                                <div class="col-sm-10">
-                                                    <select name="status" class="form-control">
-                                                        <option value="" disabled>Select One</option>
-                                                        <option value="1" selected>Active</option>
-                                                        <option value="0">Inactive</option>
-                                                    </select>
                                                 </div>
                                             </div>
                                             <div class="form-group row">
@@ -100,32 +90,31 @@
                             <table id="dataTable" class="table table-bordered table-hover">
                                 <thead>
                                     <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Details</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
+                                        <th class="text-center">SL No</th>
+                                        <th class="text-center">Name</th>
+                                        <th class="text-center">Details</th>
+                                        <th class="text-center">Status</th>
+                                        <th class="text-center">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($policies as $key => $policy)
                                         <tr>
-                                            <td>{{ $key + 1 }}</td>
-                                            <td>{{ $policy->name }}</td>
-                                            <td>{!! substr($policy->details, 0,  25) !!}</td>
-                                            <td>
+                                            <td class="text-center">{{ $key + 1 }}</td>
+                                            <td class="text-center">{{ $policy->name }}</td>
+                                            <td class="text-center">{!! substr($policy->details, 0,  25) !!}</td>
+                                            <td class="text-center">
                                                 @if($policy->status == 1)
-                                                    <span class="badge bg-success">Active</span>
-                                                @else 
-                                                    <span class="badge bg-info">Inctive</span>
+                                                    <a title="Inactive Now" href="{{ route('admin.policy.inactive', $policy->id) }}" class="btn btn-success">
+                                                        Active
+                                                    </a>
+                                                @else
+                                                    <a title="Active Now" href="{{ route('admin.policy.active', $policy->id) }}" class="btn btn-danger">
+                                                        Inactive
+                                                    </a>
                                                 @endif
                                             </td>
                                             <td class="text-center">
-                                                @if($policy->status == 1)
-                                                    <a href="{{ route('admin.policy.inactive', $policy->id) }}" class="btn btn-danger"><i class="fa fa-angle-down"></i></a>
-                                                @else
-                                                    <a href="{{ route('admin.policy.active', $policy->id) }}" class="btn btn-success"><i class="fa fa-angle-up"></i></a>
-                                                @endif
                                                 <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#edit_{{$key}}">
                                                     <i class="fas fa-edit"></i>
                                                 </button>
@@ -151,25 +140,15 @@
                                                                 @csrf
                                                                 @method('PUT')
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label">Policy Name</label>
-                                                                    <div class="col-sm-10">
+                                                                    <label class="col-md-2 text-right">Policy Name</label>
+                                                                    <div class="col-md-10">
                                                                         <input type="text" class="form-control" name="name" value="{{$policy->name}}">
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label">Details</label>
-                                                                    <div class="col-sm-10">
+                                                                    <label class="col-md-2 text-right">Details</label>
+                                                                    <div class="col-md-10">
                                                                         <textarea class="form-control summernote" name="details" placeholder="Details">{{$policy->details}}</textarea>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="form-group row">
-                                                                    <label class="col-sm-2 col-form-label">Status</label>
-                                                                    <div class="col-sm-10">
-                                                                        <select name="status" class="form-control">
-                                                                            <option value="" disabled selected>Select One</option>
-                                                                            <option @if($policy->status == 1) selected @endif value="1">Active</option>
-                                                                            <option @if($policy->status == 0) selected @endif value="0">Inactive</option>
-                                                                        </select>
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-group row">
@@ -185,15 +164,6 @@
                                         </tr>
                                     @endforeach
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>SL No</th>
-                                        <th>Name</th>
-                                        <th>Details</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

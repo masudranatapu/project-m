@@ -109,7 +109,7 @@
                                     <div class="row">
                                         <div class="col-md-4">
                                             <div class="float-left">
-                                                <h6>Conpany Email</h6>
+                                                <h6>Email Address</h6>
                                             </div>
                                         </div>
                                         <div class="col-md-2">
