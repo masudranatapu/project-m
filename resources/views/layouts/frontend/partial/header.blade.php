@@ -70,7 +70,7 @@
                     </div>
                     <div class="search_bar mb-0 mr-3 d-md-none d-block">
                         <a href="#" class="open-close"><i class="ion-ios-search-strong"></i></a>
-                        <form action="{{ route('searching') }}" method="get"id="mobile-search">
+                        <form action="{{ route('searching') }}" method="get" id="mobile-search">
                             <input name="search_product" placeholder="Search your product here..." type="text">
                             <button type="submit">
                                 <i class="ion-ios-search-strong"></i>

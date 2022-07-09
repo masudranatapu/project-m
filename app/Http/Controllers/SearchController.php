@@ -22,7 +22,7 @@ class SearchController extends Controller
             Toastr::warning('You have no name for search product:-)','warning');
             return redirect()->back();
         }
-		Toastr::success('Yoru searching products is !', 'success');
+		Toastr::success('Your searching products is !', 'success');
         return view('pages.searchproduct', compact('title', 'searchProducts'));
     }
 }
